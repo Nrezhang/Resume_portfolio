@@ -1,0 +1,54 @@
+.home-container{
+    height: 100vb;
+    color: white;
+    
+}
+.home-content h1{
+    padding: 5px;
+    padding-top: 50px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 80px;
+    margin-left: 190px;
+    
+}
+
+.home-content p{
+    padding: 5px;
+
+    font-family: 'Courier New', Courier, monospace;
+    margin-left: 190px;
+    
+}
+.home-content h2{
+    padding: 5px;
+    margin-bottom: 20px;
+    color: wheat;
+    font-family: 'Courier New', Courier, monospace;
+    margin-left: 190px;
+}
+.home-buttons{
+    margin-left: 190px;
+}
+.home-buttons .btn-hire{
+    background-color:dodgerblue;
+    color: whitesmoke;
+    width: 160px;
+}
+.home-buttons .btn-hire:hover{
+    background-color:whitesmoke;
+    color: darkblue;
+    width: 160px;
+    transition: 1s;
+}
+.home-buttons .btn-cv{
+    background-color:orange;
+    color: whitesmoke;
+    margin-left: 10px;
+    width: 160px;
+}
+.home-buttons .btn-cv:hover{
+    background-color:white;
+    color: orangered;
+    width: 160px;
+    transition: 1s;
+}

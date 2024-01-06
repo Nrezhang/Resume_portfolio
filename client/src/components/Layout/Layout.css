@@ -1,10 +1,12 @@
 .sidebar-section{
     display: flex;
+    background-color: black;
 }
 .sidebar{
     height: 100vh;
     background-color: #36454F;
-    width: 90px;
+    width: 80px;
+    position: fixed;
 }
 
 .sidebar-toggle{
@@ -12,13 +14,14 @@
 }
 .sidebar-toggle-icons{
     display: flex;
-    align-items: right;
-    justify-content: right;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
     cursor: pointer;
+    margin-left: 20px;
 }
 
-.sidebar-toggle-icons p svg{
-    background-color: #f29f67;
+.sidebar-toggle-icons-div svg{
     color: whitesmoke;
     margin-top: 30px;
 }

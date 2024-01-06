@@ -4,6 +4,7 @@ import Home from '../../pages/Home/Home'
 import "./Layout.css"
 import { MdOutlineMenu } from "react-icons/md";
 import { MdMenuOpen } from "react-icons/md";
+import Menus from '../Menus/Menus';
 const Layout = () => {
     const [toggle, setToggle] = useState(true)
     const handleToggle = () => {
@@ -14,15 +15,21 @@ const Layout = () => {
     <div className = "sidebar-section">
         <div className = {toggle ?  "sidebar" : "sidebar-toggle sidebar"}>
             <div className="sidebar-toggle-icons">
-                <p onClick={handleToggle}>
+                
+                <div className="sidebar-toggle-icons-div" onClick={handleToggle}>
                     {
-                        toggle? (<MdOutlineMenu size = {30} />) : (<MdMenuOpen size = {30} />)
+                        toggle? (
+                        <MdOutlineMenu size = {30} />
+                        ) : (
+                        <MdMenuOpen size = {30} />
+                        )
                     }
-                    
-                </p>
+                </div>
+                <Menus toggle = {toggle}/>
             </div>
         </div>
-        <div className='container'>
+
+        <div className=''>
         <Home />
         </div>
     </div>
