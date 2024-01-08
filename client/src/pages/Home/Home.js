@@ -1,5 +1,5 @@
 import React from 'react'
-import './Home.css'
+import'./Home.css'
 import Typewriter from 'typewriter-effect'
 import resume from '../../static/docs/resume.pdf'
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
                     loop: true,
                 }}/>
                 </h2>
-                <p>Welcome to my site! I love all things code, and find enjoyment in problem solving :)</p>
+                <p>Welcome to my site! I love all things code :)</p>
                 <div className='home-buttons'>
                     <button className='btn btn-hire'> Get in Touch</button>
                     <a className='btn btn-cv' href={resume} download="ZhangHenry_Resume.pdf"> My Resume</a>

@@ -1,0 +1,67 @@
+.skills{
+    background-color: tan;
+    padding: 10px;
+    display: flex;
+    min-height: 100vh;
+}
+.skills-heading{
+    margin-left: 190px;
+    margin-top: 40px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.skills hr{
+    width: 40px;
+    margin: 10px auto;
+    background-color: black;
+    border-top: 10px;
+}
+
+.skills .card{
+    cursor: pointer;
+    width: 150px flex;
+    min-width: 150px;
+    height: 55px;
+    border: 2px;
+}
+
+
+.skills .tech-icon{
+    font-size: 1.5rem;
+    margin-right: 5px;
+
+}
+
+.skills .card:hover{
+    background-color:rgb(12, 109, 130);
+    color: white;
+    border: none;
+    transition: 1s;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.skills h4{
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+.skills h5{
+    font-size: large;
+}
+
+
+
+.skill-info-container{
+    min-height: 120px;
+    overflow: hidden;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    background-color: rgb(223, 200, 169);
+    text-align: center;
+}
+
+.progress{
+    bottom: 0;
+    height: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}

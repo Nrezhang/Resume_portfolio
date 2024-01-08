@@ -1,0 +1,31 @@
+.about{
+    color: black;
+    margin: 40px 0px;
+    padding: 20px;
+    margin-left: 190px;
+    /* height: 100vb; */
+    display: flex;
+}
+.about-img img{
+    border-radius: 10px;
+    width:400px;
+    height: 400px;
+}
+
+.about-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+.about-content h1{
+    color: gray;
+    font-family: 'Courier New', Courier, monospace;
+    border-bottom: 2px solid black;
+    text-align: left;
+}
+
+.about-content p{
+    padding: 10px;
+
+}
