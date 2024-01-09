@@ -1,4 +1,5 @@
-# October30Deadline
-CRUD
-create experiences
-edit experiences
+#Notes
+
+Edit resume button to open resume
+add light dark mode
+add widget component

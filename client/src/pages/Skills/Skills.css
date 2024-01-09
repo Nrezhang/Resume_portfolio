@@ -1,6 +1,5 @@
 .skills{
     background-color: tan;
-    padding: 10px;
     display: flex;
     min-height: 100vh;
 }
@@ -8,6 +7,7 @@
     margin-left: 190px;
     margin-top: 40px;
     padding: 10px;
+    margin-bottom: 20px;
     font-family: 'Courier New', Courier, monospace;
 }
 .skills hr{

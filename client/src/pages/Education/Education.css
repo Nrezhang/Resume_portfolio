@@ -1,0 +1,19 @@
+.education{
+    background-color: mediumpurple;
+    display: flex;
+    font-family: 'Courier New', Courier, monospace;
+}
+.education-container{
+    margin-left: 190px;
+    align-items: center;
+    padding-top: 40px;
+}
+.education hr{
+    width: 70%;
+    margin:10px auto;
+}
+
+.jvectormap-container svg{
+    height:400px;
+    width:100%;
+}
