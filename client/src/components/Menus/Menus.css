@@ -28,3 +28,10 @@
 .nav-link:hover{
     color: sandybrown;
 }
+
+.nav-link .active{
+    color: sandybrown;
+    border-left: 5px solid sandybrown;
+    padding-left: 10px;
+    text-decoration: none;
+}

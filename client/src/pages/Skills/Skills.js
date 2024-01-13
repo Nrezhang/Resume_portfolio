@@ -14,8 +14,8 @@ const Skills = () => {
 
   return (
     <>
-        <div className='skills'>
-            <div className='container row skills-heading'>
+        <div className='skills' id="skills">
+            <div className=' row skills-heading'>
                 <h1 className='text-center'>
                     My Skills 
                 </h1>

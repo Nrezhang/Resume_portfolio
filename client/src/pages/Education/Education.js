@@ -1,53 +1,42 @@
 import React, {useRef, useState} from 'react'
 import './Education.css'
-import {VectorMap} from 'react-jvectormap'
+import {MdAccountBalance} from "react-icons/md";
+import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component'
+import 'react-vertical-timeline-component/style.min.css'
+
 const Education = () => {
 
     const mapRef = useRef();
 
   return (
     <>
-        <div className='education'>
-            <div className='education-container container'>
+        <div className='education' id='`education'>
+            <div className='education-container container '>
                 < h1 className='col-12 mt-3 mb-1 text-center text-uppercase'>Education</h1>
                 <hr/>
+                <VerticalTimeline layout='1-column-left'>
 
-                <VectorMap
-              
-                    ref={mapRef}
-                    // zoomOnScroll={false}
-                    // zoomButtons={false}
-                    map={"world_mill"}
-                    backgroundColor="mediumpurple"
-                    containerStyle={{
-                        width: "100%",
-                        height: "100%"
-                    }}
-                    markerStyle={{
-                        initial: {
-                        fill: "#5E32CA",
-                        stroke: "#383f47"
-                        }
-                    }}
-                    containerClassName="map"
-                    markers={[
-                        {
-                        latLng: [31.2244, 121.4692],
-                        name: "Shanghai"
-                        },
-                        {
-                            latLng: [40.7128, -74.0060],
-                            name: "New York"
-                        },
-                        {
-                            latLng: [38.8181, -77.1680],
-                            name: "Virginia"
-                        }
-                            
-                    ]}
-                    />
+                    <VerticalTimelineElement
+                        
+                        className="vertical-timeline-element--work"
+                        contentStyle={{ background: 'white', color: 'black', boxShadow:'0px 0px 0px 0px white', borderTop:'5px solid mediumpurple' }}
+                        contentArrowStyle={{ borderRight: '7px solid mediumpurple' }}
+                        date="August 2021 - Present(expected graduation date: 2025)"
+                        iconStyle={{ background: 'mediumpurple', color: 'white' }}
+                        icon={<MdAccountBalance />}
+                    >
+                        <h3 className="vertical-timeline-element-title">BS in Computer Science with a Business Minor</h3>
+                        <h4 className="vertical-timeline-element-subtitle">NYU Shanghai</h4>
+                        <p>
+                            Currently studying in both NYC and Shanghai
+                            <br/>
+                            GPA: 3.5/4.0 
+                        </p>
 
-            </div>
+                    </VerticalTimelineElement>
+                    </VerticalTimeline>
+                </div>
+
         </div>
     </>
   )

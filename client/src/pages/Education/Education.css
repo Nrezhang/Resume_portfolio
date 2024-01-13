@@ -1,19 +1,29 @@
 .education{
     background-color: mediumpurple;
+    color: white;
+    font-weight: bolder;
     display: flex;
-    font-family: 'Courier New', Courier, monospace;
+    background-repeat: no-repeat;
+    padding-bottom: 50px;
+    background-image: url(../../static/images/nyu.png);
+}
+
+.education h1{
+    font-family: sans-serif;
+    font-size: 50px;
 }
 .education-container{
     margin-left: 190px;
-    align-items: center;
-    padding-top: 40px;
+    padding: 10px;
+    min-height: 800px;
+
+
 }
 .education hr{
     width: 70%;
     margin:10px auto;
 }
 
-.jvectormap-container svg{
-    height:400px;
-    width:100%;
+.vertical-timeline-element--work{
+    font-size: xx-large;
 }
