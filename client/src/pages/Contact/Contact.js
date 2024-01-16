@@ -1,9 +1,43 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Contact.css'
+import axios from 'axios'
+import {toast} from 'react-toastify'
 import { FaLinkedin, FaGithub, FaGoogle } from "react-icons/fa";
 
 
 const Contact = () => {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [msg, setMsg] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      if(!name || !email || !msg){
+        toast.error('Please fill out all fields')
+      }
+      if(!email.includes('@')){
+        toast.error('Please enter a valid email')
+      }
+      
+        const res = await axios.post('/api/v1/portfolio/sendEmail', {name, email, msg})
+        if(res.data.success){
+          toast.success('Your Message was Sent')
+          setName('')
+          setEmail('')
+          setMsg('')
+        }
+        else{
+          toast.error('Your message failed to send')
+        }
+        console.log(name, email, msg)
+        
+      }
+    catch(error){
+      console.log(error)
+      toast.error('somethings not working')
+    }
+  }
   return (
     <div className='contact' id='contact'>
       <div className='contact-container'>
@@ -28,22 +62,22 @@ const Contact = () => {
                     <label className='mb-1'>
                       <h6 className='mb-0 text-sm'> Name</h6>
                     </label>
-                    <input className='mb-4' type='text' name='name' placeholder='Enter your name' />
+                    <input className='mb-4' type='text' name='name' placeholder='Enter your name' value={name} onChange={(e) => setName(e.target.value)} />
                   </div>
                   <div className='row px-3'>
                     <label className='mb-1'>
                       <h6 className='mb-0 text-sm'>Email Address</h6>
                     </label>
-                    <input className='mb-4' type='text' name='email' placeholder='Enter a valid email address' />
+                    <input className='mb-4' type='text' name='email' placeholder='Enter a valid email address' value={email} onChange={(e) => setEmail(e.target.value)}/>
                   </div>
                   <div className='row px-3'>
                     <label className='mb-1'>
                       <h6 className='mb-0 text-sm'>Message</h6>
                     </label>
-                    <textarea className='mb-4' rows='5' cols='50' name='message' placeholder='Enter a message' />
+                    <textarea className='mb-4' rows='5' cols='50' name='message' placeholder='Enter a message' value = {msg} onChange={(e) => setMsg(e.target.value)}/>
                   </div>
                   <div className='row mb-3 px-3'>
-                    <button type='submit' className='btn btn-blue text-center'>Send</button>
+                    <button type='submit' className='btn btn-blue text-center' onClick={handleSubmit}>Send</button>
                   </div>
                 </div>
               </div>

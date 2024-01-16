@@ -111,5 +111,6 @@ button:focus{
     border-radius: 10px;
     border: 2px solid dodgerblue;
     color: #0d6efd;
-    transition: 1s;
+    transition: .3s;
 }
+

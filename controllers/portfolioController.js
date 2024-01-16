@@ -1,22 +1,53 @@
+const nodemailer = require("nodemailer");
+const sendGridTransport = require("nodemailer-sendgrid-transport");
+
+//transport
+const transporter = nodemailer.createTransport(
+  sendGridTransport({
+    auth: {
+      api_key: process.env.API_SENDGRID,
+    },
+  })
+);
 
 const sendEmailController = (req, res) => {
+  try {
+    const { name, email, msg } = req.body;
 
-    try{
-        return res.send({
-            success: true,
-            message: 'Your Message was sent!'
-        
-        })
+    //validation
+    if (!name || !email || !msg) {
+      return res.status(500).send({
+        success: false,
+        message: "Please Provide All Fields",
+      });
     }
-    catch(error){
-        console.log(error);
-        return res.status(500).send({
-            success: false,
-            message: 'email api error',
-            error
-    })
-    }
-}
+    //email matter
+    transporter.sendMail({
+      to: process.env.EMAIL,
+      from: process.env.EMAIL,
+      subject: "Regarding Portfolio",
+      html: `
+        <h5>Information</h5>
+        <ul>
+          <li><p>Name : ${name}</p></li>
+          <li><p>Email : ${email}</p></li>
+          <li><p>Message : ${msg}</p></li>
+        </ul>
+      `,
+    });
 
+    return res.status(200).send({
+      success: true,
+      message: "Your Message Send Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Send Email API Error",
+      error,
+    });
+  }
+};
 
-module.exports = {sendEmailController};
+module.exports = { sendEmailController };

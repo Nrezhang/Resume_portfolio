@@ -7,9 +7,13 @@ import Experience from "./pages/Experience/Experience";
 import Contact from "./pages/Contact/Contact";
 import ScrollToTop from "react-scroll-to-top";
 import MobileNav from "./components/MobileNav/MobileNav";
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 function App() {
   return (
     <>
+    <ToastContainer />
     <MobileNav />
     <Layout />
     <div>
