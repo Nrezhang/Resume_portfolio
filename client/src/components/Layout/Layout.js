@@ -2,8 +2,7 @@
 import React, {useState} from 'react'
 import Home from '../../pages/Home/Home'
 import "./Layout.css"
-import { MdOutlineMenu } from "react-icons/md";
-import { MdMenuOpen } from "react-icons/md";
+import { MdOutlineMenu, MdMenuOpen } from "react-icons/md";
 import Menus from '../Menus/Menus';
 const Layout = () => {
     const [toggle, setToggle] = useState(true)

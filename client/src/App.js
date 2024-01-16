@@ -6,11 +6,13 @@ import Education from "./pages/Education/Education";
 import Experience from "./pages/Experience/Experience";
 import Contact from "./pages/Contact/Contact";
 import ScrollToTop from "react-scroll-to-top";
+import MobileNav from "./components/MobileNav/MobileNav";
 function App() {
   return (
     <>
+    <MobileNav />
+    <Layout />
     <div>
-      <Layout />
       <About />
       <Experience />
       <Skills />
