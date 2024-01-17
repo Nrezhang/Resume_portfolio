@@ -19,7 +19,7 @@ app.use(express.json());
 app.use('/api/v1/portfolio', require('./routes/portfolioRoutes'));
 
 //port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 //listen
 app.listen(PORT, () => {
