@@ -20,7 +20,7 @@ const Contact = () => {
         toast.error('Please enter a valid email')
       }
       else{
-        const res = await axios.post('http://localhost:8080/api/v1/portfolio/sendEmail', {name, email, msg})   //ISSUES
+        const res = await axios.post('/api/v1/portfolio/sendEmail', {name, email, msg})   //ISSUES
         if(res.data.success){
           toast.success('Your Message was Sent')
           setName('')
