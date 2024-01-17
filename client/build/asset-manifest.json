@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.56cb6d02.css",
+    "main.js": "/static/js/main.b1f026ef.js",
+    "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
+    "static/media/nyu.png": "/static/media/nyu.2b71a2bc249163c4739b.png",
+    "static/media/profilepic.jpg": "/static/media/profilepic.85dace77e7fd0c98ca69.jpg",
+    "static/media/homepage.png": "/static/media/homepage.017b57a80ff12dd94dca.png",
+    "static/media/resume.pdf": "/static/media/resume.958e3c3e38fa00ff9f20.pdf",
+    "static/media/widget.png": "/static/media/widget.315e462bdce9c721f7be.png",
+    "static/media/airline.png": "/static/media/airline.aa6cf13e59888056a5e3.png",
+    "index.html": "/index.html",
+    "main.56cb6d02.css.map": "/static/css/main.56cb6d02.css.map",
+    "main.b1f026ef.js.map": "/static/js/main.b1f026ef.js.map",
+    "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.56cb6d02.css",
+    "static/js/main.b1f026ef.js"
+  ]
+}
