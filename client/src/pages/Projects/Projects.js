@@ -23,9 +23,9 @@ const Projects = () => {
                                 <img src={homepage} alt= "project1"/>
                             </div>
                             <div className='card-image-overly'>
-                                <span className='card-detail-badge'>React.js </span>
+                                <span className='card-detail-badge'>MERN</span>
                                 <span className='card-detail-badge'> HTML/CSS</span>
-                                <span className='card-detail-badge'> Continuous Deployment</span>
+                                <span className='card-detail-badge'>Deployment</span>
                             </div>
                             <div className='card-body'>
                                 <div className='ad-title'>

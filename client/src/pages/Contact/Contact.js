@@ -35,7 +35,7 @@ const Contact = () => {
       }
     catch(error){
       console.log(error)
-      toast.error('somethings not working')
+      toast.error('somethings not working' + error)
     }
   }
   return (
