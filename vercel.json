@@ -5,7 +5,7 @@
             "src": "server.js",
             "use": "@vercel/node"
         },
-        { "src": "client/build/**", "use": "@vercel/static" }
+        // { "src": "client/build/**", "use": "@vercel/static" }
 
     ],
     "routes": [
