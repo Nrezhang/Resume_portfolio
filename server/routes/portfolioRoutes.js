@@ -7,5 +7,9 @@ const router = express.Router();
 //routes
 router.post("/sendEmail", sendEmailController);
 
+router.get("/test", (req, res) => {
+    res.send("Testing route");
+  });
+
 // /export
 module.exports = router;
