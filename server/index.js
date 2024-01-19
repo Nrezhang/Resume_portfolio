@@ -15,7 +15,7 @@ const app = express();
 //middleware
 app.use(cors(
     {
-        origin: 'https://resume-portfolio-api.vercel.app',
+        origin: 'https://henryszhang.com',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true
     }
