@@ -15,7 +15,7 @@ const app = express();
 //middleware
 app.use(cors(
     {
-        origin: 'https://henryszhang.com',
+        origin: 'https://www.henryszhang.com',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true
     }
