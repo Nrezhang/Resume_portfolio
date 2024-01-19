@@ -13,7 +13,13 @@ dotenv.config();
 const app = express();
 
 //middleware
-app.use(cors());
+app.use(cors(
+    {
+        origin: '',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true
+    }
+));
 app.use(express.json());
 
 //static files
@@ -22,6 +28,10 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 //route
 
 app.use('/api/v1/portfolio', require('./routes/portfolioRoutes'));
+
+app.get('/', (req, res) => {
+    res.send('hello world');
+});
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
