@@ -53,7 +53,7 @@ const Contact = () => {
                       <a id='c' href= "mailto: hsz2011@nyu.edu"><FaGoogle className='icon' /></a>
                     </h5>
                   </div>
-                  <div className='row px-3 mb-4'>
+                  {/* <div className='row px-3 mb-4'>
                     <div className='line'></div>
                     <small className='or text-center'>OR</small>
                     <div className='line'></div>
@@ -78,10 +78,10 @@ const Contact = () => {
                   </div>
                   <div className='row mb-3 px-3'>
                     <button type='submit' className='btn btn-blue text-center' onClick={handleSubmit}>Send</button>
-                  </div>
+                  </div>*/}
                 </div>
               </div>
-              </div>
+              </div> 
   
   
             </div>
