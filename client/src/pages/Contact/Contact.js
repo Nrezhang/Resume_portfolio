@@ -80,6 +80,7 @@ const Contact = () => {
                     <button type='submit' className='btn btn-blue text-center' onClick={handleSubmit}>Send</button>
                   </div>*/}
                 </div>
+                <h4 className='text-center'>Don't hesitate to reach out to talk or inquire about anything! 😁</h4>
               </div>
               </div> 
   

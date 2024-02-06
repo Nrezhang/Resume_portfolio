@@ -2,11 +2,12 @@
     background-color: lightblue;
     color: white;
     display: flex;
-    min-height: 100vh;
+    min-height: 50vh;
     font-family: 'Courier New', Courier, monospace;
 }
 .contact-container{
     margin-left: 200px;
+    width: 100%;
     align-items: center;
     padding: 10px;
     padding-right: 40px;
