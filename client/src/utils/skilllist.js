@@ -141,7 +141,7 @@ export const other = [
         _id:2,
         name: 'Teamwork',
         icon: FaPeopleCarry,
-        desc: "Teamwork makes the dream work! I enjoy working with other people!",
+        desc: "Teamwork makes the dream work! I get energy working with other people!",
         proficiency: "99%"
 
     },
@@ -157,7 +157,7 @@ export const other = [
         _id:4,
         name: 'Consulting',
         icon: BsGraphUpArrow,
-        desc: "Was a Consulting Project Manager for TAMID. Experience with market research, outreach, etc",
+        desc: "Was a Consulting Project Manager for TAMID, and won first place in a case competition! Experience with market research, outreach, etc",
         proficiency: "70%"
 
     },
@@ -165,7 +165,7 @@ export const other = [
         _id:5,
         name: 'Fitness',
         icon: TbBarbell,
-        desc: "Love fitness, and keeping my body healthy",
+        desc: "I lift weights and run consistently. I also enjoy playing basketball and lacrosse.",
         proficiency: "90%"
 
     },
