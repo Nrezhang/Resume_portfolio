@@ -45,7 +45,10 @@
 .project .card img{
     height: 150px;
     width: 100%;
-
+    aspect-ratio: 1 / 1;
+}
+.card-image img{
+    aspect-ratio: 3 / 2;
 }
 
 .card-body p{
@@ -76,8 +79,8 @@
 
 .project .card:hover{
     background-color: rgba(255, 255, 255, 0.944);
-    border-radius: 4px;
-    box-shadow: 12px 15px 20px 0px rgba(0, 0, 0, 0.055);
+    border-radius: 7px;
+    box-shadow: 12px 15px 20px 0px rgba(0, 0, 0, 0.166);
 
 }
 
