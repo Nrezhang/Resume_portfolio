@@ -23,7 +23,7 @@ app.use(cors(
 app.use(express.json());
 
 //static files
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../build')));
 
 //route
 
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
 //port
