@@ -22,7 +22,7 @@ const Experience = () => {
                         icon={<MdOutlineWorkOutline />}
                     >
                         <h3 className="vertical-timeline-element-title">Technical Project Manager</h3>
-                        <h4 className="vertical-timeline-element-subtitle"><a href='jika.io' target='_blank'>Jika.io</a> Intern</h4>
+                        <h4 className="vertical-timeline-element-subtitle"><a href='https://www.jika.io' target='_blank'>Jika.io</a> Intern</h4>
                         <p>
                         Implemented schema to <b>extract</b>, <b>transform</b>, and <b>load</b> user analytics from mongodb to BigQuery
                         </p>
