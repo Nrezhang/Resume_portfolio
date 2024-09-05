@@ -21,7 +21,7 @@ const Experience = () => {
                             icon={<MdOutlineWorkOutline />}
                         >
                             <h3 className="vertical-timeline-element-title">AI Software Engineering Intern</h3>
-                            <h4 className="vertical-timeline-element-subtitle"><a href='https://www.medidata.com' target='_blank'>Medidata Solutions Inc.s</a> New York, NY</h4>
+                            <h4 className="vertical-timeline-element-subtitle"><a href='https://www.medidata.com' target='_blank'>Medidata Solutions Inc.</a> New York, NY</h4>
                             <p>
                             Implemented and improved <b>RAG application</b> on 20,000+ medical records.
                             </p>
