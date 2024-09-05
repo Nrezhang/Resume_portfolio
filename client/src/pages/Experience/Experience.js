@@ -12,22 +12,53 @@ const Experience = () => {
                 <hr/>
 
                 <VerticalTimeline>
+                    <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ background: 'white', color: 'black', boxShadow:'0px 0px 0px 0px white', borderTop:'5px solid dodgerblue' }}
+                            contentArrowStyle={{ borderRight: '7px solid dodgerblue' }}
+                            date="May 2024 - August 2024"
+                            iconStyle={{ background: 'dodgerblue', color: 'white' }}
+                            icon={<MdOutlineWorkOutline />}
+                        >
+                            <h3 className="vertical-timeline-element-title">AI Software Engineering Intern</h3>
+                            <h4 className="vertical-timeline-element-subtitle"><a href='https://www.medidata.com' target='_blank'>Medidata Solutions Inc.s</a> New York, NY</h4>
+                            <p>
+                            Implemented and improved <b>RAG application</b> on 20,000+ medical records.
+                            </p>
+                    </VerticalTimelineElement>
+                    <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ background: 'white', color: 'black', boxShadow:'0px 0px 0px 0px white', borderTop:'5px solid dodgerblue' }}
+                            contentArrowStyle={{ borderRight: '7px solid dodgerblue' }}
+                            date="May 2023 - August 2023"
+                            iconStyle={{ background: 'dodgerblue', color: 'white' }}
+                            icon={<MdOutlineWorkOutline />}
+                        >
+                            <h3 className="vertical-timeline-element-title">Software Development Intern</h3>
+                            <h4 className="vertical-timeline-element-subtitle"><a href='https://aiotlabs.microsoft.com/en' target='_blank'>Microsoft AI Co-Innocation Labs</a> Shanghai</h4>
+                            <p>
+                            Developed application using AI to facilitate <b>employee-database</b> communication.
+                            </p>
+                    
+                    </VerticalTimelineElement>
 
                     <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        contentStyle={{ background: 'white', color: 'black', boxShadow:'0px 0px 0px 0px white', borderTop:'5px solid dodgerblue' }}
-                        contentArrowStyle={{ borderRight: '7px solid dodgerblue' }}
-                        date="February 2023 - May 2023"
-                        iconStyle={{ background: 'dodgerblue', color: 'white' }}
-                        icon={<MdOutlineWorkOutline />}
-                    >
-                        <h3 className="vertical-timeline-element-title">Technical Project Manager</h3>
-                        <h4 className="vertical-timeline-element-subtitle"><a href='https://www.jika.io' target='_blank'>Jika.io</a> Intern</h4>
-                        <p>
-                        Implemented schema to <b>extract</b>, <b>transform</b>, and <b>load</b> user analytics from mongodb to BigQuery
-                        </p>
-                  
-                  </VerticalTimelineElement>
+                            className="vertical-timeline-element--edu"
+                            contentStyle={{ background: 'white', color: 'black', boxShadow:'0px 0px 0px 0px white', borderTop:'5px solid mediumpurple' }}
+                            contentArrowStyle={{ borderRight: '7px solid mediumpurple' }}
+                            date="August 2023 - December 2023"
+                            iconStyle={{ background: 'mediumpurple', color: 'white' }}
+                            icon={<MdAccountBalance />}
+                        >
+                            <h3 className="vertical-timeline-element-title">Tech Trek Tutor</h3>
+                            <h4 className="vertical-timeline-element-subtitle"><a href='https://techatnyu.org/techtreks' target='_blank'>Tech@NYU</a></h4>
+                            <p>
+                                Guided project groups in their projects using <b>agile development</b>, using my previous experience with web development, AI, and other necessary tools.
+
+                            </p>
+                    
+                    </VerticalTimelineElement>
+
 
                   <VerticalTimelineElement
                         className="vertical-timeline-element--edu"
@@ -45,34 +76,19 @@ const Experience = () => {
                   
                   </VerticalTimelineElement>
 
+
                   <VerticalTimelineElement
                         className="vertical-timeline-element--work"
                         contentStyle={{ background: 'white', color: 'black', boxShadow:'0px 0px 0px 0px white', borderTop:'5px solid dodgerblue' }}
                         contentArrowStyle={{ borderRight: '7px solid dodgerblue' }}
-                        date="May 2023 - August 2023"
+                        date="February 2023 - May 2023"
                         iconStyle={{ background: 'dodgerblue', color: 'white' }}
                         icon={<MdOutlineWorkOutline />}
                     >
-                        <h3 className="vertical-timeline-element-title">Software Development Intern</h3>
-                        <h4 className="vertical-timeline-element-subtitle"><a href='https://aiotlabs.microsoft.com/en' target='_blank'>Microsoft AI Co-Innocation Labs</a> Shanghai</h4>
+                        <h3 className="vertical-timeline-element-title">Technical Project Manager</h3>
+                        <h4 className="vertical-timeline-element-subtitle"><a href='https://www.jika.io' target='_blank'>Jika.io</a> Intern</h4>
                         <p>
-                        Developed application using AI to facilitate <b>employee-database</b> communication.
-                        </p>
-                  
-                  </VerticalTimelineElement>
-                  <VerticalTimelineElement
-                        className="vertical-timeline-element--edu"
-                        contentStyle={{ background: 'white', color: 'black', boxShadow:'0px 0px 0px 0px white', borderTop:'5px solid mediumpurple' }}
-                        contentArrowStyle={{ borderRight: '7px solid mediumpurple' }}
-                        date="August 2023 - December 2023"
-                        iconStyle={{ background: 'mediumpurple', color: 'white' }}
-                        icon={<MdAccountBalance />}
-                    >
-                        <h3 className="vertical-timeline-element-title">Tech Trek Tutor</h3>
-                        <h4 className="vertical-timeline-element-subtitle"><a href='https://techatnyu.org/techtreks' target='_blank'>Tech@NYU</a></h4>
-                        <p>
-                            Guided project groups in their projects using <b>agile development</b>, using my previous experience with web development, AI, and other necessary tools.
-
+                        Implemented schema to <b>extract</b>, <b>transform</b>, and <b>load</b> user analytics from mongodb to BigQuery
                         </p>
                   
                   </VerticalTimelineElement>

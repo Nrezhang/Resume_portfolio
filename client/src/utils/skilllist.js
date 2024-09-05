@@ -57,10 +57,10 @@ export const languages = [
 export const tools = [
     {
         _id:1,
-        name: 'OpenAI',
+        name: 'LLMs',
         icon: SiOpenai,
-        desc: "Lots of experience at my previous internship with prompt engineering, agents, etc. I also enjoy using their API in my own free time",
-        proficiency: "95%"
+        desc: "Lots of experience at my previous internship with prompt engineering, agents, etc. I also enjoy using AI models in my own free time",
+        proficiency: "99%"
     },
     {
         _id:2,
@@ -111,6 +111,13 @@ export const tools = [
         icon: SiLooker,
         desc: "Researched Business intelligence tools such as Looker Studio, and how to display meaninful analytics",
         proficiency: "60%"
+    },
+    {
+        _id:1,
+        name: 'AWS',
+        icon: SiLooker,
+        desc: "Used AWS services like bedrock, s3, etc. during my time at Medidata. Wokring on AWS Solutions Architect Certificate",
+        proficiency: "50%"
     },
     {
         _id:1,
