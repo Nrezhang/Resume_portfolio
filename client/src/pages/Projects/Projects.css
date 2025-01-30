@@ -1,90 +1,138 @@
-.project{
+.project {
     font-family: 'Courier New', Courier, monospace;
-
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+
 }
 
-.project-container{
+.project-container {
     margin-left: 190px;
     align-items: center;
+    overflow: hidden;
+    width: 100%;
 }
 
-.project h1{
-    padding-top: 40px;    
+/* Title Styling */
+.project h1 {
+    padding-top: 40px;
+    text-align: center;
 }
-.project hr{
+
+.project hr {
     width: 70%;
-    margin:10px auto;
+    margin: 10px auto;
 }
 
-#ads{
-    margin:30px 0px 30px 0px;
-    padding: 20px;
-    
-}
-.col-md-4{
-    padding: 10px;
+/* SCROLLABLE CONTAINER */
+.project-scroll-container {
+    display: flex;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents wrapping */
+    padding: 20px 0;
+    scroll-behavior: smooth;
 }
 
-#ads .card-notify-badge{
+/* SCROLLBAR STYLING */
+.project-scroll-container::-webkit-scrollbar {
+    height: 8px; /* Scrollbar thickness */
+}
+
+.project-scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.project-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* FLEX CONTAINER FOR PROJECTS */
+.project-cards {
+    display: flex;
+    gap: 20px; /* Spacing between cards */
+    padding-bottom: 10px;
+    flex-wrap: nowrap;
+}
+
+/* Card Styling */
+.project .card {
+    min-width: 300px; /* Ensures all cards maintain size */
+    max-width: 320px;
+    flex: 0 0 auto; /* Prevents cards from shrinking */
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.project .card:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.944);
+    border-radius: 7px;
+    box-shadow: 12px 15px 20px 0px rgba(0, 0, 0, 0.166);
+}
+
+/* Card Image */
+.project .card img {
+    height: 150px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.card-image img {
+    aspect-ratio: 3 / 2;
+}
+.card-body {
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+}
+/* Card Badges */
+.card-notify-badge {
     position: absolute;
     left: -10px;
     top: -5px;
     color: white;
     background: cadetblue;
     text-align: center;
-    border-radius: 30px 30px 30px 30px;
+    border-radius: 30px;
     padding: 5px 10px;
     font-size: 14px;
 }
 
-.project .card{
-    border-radius: 0px 0px 0px 0px;
-}
-
-.project .card img{
-    height: 150px;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-}
-.card-image img{
-    aspect-ratio: 3 / 2;
-}
-
-.card-body p{
+/* Card Description */
+.card-body p {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: small; 
+    font-size: small;
 }
 
-.card-detail-badge{
+/* Tech Stack Badges */
+.card-detail-badge {
     background-color: darkkhaki;
     text-align: center;
-    border-radius: 10px 10px 10px 10px;
-    color:black;
-    padding: 5px 5px;
+    border-radius: 10px;
+    color: black;
+    padding: 5px;
     font-size: 12px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.card-image-overly{
+
+.card-image-overly {
     font-size: 20px;
     margin-top: -10px;
-    
 }
-.card-image-overly span{
+
+.card-image-overly span {
     display: inline-block;
     margin-left: 1px;
-    color:white;
-
+    color: white;
 }
 
-.project .card:hover{
-    background-color: rgba(255, 255, 255, 0.944);
-    border-radius: 7px;
-    box-shadow: 12px 15px 20px 0px rgba(0, 0, 0, 0.166);
-
-}
-
-.ad-btn{
+/* Button Styling */
+.ad-btn {
     text-transform: uppercase;
     width: 150px;
     height: 40px;
@@ -95,12 +143,12 @@
     border-radius: 80px;
     line-height: 35px;
     text-decoration: none;
-    margin: 20px auto 20px aut0;
+    margin: 20px auto;
     overflow: hidden;
     position: relative;
 }
 
-.ad-btn:hover{
+.ad-btn:hover {
     background-color: white;
     color: blue;
     background: transparent;
