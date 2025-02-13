@@ -1,22 +1,13 @@
-import React, {useState} from 'react'
+import React from 'react'
 import'./Home.css'
 import Typewriter from 'typewriter-effect'
 import resume from '../../static/docs/resume.pdf'
 import { Link } from 'react-scroll';
 const Home = () => {
-    const [showValentine, setShowValentine] = useState(false);
   return (
     <>
         <div className='container-fluid home-container' id='home'>
             <div className='container home-content'>
-                {showValentine ? (
-                    <div className='valentine-content'>
-                        <h1 className='valentine-title'>Jennifer,</h1>
-                        <h2 className='valentine-message'>Will you be my Valentine? ❤️</h2>
-                        <p className='valentine-text'>Thank you for going over my resume for me btw</p>
-                    </div>
-                ) : (
-                <>
                 <h1> Henry Zhang</h1>
                 <h2>
                     <Typewriter options={{
@@ -32,15 +23,6 @@ const Home = () => {
                 </Link>
                     <a className='btn btn-cv' href={resume} target="_blank" > My Resume</a>
                 </div>
-                
-                </>
-                )}
-                <div className='home-buttons'>
-                 <button className='btn btn-love' onClick={() => setShowValentine(!showValentine)}>
-                    {showValentine ? 'Back to Home' : '❤️'}
-                </button>
-                </div>
-                
             </div>
         </div>
     </>
