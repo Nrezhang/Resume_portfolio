@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Resume_portfolio/static/css/main.01a1617d.css",
+    "main.js": "/Resume_portfolio/static/js/main.918ed97b.js",
+    "static/js/787.d5fa4d18.chunk.js": "/Resume_portfolio/static/js/787.d5fa4d18.chunk.js",
+    "static/media/nyu.png": "/Resume_portfolio/static/media/nyu.2b71a2bc249163c4739b.png",
+    "static/media/35_Parameter_Efficient_Fine_Tu.pdf": "/Resume_portfolio/static/media/35_Parameter_Efficient_Fine_Tu.a9386bf67cdb60c44871.pdf",
+    "static/media/profilepic.jpg": "/Resume_portfolio/static/media/profilepic.85dace77e7fd0c98ca69.jpg",
+    "static/media/resume.pdf": "/Resume_portfolio/static/media/resume.0e69d8025d889baf266c.pdf",
+    "static/media/homepage.png": "/Resume_portfolio/static/media/homepage.017b57a80ff12dd94dca.png",
+    "static/media/prediction_jpm_2.png": "/Resume_portfolio/static/media/prediction_jpm_2.fc09da5d87b17b4b63e6.png",
+    "static/media/widget.png": "/Resume_portfolio/static/media/widget.315e462bdce9c721f7be.png",
+    "static/media/airline.png": "/Resume_portfolio/static/media/airline.aa6cf13e59888056a5e3.png",
+    "index.html": "/Resume_portfolio/index.html",
+    "main.01a1617d.css.map": "/Resume_portfolio/static/css/main.01a1617d.css.map",
+    "main.918ed97b.js.map": "/Resume_portfolio/static/js/main.918ed97b.js.map",
+    "787.d5fa4d18.chunk.js.map": "/Resume_portfolio/static/js/787.d5fa4d18.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01a1617d.css",
+    "static/js/main.918ed97b.js"
+  ]
+}
