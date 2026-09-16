@@ -1,7 +1,5 @@
-/*css reset*/
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 0; background: var(--paper, #f5f4ef); color: var(--ink, #171b1a); }
+button, input, textarea { font: inherit; }
+img { max-width: 100%; }

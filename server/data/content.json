@@ -1,0 +1,358 @@
+{
+  "profile": {
+    "name": "Henry Zhang",
+    "eyebrow": "Software engineer · AI systems · New York",
+    "headline": "I build useful software at the intersection of AI, data, and product.",
+    "bio": "Hello, I'm Henry. I'm a Computer Science and Business graduate from NYU Shanghai with a passion for engineering, analytics, and making things happen. I am looking for a role where I can apply my experience developing and optimizing AI-driven applications, embedding models, data pipelines, and full-stack products.",
+    "personalNote": "I enjoy driving cool solutions and experimenting with web development and AI. I've lived in Virginia, New York, and Shanghai, enjoy learning about new cultures, and am fluent in Chinese.",
+    "welcome": "Welcome to my site. Explore my work, experience, and the tools I use to build.",
+    "roles": [
+      "CS @ NYU",
+      "Web Developer"
+    ],
+    "availability": "Open to new-grad software engineering roles",
+    "email": "hsz2011@nyu.edu",
+    "github": "https://github.com/Nrezhang",
+    "linkedin": "https://www.linkedin.com/in/henryszhang/",
+    "location": "New York, NY",
+    "image": "profile"
+  },
+  "projects": [
+    {
+      "id": "financial-sentiment",
+      "year": "2024",
+      "title": "Fine Tuning for Financial Sentiment",
+      "category": "Applied AI · Capstone",
+      "description": "Fine-tuned LLaMA for financial sentiment analysis and incorporated the results into an LSTM to improve stock price movement predictions.",
+      "impact": "Built an end-to-end research pipeline covering data preparation, model adaptation, feature generation, and downstream evaluation.",
+      "skills": [
+        "Fine Tuning",
+        "LLM",
+        "LSTM",
+        "Data Analysis",
+        "Python",
+        "NLP"
+      ],
+      "image": "sentiment",
+      "imageAlt": "Financial sentiment model output chart",
+      "link": "capstone",
+      "linkLabel": "Read capstone paper"
+    },
+    {
+      "id": "portfolio-platform",
+      "year": "2024",
+      "title": "Resume Portfolio",
+      "category": "Frontend · Developer experience",
+      "description": "This website, coded from scratch so you can learn about me, my experience, and the projects I have built.",
+      "impact": "Rebuilt the original MERN-era portfolio as a routed React application with reusable content components and an authenticated editing workflow.",
+      "skills": [
+        "React",
+        "Node.js",
+        "HTML/CSS",
+        "REST APIs",
+        "Deployment",
+        "Responsive Design"
+      ],
+      "image": "portfolio",
+      "imageAlt": "Original portfolio homepage",
+      "link": "https://github.com/Nrezhang/Resume_portfolio",
+      "linkLabel": "View repository"
+    },
+    {
+      "id": "database-agent",
+      "year": "2023",
+      "title": "Natural Language to Database Communication",
+      "category": "AI product · Enterprise tools",
+      "description": "Using LangChain agents, created a chatbot component that enables natural-language database communication and generates reports from relational data.",
+      "impact": "Designed the schema-aware prompt flow, report experience, and interface states that made generated queries easier to understand and validate.",
+      "skills": [
+        "OpenAI",
+        "REST API",
+        "React.js",
+        "PostgreSQL",
+        "Python",
+        "LangChain"
+      ],
+      "image": "agent",
+      "imageAlt": "Natural language database agent interface",
+      "link": "https://www.canva.com/design/DAFqrVJmc2o/abxTLWYPVzbUUnqm7SZNvQ/view?utm_content=DAFqrVJmc2o&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink",
+      "linkLabel": "View presentation"
+    },
+    {
+      "id": "airline-simulator",
+      "year": "2023",
+      "title": "Airline Flight Booking Simulator",
+      "category": "Full stack · Database systems",
+      "description": "Created a relational database for flight information and enabled authentication for customers, airline staff, and agents to view, change, and purchase flights.",
+      "impact": "Modeled shared booking data and permissions around practical CRUD flows, relational constraints, and role-specific access.",
+      "skills": [
+        "Django",
+        "MySQL",
+        "HTML/CSS",
+        "User Authentication",
+        "Python"
+      ],
+      "image": "airline",
+      "imageAlt": "Airline booking simulator interface",
+      "link": "https://github.com/Nrezhang/AirlineSim",
+      "linkLabel": "View source code"
+    }
+  ],
+  "experience": [
+    {
+      "id": "trianz",
+      "type": "work",
+      "role": "PMO Analyst",
+      "company": "Trianz Inc.",
+      "location": "Herndon, VA",
+      "period": "May 2024 – August 2024",
+      "description": "Supported project planning, reporting, and delivery coordination across client-facing technical work, translating progress and risks into clear operating updates.",
+      "skills": [
+        "Project Management",
+        "Stakeholder Communication",
+        "Delivery Operations"
+      ],
+      "url": "https://www.trianz.com"
+    },
+    {
+      "id": "medidata",
+      "type": "work",
+      "role": "AI Software Engineering Intern",
+      "company": "Medidata Solutions Inc.",
+      "location": "New York, NY",
+      "period": "May 2024 – August 2024",
+      "description": "Implemented and improved a retrieval-augmented generation application over more than 20,000 medical records.",
+      "skills": [
+        "RAG",
+        "Python",
+        "LLMs",
+        "Vector Search",
+        "AWS"
+      ],
+      "url": "https://www.medidata.com"
+    },
+    {
+      "id": "microsoft",
+      "type": "work",
+      "role": "Software Development Intern",
+      "company": "Microsoft AI Co-Innovation Labs",
+      "location": "Shanghai, China",
+      "period": "May 2023 – August 2023",
+      "description": "Developed an AI application that facilitated employee-to-database communication and generated reports for non-technical users.",
+      "skills": [
+        "React",
+        "Python",
+        "OpenAI",
+        "PostgreSQL",
+        "Product Prototyping"
+      ],
+      "url": "https://aiotlabs.microsoft.com/en"
+    },
+    {
+      "id": "tech-trek",
+      "type": "leadership",
+      "role": "Tech Trek Tutor",
+      "company": "Tech@NYU",
+      "location": "New York, NY",
+      "period": "August 2023 – December 2023",
+      "description": "Guided project groups using Agile development and shared practical experience with web development, AI, and the tools needed to complete their projects.",
+      "skills": [
+        "Mentorship",
+        "Agile",
+        "Web Development",
+        "AI"
+      ],
+      "url": "https://techatnyu.org/techtreks"
+    },
+    {
+      "id": "tamid",
+      "type": "leadership",
+      "role": "Director of Technology",
+      "company": "TAMID at NYU Shanghai",
+      "location": "Shanghai, China",
+      "period": "2023",
+      "description": "Led the inaugural Technical Consulting chapter at NYU Shanghai, including member education, project-team management, and correspondence with TAMID Global.",
+      "skills": [
+        "Technical Consulting",
+        "Leadership",
+        "Education",
+        "Team Management"
+      ],
+      "url": "https://tamidgroup.org/technical-consulting/"
+    },
+    {
+      "id": "jika",
+      "type": "work",
+      "role": "Technical Project Manager",
+      "company": "Jika.io",
+      "location": "Remote",
+      "period": "February 2023 – May 2023",
+      "description": "Implemented a schema to extract, transform, and load user analytics from MongoDB into BigQuery.",
+      "skills": [
+        "BigQuery",
+        "MongoDB",
+        "ETL",
+        "Analytics",
+        "Technical Planning"
+      ],
+      "url": "https://www.jika.io"
+    }
+  ],
+  "skills": [
+    {
+      "group": "Languages",
+      "items": [
+        {
+          "name": "Python",
+          "proficiency": 99,
+          "description": "My go-to language and the one I use most proficiently."
+        },
+        {
+          "name": "Java",
+          "proficiency": 90,
+          "description": "My first programming language, which I started learning in high school."
+        },
+        {
+          "name": "HTML",
+          "proficiency": 70,
+          "description": "Used extensively with CSS across websites and project interfaces."
+        },
+        {
+          "name": "CSS",
+          "proficiency": 70,
+          "description": "Used extensively with HTML for responsive websites and interface work."
+        },
+        {
+          "name": "JavaScript",
+          "proficiency": 70,
+          "description": "Self-taught during my Microsoft internship and developed further through React projects."
+        },
+        {
+          "name": "SQL",
+          "proficiency": 99,
+          "description": "Professional and academic experience with BigQuery, PostgreSQL, MySQL, and database coursework."
+        }
+      ]
+    },
+    {
+      "group": "Tools & Frameworks",
+      "items": [
+        {
+          "name": "LLMs",
+          "proficiency": 99,
+          "description": "Experience with prompt engineering, agents, retrieval, and using AI models in personal projects."
+        },
+        {
+          "name": "React.js",
+          "proficiency": 75,
+          "description": "Used to build this portfolio and component-based interfaces during my Microsoft internship."
+        },
+        {
+          "name": "Flask",
+          "proficiency": 90,
+          "description": "Experience building REST APIs and lightweight web applications."
+        },
+        {
+          "name": "Django",
+          "proficiency": 88,
+          "description": "Used across school projects, including the airline booking simulator."
+        },
+        {
+          "name": "Git",
+          "proficiency": 90,
+          "description": "Used for collaboration, version control, and shipping project work."
+        },
+        {
+          "name": "REST APIs",
+          "proficiency": 90,
+          "description": "Implemented and consumed RESTful APIs for communication and data exchange between applications."
+        },
+        {
+          "name": "BigQuery",
+          "proficiency": 90,
+          "description": "Loaded and analyzed user data in BigQuery during my work with Jika.io."
+        },
+        {
+          "name": "Business Intelligence",
+          "proficiency": 60,
+          "description": "Researched tools such as Looker Studio and ways to present meaningful analytics."
+        },
+        {
+          "name": "AWS",
+          "proficiency": 50,
+          "description": "Used services including Bedrock and S3 at Medidata and studied toward the AWS Solutions Architect certification."
+        },
+        {
+          "name": "Python Libraries",
+          "proficiency": 95,
+          "description": "Worked with pandas, NumPy, LangChain, Streamlit, spaCy, and related libraries."
+        },
+        {
+          "name": "Docker",
+          "proficiency": 30,
+          "description": "Experience containerizing an application for deployment."
+        }
+      ]
+    },
+    {
+      "group": "Other Skills & Interests",
+      "items": [
+        {
+          "name": "Project Management",
+          "proficiency": 90,
+          "description": "Managed tasks and workloads, coordinated teams, and resolved delivery conflicts in previous roles."
+        },
+        {
+          "name": "Teamwork",
+          "proficiency": 99,
+          "description": "I get energy from working with other people and building as a team."
+        },
+        {
+          "name": "Mentorship",
+          "proficiency": 90,
+          "description": "I enjoy supporting less-experienced peers and held several mentorship positions in college."
+        },
+        {
+          "name": "Consulting",
+          "proficiency": 70,
+          "description": "Managed a TAMID consulting project, won first place in a case competition, and gained experience in market research and outreach."
+        },
+        {
+          "name": "Fitness",
+          "proficiency": 90,
+          "description": "I lift weights and run consistently, and enjoy basketball and lacrosse."
+        },
+        {
+          "name": "Chinese",
+          "proficiency": 80,
+          "description": "Fluent in Chinese through studying, living, and working in China."
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "nyu-shanghai",
+      "school": "NYU Shanghai",
+      "degree": "BS in Computer Science · Minor in Business",
+      "period": "August 2021 – May 2025",
+      "locations": "New York City and Shanghai",
+      "gpa": "3.55/4.0",
+      "description": "Studied in both New York City and Shanghai with an interdisciplinary focus on computer science, business, and product development.",
+      "coursework": [
+        "Machine Learning",
+        "Recommendation Systems",
+        "Agile and DevOps",
+        "Object-Oriented Programming",
+        "Design and Analysis of Algorithms",
+        "Databases"
+      ]
+    }
+  ],
+  "contact": {
+    "eyebrow": "Let's connect",
+    "headline": "Have a role or project in mind?",
+    "description": "I am interested in software engineering, AI engineering, and product engineering teams where I can own meaningful work and keep learning quickly.",
+    "note": "Don't hesitate to reach out to talk or inquire about anything."
+  }
+}

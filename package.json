@@ -1,0 +1,13 @@
+{
+  "name": "henry-zhang-portfolio",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "client": "npm --prefix client start",
+    "server": "node server/server.js",
+    "build": "npm --prefix client run build"
+  },
+  "dependencies": {
+    "google-auth-library": "^10.9.1"
+  }
+}

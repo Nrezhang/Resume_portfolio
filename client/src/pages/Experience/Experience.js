@@ -20,6 +20,20 @@ const Experience = () => {
                             iconStyle={{ background: 'dodgerblue', color: 'white' }}
                             icon={<MdOutlineWorkOutline />}
                         >
+                            <h3 className="vertical-timeline-element-title">PMO Analyst</h3>
+                            <h4 className="vertical-timeline-element-subtitle"><a href='https://www.medidata.com' target='_blank'>Trianz Inc.</a>Herndon, VA</h4>
+                            <p>
+                            Current
+                            </p>
+                    </VerticalTimelineElement>
+                    <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ background: 'white', color: 'black', boxShadow:'0px 0px 0px 0px white', borderTop:'5px solid dodgerblue' }}
+                            contentArrowStyle={{ borderRight: '7px solid dodgerblue' }}
+                            date="May 2024 - August 2024"
+                            iconStyle={{ background: 'dodgerblue', color: 'white' }}
+                            icon={<MdOutlineWorkOutline />}
+                        >
                             <h3 className="vertical-timeline-element-title">AI Software Engineering Intern</h3>
                             <h4 className="vertical-timeline-element-subtitle"><a href='https://www.medidata.com' target='_blank'>Medidata Solutions Inc.</a> New York, NY</h4>
                             <p>

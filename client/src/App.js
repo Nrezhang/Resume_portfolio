@@ -1,33 +1,26 @@
-import Layout from "./components/Layout/Layout";
-import About from './pages/About/About'
-import Skills from './pages/Skills/Skills'
-import Projects from './pages/Projects/Projects'
-import Education from "./pages/Education/Education";
-import Experience from "./pages/Experience/Experience";
-import Contact from "./pages/Contact/Contact";
-import ScrollToTop from "react-scroll-to-top";
-import MobileNav from "./components/MobileNav/MobileNav";
-import {ToastContainer} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { ContentProvider } from './content/ContentContext';
+import PortfolioLayout from './components/shell/PortfolioLayout';
+import HomePage from './pages/HomePage';
+import ResumePage from './pages/ResumePage';
+import AdminPage from './pages/AdminPage';
+import './styles/portfolio.css';
 
 function App() {
   return (
-    <>
-    <ToastContainer />
-    <MobileNav />
-    <Layout />
-    <div>
-      <About />
-      <Experience />
-      <Skills />
-      <Education />
-      <Projects />
-      <Contact />
-    </div>
-    <div>
-      <ScrollToTop smooth color="white" style={{backgroundColor: "#36454F", borderRadius:'80px'}} />
-    </div>
-    </>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <ContentProvider>
+        <Routes>
+          <Route element={<PortfolioLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="resume" element={<ResumePage />} />
+            <Route path=":section" element={<HomePage />} />
+          </Route>
+          <Route path="admin" element={<AdminPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </ContentProvider>
+    </BrowserRouter>
   );
 }
 
