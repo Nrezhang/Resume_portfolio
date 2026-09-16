@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ae89ebf8.css",
-    "main.js": "/static/js/main.244d2a89.js",
+    "main.css": "/static/css/main.0b79d1e4.css",
+    "main.js": "/static/js/main.bcf7481f.js",
     "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
     "static/media/35_Parameter_Efficient_Fine_Tu.pdf": "/static/media/35_Parameter_Efficient_Fine_Tu.a9386bf67cdb60c44871.pdf",
     "static/media/profilepic.jpg": "/static/media/profilepic.85dace77e7fd0c98ca69.jpg",
@@ -11,12 +11,12 @@
     "static/media/widget.png": "/static/media/widget.315e462bdce9c721f7be.png",
     "static/media/airline.png": "/static/media/airline.aa6cf13e59888056a5e3.png",
     "index.html": "/index.html",
-    "main.ae89ebf8.css.map": "/static/css/main.ae89ebf8.css.map",
-    "main.244d2a89.js.map": "/static/js/main.244d2a89.js.map",
+    "main.0b79d1e4.css.map": "/static/css/main.0b79d1e4.css.map",
+    "main.bcf7481f.js.map": "/static/js/main.bcf7481f.js.map",
     "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ae89ebf8.css",
-    "static/js/main.244d2a89.js"
+    "static/css/main.0b79d1e4.css",
+    "static/js/main.bcf7481f.js"
   ]
 }

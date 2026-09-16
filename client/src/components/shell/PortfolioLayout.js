@@ -45,7 +45,7 @@ export default function PortfolioLayout() {
       <header className="site-header">
         <div className="site-shell header-inner">
           <Link className="brand" to="/profile" onClick={() => scrollToRoute('/profile')} aria-label="Henry Zhang home">
-            <span className="brand-mark">HZ</span>
+            <img className="brand-mark" src={`${process.env.PUBLIC_URL}/icons/favicon-master.png`} alt="" aria-hidden="true" />
             <span className="brand-copy"><b>{content.profile.name}</b><small>Software Engineer</small></span>
           </Link>
           <motion.button className="icon-button menu-button" whileTap={{ scale: 0.92 }} type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen}>{menuOpen ? <FiX /> : <FiMenu />}</motion.button>

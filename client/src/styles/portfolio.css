@@ -51,7 +51,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .site-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--line); background: var(--header-bg); backdrop-filter: blur(16px); }
 .header-inner { display: grid; grid-template-columns: minmax(190px, 1fr) auto minmax(190px, 1fr); align-items: center; gap: 24px; min-height: 72px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; width: max-content; }
-.brand-mark { display: grid; width: 42px; height: 42px; place-items: center; background: var(--ink); color: white; font-family: var(--serif); font-weight: 700; }
+.brand-mark { display: block; width: 42px; height: 42px; flex: 0 0 auto; object-fit: cover; }
 .brand-copy { display: grid; line-height: 1.15; }
 .brand-copy b { font-size: .96rem; }
 .brand-copy small { margin-top: 4px; color: var(--muted); font-size: .72rem; }
@@ -358,6 +358,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid color-mix(in srgb, va
 }
 
 @media (max-width: 420px) {
+  .brand-copy { display: none; }
   .profile-copy h1 { font-size: 3.65rem; }
   .profile-headline { font-size: 1.7rem; }
   .section-heading h2, .contact-panel h2, .resume-heading h1 { font-size: 2.55rem; }

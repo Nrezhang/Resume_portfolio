@@ -16,7 +16,7 @@ export default function VisualPortfolioEditor({ dirty, message, saving, onEdit, 
   return (
     <div className="admin-visual-app">
       <header className="visual-editor-bar">
-        <div className="visual-editor-brand"><span className="brand-mark">HZ</span><div><b>Visual editor</b><small>{dirty ? 'Unpublished changes' : 'All changes published'}</small></div></div>
+        <div className="visual-editor-brand"><img className="brand-mark" src={`${process.env.PUBLIC_URL}/icons/favicon-master.png`} alt="" aria-hidden="true" /><div><b>Visual editor</b><small>{dirty ? 'Unpublished changes' : 'All changes published'}</small></div></div>
         <span className="editor-status" role="status">{message}</span>
         <div className="visual-editor-actions">
           <Link className="icon-button" to="/profile" title="Exit editor" aria-label="Exit editor"><FiArrowLeft /></Link>
