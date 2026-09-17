@@ -76,7 +76,7 @@ function Login({ onLogin }) {
 const templates = {
   project: () => ({ id: createId('project'), year: new Date().getFullYear().toString(), title: 'New project', category: 'Software project', description: 'Describe the problem and why this project matters.', impact: 'Describe what you designed and built.', highlights: [], skills: [], image: 'portfolio', imageAlt: 'Project preview', link: '', linkLabel: 'View project' }),
   experience: () => ({ id: createId('experience'), type: 'work', role: 'New role', company: 'Organization', location: 'Location', period: 'Dates', brand: '', description: 'Describe your responsibilities and impact.', highlights: [], skills: [], url: '' }),
-  education: () => ({ id: createId('education'), school: 'School', degree: 'Degree or program', period: 'Dates', locations: 'Location', gpa: '', brand: '', url: '', description: 'Describe the program and areas of focus.', coursework: [] }),
+  education: () => ({ id: createId('education'), school: 'School', degree: 'Degree or program', period: 'Dates', locations: 'Location', gpa: '', brand: '', url: '', description: 'Describe the program and areas of focus.', coursework: [], leadership: [] }),
   skillGroup: () => ({ id: createId('skill-group'), group: 'New skill group', items: [] }),
   skill: () => ({ name: 'New skill', proficiency: 75, description: 'Describe how you have used this skill.' }),
 };

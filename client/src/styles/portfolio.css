@@ -294,6 +294,15 @@ a:focus-visible, button:focus-visible { outline: 3px solid color-mix(in srgb, va
 .editor-modal footer { position: sticky; bottom: 0; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--line); padding: 16px 24px; background: rgba(255,255,255,.98); }
 .editor-modal .admin-field input, .editor-modal .admin-field textarea, .editor-modal .admin-field select { width: 100%; border: 1px solid #c8ccc7; border-radius: 3px; padding: 11px 12px; background: white; color: var(--ink); font: inherit; font-weight: 500; resize: vertical; }
 .editor-modal .admin-field input:focus, .editor-modal .admin-field textarea:focus, .editor-modal .admin-field select:focus { border-color: var(--green); outline: 3px solid var(--green-soft); }
+.admin-nested-section { display: grid; gap: 16px; border-top: 1px solid var(--line); padding-top: 22px; }
+.admin-nested-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; }
+.admin-nested-heading span { color: var(--green); font-size: .7rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+.editor-modal .admin-nested-heading h3 { margin: 5px 0 0; font-family: var(--serif); font-size: 1.45rem; font-weight: 600; }
+.admin-nested-action { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 7px; padding: 9px 12px; }
+.admin-nested-empty { margin: 0; border: 1px dashed var(--line); padding: 16px; color: var(--muted); font-size: .82rem; }
+.admin-nested-card { position: relative; display: grid; min-width: 0; gap: 16px; margin: 0; border: 1px solid var(--line); padding: 20px; background: var(--paper); }
+.admin-nested-card legend { max-width: calc(100% - 100px); padding: 0 8px; color: var(--headline-copy); font-family: var(--serif); font-size: 1rem; font-weight: 650; }
+.admin-nested-remove { position: absolute; top: 10px; right: 12px; display: inline-flex; align-items: center; gap: 5px; border: 0; background: transparent; color: #a93427; font-size: .72rem; font-weight: 800; cursor: pointer; }
 .editor-confirm { width: min(520px, 100%); }
 .editor-confirm > p { margin: 0; padding: 24px; color: var(--muted); }
 .editor-danger-button { border-color: #a93427; background: #a93427; color: white; }
@@ -401,6 +410,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid color-mix(in srgb, va
   .editor-modal { width: 100%; max-height: 92vh; }
   .editor-modal > header, .editor-modal-fields { padding: 20px 15px; }
   .editor-modal footer { padding: 14px 15px; }
+  .admin-nested-heading { align-items: flex-start; flex-direction: column; }
+  .admin-nested-card { padding: 16px; }
   .skill-group li .editor-item-controls { opacity: 1; }
 }
 

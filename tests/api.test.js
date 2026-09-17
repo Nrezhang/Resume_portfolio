@@ -33,6 +33,12 @@ test('rejects malformed education content', () => {
   assert.equal(__testables.validateContent(malformed), false);
 });
 
+test('rejects malformed nested education leadership', () => {
+  const malformed = structuredClone(defaultContent);
+  malformed.education[0].leadership = { role: 'Director' };
+  assert.equal(__testables.validateContent(malformed), false);
+});
+
 test('normalizes and limits the editor allowlist', () => {
   const emails = __testables.allowedEmails({ allowedEmails: ['HenrySZhang83@gmail.com ', 'hsz2011@nyu.edu'] });
   assert.equal(emails.has('henryszhang83@gmail.com'), true);
