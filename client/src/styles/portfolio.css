@@ -116,29 +116,75 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-content h3 { max-width: 15ch; margin: 0; overflow-wrap: anywhere; font-family: var(--serif); font-size: 3rem; font-weight: 500; line-height: 1; text-wrap: balance; }
 .project-content > p:not(.card-kicker) { max-width: 62ch; margin: 18px 0 0; color: var(--body-copy); }
 .project-impact { padding-top: 17px; border-top: 1px solid var(--line); }
+.project-highlights, .experience-highlights { max-width: 760px; margin: 16px 0 0; padding-left: 1.2rem; color: var(--body-copy); }
+.project-highlights li, .experience-highlights li { margin-top: 8px; line-height: 1.55; }
+.project-image-static { cursor: default; }
+.project-image-static:hover img { transform: none; }
 .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; }
 .badge { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; background: var(--soft-surface); color: var(--muted); font-size: .76rem; font-weight: 750; line-height: 1; }
 .card-link { margin-top: auto; padding-top: 26px; }
 
 .experience-list { border-top: 1px solid var(--ink); }
-.experience-row { display: grid; grid-template-columns: minmax(210px, .42fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); padding-block: 32px; border-bottom: 1px solid var(--line); }
+.experience-row { --experience-accent: var(--green); display: grid; grid-template-columns: minmax(210px, .36fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); padding-block: 38px; border-bottom: 1px solid var(--line); }
 .experience-meta { display: grid; align-content: start; gap: 7px; }
+.experience-logo { display: flex; width: min(190px, 100%); height: 72px; align-items: center; justify-content: flex-start; margin-bottom: 15px; }
+.experience-logo img { max-width: 100%; max-height: 100%; object-fit: contain; object-position: left center; }
+.experience-logo-dark { display: none; }
+:root[data-theme="dark"] .experience-logo-dark { display: block; }
+:root[data-theme="dark"] .experience-logo.has-dark-variant .experience-logo-light { display: none; }
+.experience-logo-mask { width: 100%; height: 100%; background: #c3d500; -webkit-mask-image: var(--experience-logo-mask); mask-image: var(--experience-logo-mask); -webkit-mask-position: left center; mask-position: left center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; }
+.experience-row-treasury .experience-logo { width: 112px; height: 112px; justify-content: center; }
+.experience-row-treasury .experience-logo img { width: 96px; height: 96px; border-radius: 50%; object-fit: contain; }
+.experience-row-microsoft .experience-logo { width: 170px; height: 58px; }
+.experience-row-tech-nyu .experience-logo { width: 112px; height: 112px; box-sizing: border-box; justify-content: center; border: 1px solid #000; padding: 32px 12px; background: #000; }
+.experience-row-tech-nyu .experience-logo img { object-position: center; }
+.experience-row-tamid .experience-logo { width: 108px; height: 86px; }
 .experience-meta span { color: var(--muted); font-size: .82rem; }
 .experience-meta small { color: var(--muted); }
-.experience-meta i { width: max-content; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; color: var(--green); font-size: .68rem; font-style: normal; font-weight: 800; text-transform: uppercase; }
+.experience-meta i { width: max-content; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; color: var(--experience-accent); font-size: .68rem; font-style: normal; font-weight: 800; text-transform: uppercase; }
 .experience-copy { min-width: 0; }
-.experience-copy h3 { margin: 0; overflow-wrap: anywhere; font-family: var(--serif); font-size: 2.6rem; font-weight: 500; line-height: 1; text-wrap: balance; }
+.experience-copy h3 { max-width: 30ch; margin: 0; overflow-wrap: anywhere; font-family: var(--serif); font-size: clamp(1.6rem, 2.6vw, 2.25rem); font-weight: 600; line-height: 1.08; text-wrap: balance; }
 .experience-copy > p { max-width: 760px; margin: 14px 0 0; color: var(--body-copy); font-size: 1.02rem; }
+.experience-copy > p.experience-company { margin-top: 8px; color: var(--experience-accent); font-size: 1rem; font-weight: 800; }
+.experience-company a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.experience-company svg { width: .8em; height: .8em; vertical-align: .05em; }
 
 .education-list { border-top: 1px solid var(--ink); }
-.education-entry { position: relative; display: grid; grid-template-columns: minmax(210px, .42fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); padding-block: 32px; border-bottom: 1px solid var(--line); }
+.education-entry { --school-accent: var(--green); position: relative; display: grid; grid-template-columns: minmax(210px, .34fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); padding-block: 38px; border-bottom: 1px solid var(--line); }
+.education-entry-nyu { --school-accent: #57068c; }
+.education-entry-tjhsst { --school-accent: #24539b; }
 .education-meta { display: grid; align-content: start; gap: 7px; }
+.education-logo { display: flex; width: min(190px, 100%); height: 82px; align-items: center; justify-content: flex-start; margin-bottom: 14px; }
+.education-logo img { max-width: 100%; max-height: 100%; object-fit: contain; object-position: left center; }
+.education-entry-tjhsst .education-logo { width: 92px; height: 92px; overflow: hidden; border-radius: 50%; }
+.education-entry-tjhsst .education-logo img { width: 100%; height: 100%; object-fit: cover; }
 .education-meta span, .education-meta small { color: var(--muted); }
 .education-meta span { font-size: .82rem; }
-.education-meta i { color: var(--green); font-size: .78rem; font-style: normal; font-weight: 800; }
+.education-meta i { color: var(--school-accent); font-size: .78rem; font-style: normal; font-weight: 800; }
 .education-copy { min-width: 0; }
-.education-copy h3 { margin: 0; overflow-wrap: anywhere; font-family: var(--serif); font-size: 2.6rem; font-weight: 500; line-height: 1; text-wrap: balance; }
+.education-copy h3 { max-width: 24ch; margin: 0; overflow-wrap: anywhere; font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 500; line-height: .98; text-wrap: balance; }
+.education-copy h3 a { color: inherit; text-decoration: none; }
+.education-copy h3 a:hover { color: var(--school-accent); }
 .education-copy > p { max-width: 760px; margin: 14px 0 0; color: var(--body-copy); font-size: 1.02rem; }
+.education-copy > p.education-degree { margin-top: 14px; color: var(--headline-copy); font-size: 1.15rem; font-weight: 800; }
+.education-leadership { margin-top: 30px; border-top: 1px solid var(--line); padding-top: 24px; }
+.education-leadership > h4 { margin: 0 0 16px; color: var(--school-accent); font-size: .72rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+.education-leadership-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.education-leadership-item { display: grid; grid-template-columns: 56px minmax(0, 1fr); align-content: start; gap: 14px; border: 1px solid var(--line); padding: 16px; background: var(--surface); }
+.education-leadership-logo { display: flex; width: 56px; height: 56px; box-sizing: border-box; align-items: center; justify-content: center; }
+.education-leadership-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.education-leadership-logo-dark { display: none; }
+:root[data-theme="dark"] .education-leadership-logo-dark { display: block; }
+:root[data-theme="dark"] .education-leadership-logo.has-dark-variant .education-leadership-logo-light { display: none; }
+.education-leadership-logo-tech-nyu { border: 1px solid #000; padding: 14px 7px; background: #000; }
+.education-leadership-logo-tamid { padding: 4px; }
+.education-leadership-copy { min-width: 0; }
+.education-leadership-copy h5 { margin: 0; color: var(--headline-copy); font-family: var(--serif); font-size: 1.18rem; font-weight: 650; line-height: 1.1; }
+.education-leadership-company { margin: 6px 0 0; color: var(--school-accent); font-size: .82rem; font-weight: 800; }
+.education-leadership-company a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.education-leadership-company svg { width: .8em; height: .8em; vertical-align: .05em; }
+.education-leadership-meta { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0 0; color: var(--muted); font-size: .72rem; }
+.education-leadership-description { margin: 10px 0 0; color: var(--body-copy); font-size: .84rem; line-height: 1.55; }
 
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1px; border: 1px solid var(--ink); background: var(--line); }
 .skill-group { min-width: 0; padding: 26px; background: var(--paper); }
@@ -329,6 +375,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid color-mix(in srgb, va
   .project-content h3 { max-width: none; font-size: 2.2rem; }
   .experience-row { grid-template-columns: 1fr; gap: 16px; }
   .education-entry { grid-template-columns: 1fr; gap: 16px; }
+  .education-leadership-grid { grid-template-columns: 1fr; }
   .contact-actions { grid-template-columns: 1fr; }
   .social-row { grid-template-columns: 1fr; margin-top: -3rem; }
   .education-band { grid-template-columns: 1fr; gap: 12px; }

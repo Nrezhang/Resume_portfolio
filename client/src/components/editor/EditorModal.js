@@ -17,10 +17,13 @@ function Field({ label, value, onChange, textarea = false, type = 'text', option
 }
 
 const commaList = (value) => value.split(',').map((item) => item.trim()).filter(Boolean);
+const lineList = (value) => value.split('\n').map((item) => item.trim()).filter(Boolean);
 
 function Fields({ type, value, update }) {
   if (type === 'profile') return <>
     <div className="admin-two-column"><Field label="Name" value={value.name} onChange={(next) => update('name', next)} /><Field label="Location" value={value.location} onChange={(next) => update('location', next)} /></div>
+    <div className="admin-two-column"><Field label="Phone" value={value.phone} onChange={(next) => update('phone', next)} /><Field label="Focus" value={value.focus} onChange={(next) => update('focus', next)} /></div>
+    <Field label="Citizenship / clearance" value={value.citizenship} onChange={(next) => update('citizenship', next)} />
     <Field label="Eyebrow" value={value.eyebrow} onChange={(next) => update('eyebrow', next)} />
     <Field label="Headline" value={value.headline} onChange={(next) => update('headline', next)} textarea />
     <Field label="Bio" value={value.bio} onChange={(next) => update('bio', next)} textarea />
@@ -37,6 +40,7 @@ function Fields({ type, value, update }) {
     <Field label="Category" value={value.category} onChange={(next) => update('category', next)} />
     <Field label="Description" value={value.description} onChange={(next) => update('description', next)} textarea />
     <Field label="What I built" value={value.impact} onChange={(next) => update('impact', next)} textarea />
+    <Field label="Highlights (one per line)" value={(value.highlights || []).join('\n')} onChange={(next) => update('highlights', lineList(next))} textarea />
     <Field label="Skills (comma separated)" value={value.skills.join(', ')} onChange={(next) => update('skills', commaList(next))} />
     <div className="admin-two-column"><Field label="Image" value={value.image} onChange={(next) => update('image', next)} options={['portfolio', 'sentiment', 'agent', 'airline'].map((item) => ({ value: item, label: item }))} /><Field label="Image alt text" value={value.imageAlt} onChange={(next) => update('imageAlt', next)} /></div>
     <div className="admin-two-column"><Field label="Link label" value={value.linkLabel} onChange={(next) => update('linkLabel', next)} /><Field label="Link or document key" value={value.link} onChange={(next) => update('link', next)} /></div>
@@ -45,14 +49,17 @@ function Fields({ type, value, update }) {
   if (type === 'experience') return <>
     <div className="admin-two-column"><Field label="Role" value={value.role} onChange={(next) => update('role', next)} /><Field label="Company" value={value.company} onChange={(next) => update('company', next)} /></div>
     <div className="admin-two-column"><Field label="Period" value={value.period} onChange={(next) => update('period', next)} /><Field label="Location" value={value.location} onChange={(next) => update('location', next)} /></div>
-    <div className="admin-two-column"><Field label="Type" value={value.type} onChange={(next) => update('type', next)} /><Field label="Organization URL" value={value.url} onChange={(next) => update('url', next)} /></div>
+    <div className="admin-two-column"><Field label="Type" value={value.type} onChange={(next) => update('type', next)} /><Field label="Brand" value={value.brand} onChange={(next) => update('brand', next)} options={[{ value: '', label: 'None' }, { value: 'treasury', label: 'U.S. Treasury' }, { value: 'trianz', label: 'Trianz' }, { value: 'medidata', label: 'Medidata' }, { value: 'microsoft', label: 'Microsoft' }, { value: 'tech-nyu', label: 'Tech@NYU' }, { value: 'tamid', label: 'TAMID Group' }, { value: 'jika', label: 'Jika.io' }]} /></div>
+    <Field label="Organization URL" value={value.url} onChange={(next) => update('url', next)} />
     <Field label="Description" value={value.description} onChange={(next) => update('description', next)} textarea />
+    <Field label="Highlights (one per line)" value={(value.highlights || []).join('\n')} onChange={(next) => update('highlights', lineList(next))} textarea />
     <Field label="Skills (comma separated)" value={value.skills.join(', ')} onChange={(next) => update('skills', commaList(next))} />
   </>;
 
   if (type === 'education') return <>
     <div className="admin-two-column"><Field label="School" value={value.school} onChange={(next) => update('school', next)} /><Field label="Degree" value={value.degree} onChange={(next) => update('degree', next)} /></div>
     <div className="admin-two-column"><Field label="Period" value={value.period} onChange={(next) => update('period', next)} /><Field label="GPA" value={value.gpa} onChange={(next) => update('gpa', next)} /></div>
+    <div className="admin-two-column"><Field label="Brand" value={value.brand} onChange={(next) => update('brand', next)} options={[{ value: '', label: 'None' }, { value: 'nyu', label: 'NYU' }, { value: 'tjhsst', label: 'TJHSST' }]} /><Field label="School URL" value={value.url} onChange={(next) => update('url', next)} /></div>
     <Field label="Study locations" value={value.locations} onChange={(next) => update('locations', next)} />
     <Field label="Description" value={value.description} onChange={(next) => update('description', next)} textarea />
     <Field label="Coursework (comma separated)" value={value.coursework.join(', ')} onChange={(next) => update('coursework', commaList(next))} />

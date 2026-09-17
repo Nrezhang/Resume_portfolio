@@ -1,43 +1,94 @@
 {
   "profile": {
     "name": "Henry Zhang",
-    "eyebrow": "Software engineer · AI systems · New York",
-    "headline": "I build useful software at the intersection of AI, data, and product.",
-    "bio": "Hello, I'm Henry. I'm a Computer Science and Business graduate from NYU Shanghai with a passion for engineering, analytics, and making things happen. I am looking for a role where I can apply my experience developing and optimizing AI-driven applications, embedding models, data pipelines, and full-stack products.",
-    "personalNote": "I enjoy driving cool solutions and experimenting with web development and AI. I've lived in Virginia, New York, and Shanghai, enjoy learning about new cultures, and am fluent in Chinese.",
-    "welcome": "Welcome to my site. Explore my work, experience, and the tools I use to build.",
-    "roles": ["CS @ NYU", "Web Developer"],
-    "availability": "Open to new-grad software engineering roles",
-    "email": "hsz2011@nyu.edu",
+    "eyebrow": "Software engineer · AI systems · Technical program leadership",
+    "headline": "I build production AI systems and lead complex technical programs from ambiguity to delivery.",
+    "bio": "I'm a software engineer at the U.S. Department of the Treasury and a Computer Science and Business graduate from NYU Shanghai. My work spans production AI, data platforms, cloud migrations, full-stack products, and technical program leadership. I am strongest where engineering depth and cross-functional execution meet: translating real operational problems into reliable systems, measurable outcomes, and clear delivery plans.",
+    "personalNote": "I've studied and worked across the United States, China, and the Middle East, and I am comfortable adapting quickly to new teams, cultures, and expectations. I enjoy experimenting with AI and web development, mentoring others, lifting weights, running, basketball, and lacrosse. I am fluent in Chinese.",
+    "welcome": "Welcome to my site. Explore the AI systems, data products, cloud programs, and teams I have helped move forward.",
+    "roles": ["Software Engineer", "AI Systems", "Technical Program Management"],
+    "availability": "Software Engineer at the U.S. Department of the Treasury",
+    "email": "henryszhang83@gmail.com",
     "github": "https://github.com/Nrezhang",
     "linkedin": "https://www.linkedin.com/in/henryszhang/",
-    "location": "New York, NY",
+    "location": "Washington, DC",
+    "focus": "Production AI · Data platforms · Cloud delivery",
     "image": "profile"
   },
   "projects": [
     {
+      "id": "inyo",
+      "year": "2026",
+      "title": "Inyo",
+      "category": "Founding engineering · AI product",
+      "description": "An AI-powered SMS matchmaking platform built and launched for thousands of users.",
+      "impact": "Architected the event-driven backend, AI conversation and profile-extraction pipelines, admin tooling, and production infrastructure.",
+      "highlights": [
+        "Led three engineers and partnered directly with the founder to define MVP priorities and turn product requirements into technical workstreams.",
+        "Balanced scalability, reliability, and execution speed while rapidly delivering the product as a part-time founding engineer and technical lead."
+      ],
+      "skills": ["Technical Leadership", "Event-Driven Systems", "LLMs", "SMS", "Product Strategy", "Production Infrastructure"],
+      "image": "portfolio",
+      "imageAlt": "Web product and engineering interface",
+      "link": "",
+      "linkLabel": ""
+    },
+    {
+      "id": "mydian-dashboard",
+      "year": "2025",
+      "title": "MyDian Dashboard",
+      "category": "Product engineering · Cross-border commerce",
+      "description": "A login, onboarding, and dashboard experience for a platform connecting U.S. and Chinese manufacturers.",
+      "impact": "Used React, Supabase, and generative-AI development tools to efficiently build the core product experience.",
+      "highlights": [
+        "Translated founder-level business goals into product requirements, UX flows, and dashboard specifications.",
+        "Established a foundation for future product development and client onboarding."
+      ],
+      "skills": ["React", "Supabase", "Generative AI", "Requirements Gathering", "UX Flows", "Product Development"],
+      "image": "portfolio",
+      "imageAlt": "Dashboard product interface",
+      "link": "",
+      "linkLabel": ""
+    },
+    {
       "id": "financial-sentiment",
       "year": "2024",
-      "title": "Fine Tuning for Financial Sentiment",
+      "title": "Fine-Tuning and Supervised Learning for Stock Prediction",
       "category": "Applied AI · Capstone",
-      "description": "Fine-tuned LLaMA for financial sentiment analysis and incorporated the results into an LSTM to improve stock price movement predictions.",
-      "impact": "Built an end-to-end research pipeline covering data preparation, model adaptation, feature generation, and downstream evaluation.",
-      "skills": ["Fine Tuning", "LLM", "LSTM", "Data Analysis", "Python", "NLP"],
+      "description": "Fine-tuned LLaMA 3.1 on financial news with qLoRA and incorporated the enhanced sentiment signal into a time-series stock-prediction model.",
+      "impact": "Improved financial-news sentiment labeling accuracy by 9%, from 0.75 to 0.84, then used those scores as an additional model feature for market-trend prediction.",
+      "highlights": ["Built the end-to-end research pipeline covering data preparation, parameter-efficient model adaptation, feature generation, and downstream evaluation."],
+      "skills": ["LLaMA 3.1", "qLoRA", "Fine-Tuning", "LSTM", "Python", "NLP", "Data Analysis"],
       "image": "sentiment",
       "imageAlt": "Financial sentiment model output chart",
       "link": "capstone",
       "linkLabel": "Read capstone paper"
     },
     {
+      "id": "full-stack-tinder",
+      "year": "2024",
+      "title": "Full-Stack Tinder Application",
+      "category": "Full stack · Agile delivery",
+      "description": "A team-built full-stack application delivered iteratively across multiple Agile sprints.",
+      "impact": "Contributed across design, implementation, and iteration while helping define user stories, scope features, and prioritize the backlog.",
+      "highlights": [],
+      "skills": ["Agile", "Full-Stack Development", "User Stories", "Backlog Prioritization", "Teamwork"],
+      "image": "portfolio",
+      "imageAlt": "Full-stack web application interface",
+      "link": "",
+      "linkLabel": ""
+    },
+    {
       "id": "portfolio-platform",
       "year": "2024",
       "title": "Resume Portfolio",
       "category": "Frontend · Developer experience",
-      "description": "This website, coded from scratch so you can learn about me, my experience, and the projects I have built.",
-      "impact": "Rebuilt the original MERN-era portfolio as a routed React application with reusable content components and an authenticated editing workflow.",
-      "skills": ["React", "Node.js", "HTML/CSS", "REST APIs", "Deployment", "Responsive Design"],
+      "description": "This website, coded from scratch to present my experience, projects, and evolving work across engineering and technical leadership.",
+      "impact": "Rebuilt the original MERN-era portfolio as a routed React application with reusable content components, an authenticated editor, and DynamoDB-backed publishing.",
+      "highlights": [],
+      "skills": ["React", "Node.js", "AWS", "DynamoDB", "REST APIs", "Responsive Design"],
       "image": "portfolio",
-      "imageAlt": "Original portfolio homepage",
+      "imageAlt": "Portfolio homepage",
       "link": "https://github.com/Nrezhang/Resume_portfolio",
       "linkLabel": "View repository"
     },
@@ -46,11 +97,12 @@
       "year": "2023",
       "title": "Natural Language to Database Communication",
       "category": "AI product · Enterprise tools",
-      "description": "Using LangChain agents, created a chatbot component that enables natural-language database communication and generates reports from relational data.",
-      "impact": "Designed the schema-aware prompt flow, report experience, and interface states that made generated queries easier to understand and validate.",
-      "skills": ["OpenAI", "REST API", "React.js", "PostgreSQL", "Python", "LangChain"],
+      "description": "A LangChain-based chatbot that enabled natural-language communication with relational databases and generated reports for non-technical users.",
+      "impact": "Designed the schema-aware prompt and agent flow, built a React widget and REST integration, and made generated queries and reports easier to understand and validate.",
+      "highlights": [],
+      "skills": ["OpenAI", "LangChain", "React", "REST APIs", "PostgreSQL", "Python"],
       "image": "agent",
-      "imageAlt": "Natural language database agent interface",
+      "imageAlt": "Natural-language database agent interface",
       "link": "https://www.canva.com/design/DAFqrVJmc2o/abxTLWYPVzbUUnqm7SZNvQ/view?utm_content=DAFqrVJmc2o&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink",
       "linkLabel": "View presentation"
     },
@@ -59,9 +111,10 @@
       "year": "2023",
       "title": "Airline Flight Booking Simulator",
       "category": "Full stack · Database systems",
-      "description": "Created a relational database for flight information and enabled authentication for customers, airline staff, and agents to view, change, and purchase flights.",
-      "impact": "Modeled shared booking data and permissions around practical CRUD flows, relational constraints, and role-specific access.",
-      "skills": ["Django", "MySQL", "HTML/CSS", "User Authentication", "Python"],
+      "description": "A relational flight-booking application with authentication and distinct workflows for customers, airline staff, and agents.",
+      "impact": "Modeled shared booking data, permissions, CRUD flows, and relational constraints in a Django and MySQL application.",
+      "highlights": [],
+      "skills": ["Django", "MySQL", "Python", "HTML/CSS", "User Authentication"],
       "image": "airline",
       "imageAlt": "Airline booking simulator interface",
       "link": "https://github.com/Nrezhang/AirlineSim",
@@ -70,14 +123,39 @@
   ],
   "experience": [
     {
+      "id": "treasury",
+      "type": "work",
+      "role": "Software Engineer",
+      "company": "U.S. Department of the Treasury",
+      "brand": "treasury",
+      "location": "Washington, DC",
+      "period": "June 2026 – Present",
+      "description": "Builds production AI, data, and integration systems for high-impact government workflows while partnering with senior leaders and engineering stakeholders to turn manual processes into secure, scalable tools.",
+      "highlights": [
+        "Architected an event-driven mailbox-triage system on AWS with webhook ingestion, failure reconciliation, AI classification, and information extraction, saving approximately 10 staff-hours per week while automating leadership reporting.",
+        "Unified approximately 20,000 financial records each week across disparate sources using entity deduplication and a shared ontology, then built graph-based relationship models to surface suspicious transactions and hidden entity connections.",
+        "Scoped, built, and productionized an AI security evaluation platform supporting the White House-launched Gold Eagle initiative, with success metrics, a reporting portal, standardized benchmarks, isolated Docker sandboxes, and parallel GCP VMs for reproducible exploitability testing.",
+        "Built a Microsoft Graph-backed MCP integration for Treasury's internal ChatGPT ecosystem with per-user authentication, data isolation, and throttling under a four-request-per-second service constraint for more than 4,000 staff."
+      ],
+      "skills": ["AWS", "AI Systems", "Data Engineering", "GCP", "Docker", "Microsoft Graph", "MCP", "Security Evaluation", "Stakeholder Management"],
+      "url": "https://home.treasury.gov"
+    },
+    {
       "id": "trianz",
       "type": "work",
-      "role": "PMO Analyst",
+      "role": "Associate Project Manager",
       "company": "Trianz Inc.",
+      "brand": "trianz",
       "location": "Herndon, VA",
-      "period": "May 2024 – August 2024",
-      "description": "Supported project planning, reporting, and delivery coordination across client-facing technical work, translating progress and risks into clear operating updates.",
-      "skills": ["Project Management", "Stakeholder Communication", "Delivery Operations"],
+      "period": "September 2025 – June 2026",
+      "description": "Owned core PMO operations for the organization's largest on-premises-to-AWS migration and paired program leadership with hands-on product and automation work.",
+      "highlights": [
+        "Coordinated more than 60 application teams across the U.S., U.K., Singapore, and India through roadmap planning, migration-wave sequencing, milestone tracking, and cross-functional execution, achieving migration readiness within six months.",
+        "Maintained program status, dependency, risk, and technical-decision records; surfaced application dependencies, security approvals, environment-readiness gaps, and infrastructure tradeoffs before migration waves, then coordinated Engineering, DevOps, security, and client owners to keep delivery on schedule.",
+        "Built a full-stack AI program-management platform that automated metrics from Excel trackers and used LLMs to extract risks, blockers, goals, and status updates from meeting notes, reducing executive and quarterly reporting turnaround from as long as one week to on-demand access.",
+        "Translated fragmented operational workflows into structured system requirements, a normalized data model, and automation rules that standardized project initiation, tracking, and cross-team visibility across projects and clients."
+      ],
+      "skills": ["Technical Program Management", "AWS Migration", "Roadmapping", "Risk Management", "Cross-Functional Leadership", "LLMs", "Full-Stack Development", "Excel"],
       "url": "https://www.trianz.com"
     },
     {
@@ -85,113 +163,174 @@
       "type": "work",
       "role": "AI Software Engineering Intern",
       "company": "Medidata Solutions Inc.",
+      "brand": "medidata",
       "location": "New York, NY",
-      "period": "May 2024 – August 2024",
-      "description": "Implemented and improved a retrieval-augmented generation application over more than 20,000 medical records.",
-      "skills": ["RAG", "Python", "LLMs", "Vector Search", "AWS"],
+      "period": "June 2024 – August 2024",
+      "description": "Built and evaluated retrieval, analytics, and product experiences over more than 40,000 medical records where accuracy, coverage, relevance, and trustworthiness were critical.",
+      "highlights": [
+        "Built a retrieval-augmented data pipeline combining embedding similarity with keyword filtering, generating vector embeddings and semantic-search indexes with AWS EC2, PostgreSQL, and PGvector.",
+        "Optimized PostgreSQL hybrid search by filtering candidates with full-text search before PGvector ranking and reducing unnecessary joins and intermediate data transfer.",
+        "Established a reusable evaluation framework using precision, recall, and AI-assisted relevance scoring to compare models, retrieval configurations, and top-k results; translated ambiguous product, engineering, and medical-data asks into success criteria and representative test cases.",
+        "Applied AI models to identify and categorize relevant clinical information, then used Pendo analytics to find usability pain points and implemented React data-visualization improvements with product and design, translating insights into prioritized Jira work."
+      ],
+      "skills": ["RAG", "Python", "PostgreSQL", "PGvector", "AWS EC2", "SQL Optimization", "Evaluation", "React", "Pendo", "Jira"],
       "url": "https://www.medidata.com"
     },
     {
       "id": "microsoft",
       "type": "work",
-      "role": "Software Development Intern",
+      "role": "AI Software Engineering Intern",
       "company": "Microsoft AI Co-Innovation Labs",
+      "brand": "microsoft",
       "location": "Shanghai, China",
-      "period": "May 2023 – August 2023",
-      "description": "Developed an AI application that facilitated employee-to-database communication and generated reports for non-technical users.",
-      "skills": ["React", "Python", "OpenAI", "PostgreSQL", "Product Prototyping"],
-      "url": "https://aiotlabs.microsoft.com/en"
-    },
-    {
-      "id": "tech-trek",
-      "type": "leadership",
-      "role": "Tech Trek Tutor",
-      "company": "Tech@NYU",
-      "location": "New York, NY",
-      "period": "August 2023 – December 2023",
-      "description": "Guided project groups using Agile development and shared practical experience with web development, AI, and the tools needed to complete their projects.",
-      "skills": ["Mentorship", "Agile", "Web Development", "AI"],
-      "url": "https://techatnyu.org/techtreks"
-    },
-    {
-      "id": "tamid",
-      "type": "leadership",
-      "role": "Director of Technology",
-      "company": "TAMID at NYU Shanghai",
-      "location": "Shanghai, China",
-      "period": "2023",
-      "description": "Led the inaugural Technical Consulting chapter at NYU Shanghai, including member education, project-team management, and correspondence with TAMID Global.",
-      "skills": ["Technical Consulting", "Leadership", "Education", "Team Management"],
-      "url": "https://tamidgroup.org/technical-consulting/"
+      "period": "June 2023 – August 2023",
+      "description": "Built enterprise AI prototypes and helped clients evaluate whether AI and Azure opportunities were technically feasible, commercially useful, and ready for implementation.",
+      "highlights": [
+        "Developed an enterprise LLM chatbot with embeddings, prompt engineering, and agent workflows for natural-language querying across internal datasets, cutting project-management reporting cycles from weeks to days.",
+        "Built a React frontend widget and REST API service to integrate the system into an internal portal used by project managers and stakeholders.",
+        "Translated business needs into scoped Azure and machine-learning pilots with defined data requirements, feasibility criteria, and implementation tradeoffs to accelerate go/no-go decisions.",
+        "Supported a computer-vision pilot for ballet-pose classification by preparing labeled data and evaluating machine-learning approaches."
+      ],
+      "skills": ["LLMs", "React", "Python", "REST APIs", "Azure", "Prompt Engineering", "Agents", "Computer Vision", "Client Consulting"],
+      "url": "https://www.microsoft.com/en-us/ailab"
     },
     {
       "id": "jika",
       "type": "work",
-      "role": "Technical Project Manager",
+      "role": "Technical Project Manager Intern",
       "company": "Jika.io",
+      "brand": "jika",
       "location": "Remote",
-      "period": "February 2023 – May 2023",
-      "description": "Implemented a schema to extract, transform, and load user analytics from MongoDB into BigQuery.",
-      "skills": ["BigQuery", "MongoDB", "ETL", "Analytics", "Technical Planning"],
-      "url": "https://www.jika.io"
+      "period": "February 2023 – June 2023",
+      "description": "Worked directly with the technical lead at an early-stage investment-trading platform on data infrastructure, implementation decisions, analytics, and market expansion.",
+      "highlights": [
+        "Evaluated infrastructure options by balancing cost, implementation effort, integration complexity, and performance to inform architectural decisions.",
+        "Designed a relational schema and wrote SQL scripts to extract, transform, and load JSON user analytics from MongoDB into BigQuery.",
+        "Conducted outreach to U.S. universities, assessed expansion opportunities, and delivered a go-to-market plan for adoption on college campuses."
+      ],
+      "skills": ["BigQuery", "MongoDB", "SQL", "ETL", "Technical Planning", "Data Infrastructure", "Market Research", "Go-to-Market"],
+      "url": "https://www.linkedin.com/company/jika-io/"
     }
   ],
   "skills": [
     {
       "group": "Languages",
       "items": [
-        {"name": "Python", "proficiency": 99, "description": "My go-to language and the one I use most proficiently."},
-        {"name": "Java", "proficiency": 90, "description": "My first programming language, which I started learning in high school."},
-        {"name": "HTML", "proficiency": 70, "description": "Used extensively with CSS across websites and project interfaces."},
-        {"name": "CSS", "proficiency": 70, "description": "Used extensively with HTML for responsive websites and interface work."},
-        {"name": "JavaScript", "proficiency": 70, "description": "Self-taught during my Microsoft internship and developed further through React projects."},
-        {"name": "SQL", "proficiency": 99, "description": "Professional and academic experience with BigQuery, PostgreSQL, MySQL, and database coursework."}
+        {"name": "Python", "proficiency": 99, "description": "My primary language for AI systems, data pipelines, backend services, evaluation tooling, and automation."},
+        {"name": "SQL", "proficiency": 95, "description": "Used professionally with PostgreSQL, PGvector, BigQuery, MySQL, analytics workflows, and retrieval optimization."},
+        {"name": "Java", "proficiency": 90, "description": "My first programming language and a foundation for object-oriented programming and computer-science coursework."},
+        {"name": "JavaScript", "proficiency": 80, "description": "Used with React and Node.js for full-stack products, internal tools, and enterprise integrations."},
+        {"name": "HTML/CSS", "proficiency": 80, "description": "Used across responsive websites, dashboards, and production frontend interfaces."},
+        {"name": "C/C++", "proficiency": 65, "description": "Used in computer-science coursework covering systems, algorithms, and lower-level programming."}
       ]
     },
     {
-      "group": "Tools & Frameworks",
+      "group": "AI, Data & Backend",
       "items": [
-        {"name": "LLMs", "proficiency": 99, "description": "Experience with prompt engineering, agents, retrieval, and using AI models in personal projects."},
-        {"name": "React.js", "proficiency": 75, "description": "Used to build this portfolio and component-based interfaces during my Microsoft internship."},
-        {"name": "Flask", "proficiency": 90, "description": "Experience building REST APIs and lightweight web applications."},
-        {"name": "Django", "proficiency": 88, "description": "Used across school projects, including the airline booking simulator."},
-        {"name": "Git", "proficiency": 90, "description": "Used for collaboration, version control, and shipping project work."},
-        {"name": "REST APIs", "proficiency": 90, "description": "Implemented and consumed RESTful APIs for communication and data exchange between applications."},
-        {"name": "BigQuery", "proficiency": 90, "description": "Loaded and analyzed user data in BigQuery during my work with Jika.io."},
-        {"name": "Business Intelligence", "proficiency": 60, "description": "Researched tools such as Looker Studio and ways to present meaningful analytics."},
-        {"name": "AWS", "proficiency": 50, "description": "Used services including Bedrock and S3 at Medidata and studied toward the AWS Solutions Architect certification."},
-        {"name": "Python Libraries", "proficiency": 95, "description": "Worked with pandas, NumPy, LangChain, Streamlit, spaCy, and related libraries."},
-        {"name": "Docker", "proficiency": 30, "description": "Experience containerizing an application for deployment."}
+        {"name": "LLMs & Agents", "proficiency": 95, "description": "Production experience with prompt engineering, agent workflows, classification, extraction, natural-language querying, and AI automation."},
+        {"name": "RAG & Vector Search", "proficiency": 95, "description": "Built hybrid retrieval over 40,000+ medical records with embeddings, full-text search, PGvector, and structured evaluation."},
+        {"name": "Machine Learning", "proficiency": 88, "description": "Worked with fine-tuning, qLoRA, PyTorch, supervised learning, time-series modeling, computer vision, and model evaluation."},
+        {"name": "Data Engineering", "proficiency": 92, "description": "Built ETL, entity-resolution, ontology, graph-analysis, analytics, and cross-source data-unification workflows."},
+        {"name": "PostgreSQL & PGvector", "proficiency": 92, "description": "Designed and optimized SQL, full-text search, vector indexes, schemas, and hybrid retrieval pipelines."},
+        {"name": "REST APIs & MCP", "proficiency": 90, "description": "Built REST services and a production Microsoft Graph-backed MCP integration with authentication, isolation, and throttling."},
+        {"name": "Python Libraries", "proficiency": 95, "description": "Hands-on work with pandas, NumPy, LangChain, PyTorch, Streamlit, spaCy, and related tools."},
+        {"name": "Databases", "proficiency": 90, "description": "Experience with PostgreSQL, PGvector, MongoDB, Redis, BigQuery, MySQL, and Supabase."}
       ]
     },
     {
-      "group": "Other Skills & Interests",
+      "group": "Cloud & Product Engineering",
       "items": [
-        {"name": "Project Management", "proficiency": 90, "description": "Managed tasks and workloads, coordinated teams, and resolved delivery conflicts in previous roles."},
-        {"name": "Teamwork", "proficiency": 99, "description": "I get energy from working with other people and building as a team."},
-        {"name": "Mentorship", "proficiency": 90, "description": "I enjoy supporting less-experienced peers and held several mentorship positions in college."},
-        {"name": "Consulting", "proficiency": 70, "description": "Managed a TAMID consulting project, won first place in a case competition, and gained experience in market research and outreach."},
-        {"name": "Fitness", "proficiency": 90, "description": "I lift weights and run consistently, and enjoy basketball and lacrosse."},
-        {"name": "Chinese", "proficiency": 80, "description": "Fluent in Chinese through studying, living, and working in China."}
+        {"name": "AWS", "proficiency": 88, "description": "Built AWS systems and supported a 60+ application cloud migration; AWS Certified Cloud Practitioner."},
+        {"name": "Azure & GCP", "proficiency": 80, "description": "Scoped Azure AI pilots and ran parallel, containerized model-evaluation workloads on GCP VMs."},
+        {"name": "Docker", "proficiency": 85, "description": "Built isolated evaluation sandboxes and containerized systems for reliable, reproducible execution."},
+        {"name": "React", "proficiency": 85, "description": "Built dashboards, data visualizations, enterprise widgets, admin tooling, and this portfolio."},
+        {"name": "Backend Frameworks", "proficiency": 85, "description": "Experience with Node.js, Flask, Django, REST services, and the MERN stack."},
+        {"name": "Git & Copilot", "proficiency": 90, "description": "Used for version control, collaboration, code review, and AI-assisted development."},
+        {"name": "Analytics & BI", "proficiency": 82, "description": "Worked with Excel, BI tools, Pendo, data visualizations, and operational reporting."},
+        {"name": "AWS Certified Cloud Practitioner", "proficiency": 100, "description": "Earned the AWS Cloud Practitioner certification and applied cloud concepts in engineering and migration work."}
+      ]
+    },
+    {
+      "group": "Program, Product & Leadership",
+      "items": [
+        {"name": "Technical Program Management", "proficiency": 95, "description": "Led migration planning, roadmaps, wave sequencing, milestones, technical decisions, and delivery across global teams."},
+        {"name": "Cross-Functional Collaboration", "proficiency": 98, "description": "Coordinated engineering, DevOps, security, product, design, medical-data, client, and executive stakeholders."},
+        {"name": "Requirements & Product Strategy", "proficiency": 92, "description": "Turns ambiguous business goals into system requirements, MVP scope, success metrics, UX flows, and technical workstreams."},
+        {"name": "Risk & Dependency Management", "proficiency": 92, "description": "Maintained program risks, dependencies, decisions, readiness gaps, owners, and mitigation plans for large cloud programs."},
+        {"name": "Client & Stakeholder Communication", "proficiency": 95, "description": "Comfortable bridging technical teams, business stakeholders, senior leaders, and enterprise clients."},
+        {"name": "Agile Delivery Tools", "proficiency": 88, "description": "Experience with Agile delivery, Jira, Confluence, Asana, Salesforce, backlog prioritization, and documentation."},
+        {"name": "Leadership & Mentorship", "proficiency": 92, "description": "Led three engineers, directed a technical-consulting chapter, and mentored student project teams."},
+        {"name": "Consulting & Go-to-Market", "proficiency": 82, "description": "Evaluated technical feasibility, business fit, profitability, market opportunities, and client-adoption strategies."}
+      ]
+    },
+    {
+      "group": "Languages & Interests",
+      "items": [
+        {"name": "Chinese", "proficiency": 80, "description": "Fluent in Chinese through studying, living, and working in China."},
+        {"name": "Adaptability", "proficiency": 95, "description": "Studied and worked across the U.S., China, and the Middle East in individual-contributor and client-facing settings."},
+        {"name": "Fitness", "proficiency": 90, "description": "I lift weights and run consistently and enjoy basketball and lacrosse."},
+        {"name": "Teamwork", "proficiency": 99, "description": "I get energy from collaborative problem-solving and building with others."}
       ]
     }
   ],
   "education": [
     {
       "id": "nyu-shanghai",
-      "school": "NYU Shanghai",
+      "school": "New York University Shanghai",
       "degree": "BS in Computer Science · Minor in Business",
       "period": "August 2021 – May 2025",
       "locations": "New York City and Shanghai",
       "gpa": "3.55/4.0",
-      "description": "Studied in both New York City and Shanghai with an interdisciplinary focus on computer science, business, and product development.",
-      "coursework": ["Machine Learning", "Recommendation Systems", "Agile and DevOps", "Object-Oriented Programming", "Design and Analysis of Algorithms", "Databases"]
+      "brand": "nyu",
+      "url": "https://shanghai.nyu.edu",
+      "description": "Studied computer science, business, product development, and strategy across New York City and Shanghai.",
+      "coursework": ["Agile and DevOps", "Machine Learning", "Recommendation Systems", "Design and Analysis of Algorithms", "Data Structures", "Distributed Systems", "Databases", "Object-Oriented Programming", "Operating Systems", "Strategic Analysis"],
+      "leadership": [
+        {
+          "id": "tamid",
+          "type": "leadership",
+          "role": "Director of Technology",
+          "company": "TAMID at NYU Shanghai",
+          "brand": "tamid",
+          "location": "Shanghai, China",
+          "period": "2023",
+          "description": "Led the inaugural Technical Consulting chapter at NYU Shanghai, including member education, consulting-team management, and coordination with TAMID Global.",
+          "highlights": [],
+          "skills": ["Technical Consulting", "Leadership", "Education", "Team Management", "Market Research"],
+          "url": "https://tamidgroup.org/technical-consulting/"
+        },
+        {
+          "id": "tech-trek",
+          "type": "leadership",
+          "role": "Tech Trek Tutor",
+          "company": "Tech@NYU",
+          "brand": "tech-nyu",
+          "location": "New York, NY",
+          "period": "August 2023 – December 2023",
+          "description": "Guided project teams using Agile development and shared practical experience with web development, AI, and the tools needed to complete their projects.",
+          "highlights": [],
+          "skills": ["Mentorship", "Agile", "Web Development", "AI", "Teamwork"],
+          "url": "https://techatnyu.org"
+        }
+      ]
+    },
+    {
+      "id": "tjhsst",
+      "school": "Thomas Jefferson High School for Science and Technology",
+      "degree": "Advanced Studies Diploma",
+      "period": "Graduated 2021",
+      "locations": "Alexandria, VA",
+      "gpa": "",
+      "brand": "tjhsst",
+      "url": "https://tjhsst.fcps.edu",
+      "description": "Studied at a selective regional STEM magnet and Virginia Governor's School with a research-centered curriculum spanning science, engineering, and computing.",
+      "coursework": []
     }
   ],
   "contact": {
     "eyebrow": "Let's connect",
-    "headline": "Have a role or project in mind?",
-    "description": "I am interested in software engineering, AI engineering, and product engineering teams where I can own meaningful work and keep learning quickly.",
-    "note": "Don't hesitate to reach out to talk or inquire about anything."
+    "headline": "Building at the intersection of engineering and execution.",
+    "description": "I bring software engineering depth, AI and data experience, and technical program leadership to teams solving complex, high-impact problems.",
+    "note": "Reach out to discuss AI systems, software engineering, cloud programs, technical leadership, or product opportunities."
   }
 }
