@@ -174,4 +174,15 @@ exports.handler = async (event) => {
   }
 };
 
-exports.__testables = { allowedEmails, sessionKey, validateContent };
+function resetAuthConfigForTests() {
+  cachedAuthConfig = undefined;
+  authConfigExpiresAt = 0;
+}
+
+exports.__testables = {
+  allowedEmails,
+  clients: { dynamo, googleClient, secrets },
+  resetAuthConfigForTests,
+  sessionKey,
+  validateContent,
+};
