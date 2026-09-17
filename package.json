@@ -5,7 +5,9 @@
     "dev": "node scripts/dev.js",
     "client": "npm --prefix client start",
     "server": "node server/server.js",
-    "build": "npm --prefix client run build"
+    "build": "npm --prefix client run build",
+    "seed:content": "node scripts/seed-dynamodb-content.js",
+    "test:api": "node --test tests/api.test.js"
   },
   "dependencies": {
     "google-auth-library": "^10.9.1"

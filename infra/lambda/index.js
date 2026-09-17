@@ -61,7 +61,8 @@ function validateContent(content) {
     content && content.profile && typeof content.profile.name === 'string' &&
     Array.isArray(content.projects) && Array.isArray(content.experience) &&
     Array.isArray(content.skills) && content.skills.every((group) => Array.isArray(group.items)) &&
-    content.education && Array.isArray(content.education.coursework) && content.contact
+    Array.isArray(content.education) && content.education.every((entry) => entry && Array.isArray(entry.coursework)) &&
+    content.contact
   );
 }
 
@@ -161,7 +162,7 @@ exports.handler = async (event) => {
     if (method === 'PUT' && route === '/content') {
       if (!await isAuthenticated(event)) return response(401, { message: 'Sign in is required.' });
       const content = parseBody(event);
-      if (!validateContent(content)) return response(400, { message: 'The content format is invalid.' });
+      if (!validateContent(content)) return response(400, { message: 'The portfolio data is incomplete. Check education coursework, skills, and required sections.' });
       await saveContent(content);
       return response(200, content);
     }
@@ -172,3 +173,5 @@ exports.handler = async (event) => {
     return response(500, { message: 'Server error.' });
   }
 };
+
+exports.__testables = { allowedEmails, sessionKey, validateContent };

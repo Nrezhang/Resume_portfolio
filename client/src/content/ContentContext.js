@@ -27,7 +27,7 @@ export function ContentProvider({ children }) {
         }
       })
       .catch(() => {
-        if (active) setSource('local');
+        if (active) setSource('fallback');
       });
     return () => { active = false; };
   }, []);

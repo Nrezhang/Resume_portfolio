@@ -35,6 +35,8 @@ jobs:
           cache: npm
           cache-dependency-path: client/package-lock.json
       - run: npm ci --prefix client
+      - run: npm ci --prefix infra/lambda --omit=dev --ignore-scripts
+      - run: npm run test:api
       - run: npm test --prefix client -- --watchAll=false
       - run: npm run build
         env:

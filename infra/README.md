@@ -20,7 +20,7 @@ terraform apply
 
 Create a Google OAuth web client first, then add its client ID and the approved editor emails to the admin secret. The Google client ID is not a password, but keeping the full sign-in configuration in the existing secret means deployments do not need a separate manual environment variable.
 
-In Google Cloud, add every exact site origin under **Authorized JavaScript origins**: the deployed site (for example, `https://www.henryszhang.com`), `http://127.0.0.1:3000`, and `http://localhost:3000` if you use that local URL. This sign-in flow uses a browser popup, so it does not need an authorized redirect URI.
+In Google Cloud, add every exact site origin under **Authorized JavaScript origins**: the deployed site (for example, `https://www.henryszhang.dev`), `http://127.0.0.1:3000`, and `http://localhost:3000` if you use that local URL. This sign-in flow uses a browser popup, so it does not need an authorized redirect URI.
 
 ```bash
 aws secretsmanager put-secret-value \
@@ -50,3 +50,21 @@ Set these repository variables from Terraform outputs:
 - `GOOGLE_CLIENT_ID` from the Google OAuth web client (required for `/admin` sign-in)
 
 Pull requests run tests and a production build. Pushes to `main` additionally upload the site and invalidate CloudFront.
+
+## Content Operations
+
+The DynamoDB `portfolio` record is the production source of truth. Seed it once from the checked-in portfolio content:
+
+```bash
+npm run seed:content
+```
+
+The seed command uses a conditional write, so rerunning it does not overwrite published edits. To intentionally replace the live document with the bundled default, run `npm run seed:content -- --force`.
+
+For a portable backup, save the current record before a manual replacement:
+
+```bash
+aws dynamodb get-item --table-name henry-portfolio-content --key '{"id":{"S":"portfolio"}}' --consistent-read --output json > portfolio-content-backup.json
+```
+
+Restore that backup with `aws dynamodb put-item --table-name henry-portfolio-content --item file://portfolio-content-backup.json`. DynamoDB point-in-time recovery is also enabled by Terraform for database-level recovery. For application rollbacks, rerun the prior successful GitHub Actions deployment or restore the corresponding S3 object version.

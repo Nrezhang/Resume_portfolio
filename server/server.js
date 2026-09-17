@@ -67,7 +67,8 @@ function validateContent(content) {
     content && content.profile && typeof content.profile.name === 'string' &&
     Array.isArray(content.projects) && Array.isArray(content.experience) &&
     Array.isArray(content.skills) && content.skills.every((group) => Array.isArray(group.items)) &&
-    Array.isArray(content.education) && content.education.every((entry) => Array.isArray(entry.coursework)) && content.contact
+    Array.isArray(content.education) && content.education.every((entry) => entry && Array.isArray(entry.coursework)) &&
+    content.contact
   );
 }
 
@@ -137,7 +138,7 @@ const server = http.createServer(async (request, response) => {
     if (request.url === '/api/content' && request.method === 'PUT') {
       if (!authenticated(request)) return json(response, 401, { message: 'Sign in is required.' });
       const content = await readBody(request);
-      if (!validateContent(content)) return json(response, 400, { message: 'The content format is invalid.' });
+      if (!validateContent(content)) return json(response, 400, { message: 'The portfolio data is incomplete. Check education coursework, skills, and required sections.' });
       saveContent(content);
       return json(response, 200, content);
     }
