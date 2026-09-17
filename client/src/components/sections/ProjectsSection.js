@@ -9,20 +9,19 @@ import Card from '../ui/Card';
 import { AddControl, ItemControls } from '../editor/InlineEditorControls';
 
 export function ProjectCard({ project, index = 0, editor }) {
+  const projectImage = <><img src={imageAssets[project.image]} alt={project.imageAlt} />{project.link && <span><FiExternalLink /></span>}</>;
   return (
     <Card className="project-card" index={index} whileHover={{ y: -6 }}>
       {editor && <ItemControls label={project.title || 'project'} onEdit={editor.onEdit} onDelete={editor.onDelete} />}
-      <a className="project-image" href={resolveLink(project.link)} target="_blank" rel="noreferrer" aria-label={`${project.linkLabel}: ${project.title}`}>
-        <img src={imageAssets[project.image]} alt={project.imageAlt} />
-        <span><FiExternalLink /></span>
-      </a>
+      {project.link ? <a className="project-image" href={resolveLink(project.link)} target="_blank" rel="noreferrer" aria-label={`${project.linkLabel || 'View project'}: ${project.title}`}>{projectImage}</a> : <div className="project-image project-image-static">{projectImage}</div>}
       <div className="project-content">
         <div className="project-meta"><p className="card-kicker">{project.category}</p><span>{project.year}</span></div>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
         <p className="project-impact"><b>What I built:</b> {project.impact}</p>
+        {project.highlights?.length > 0 && <ul className="project-highlights">{project.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>}
         <SkillTags items={project.skills} />
-        <a className="card-link" href={resolveLink(project.link)} target="_blank" rel="noreferrer">{project.linkLabel} <FiArrowUpRight /></a>
+        {project.link && <a className="card-link" href={resolveLink(project.link)} target="_blank" rel="noreferrer">{project.linkLabel || 'View project'} <FiArrowUpRight /></a>}
       </div>
     </Card>
   );

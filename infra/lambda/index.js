@@ -61,7 +61,10 @@ function validateContent(content) {
     content && content.profile && typeof content.profile.name === 'string' &&
     Array.isArray(content.projects) && Array.isArray(content.experience) &&
     Array.isArray(content.skills) && content.skills.every((group) => Array.isArray(group.items)) &&
-    Array.isArray(content.education) && content.education.every((entry) => entry && Array.isArray(entry.coursework)) &&
+    Array.isArray(content.education) && content.education.every((entry) => entry && Array.isArray(entry.coursework) &&
+      (entry.leadership === undefined || (Array.isArray(entry.leadership) && entry.leadership.every((item) =>
+        item && typeof item.role === 'string' && typeof item.company === 'string' &&
+        Array.isArray(item.highlights) && Array.isArray(item.skills))))) &&
     content.contact
   );
 }
