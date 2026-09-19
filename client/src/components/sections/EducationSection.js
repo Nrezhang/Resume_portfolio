@@ -33,7 +33,7 @@ export default function EducationSection({ editor }) {
       <SectionHeading id="education-heading" eyebrow="Education" title="Learning across disciplines and cities." action={editor ? <AddControl label="Add education" onClick={editor.onAdd} /> : null} />
       <div className="education-list">
         {content.education.map((education, index) => (
-          <article className={`education-entry education-entry-${education.brand || 'default'}`} key={education.id || `${education.school}-${index}`}>
+          <article id={`education-entry-${education.id}`} className={`education-entry education-entry-${education.brand || 'default'}`} key={education.id || `${education.school}-${index}`}>
             {editor && <ItemControls label={education.school || 'education'} onEdit={() => editor.onEdit(index)} onDelete={() => editor.onDelete(index)} />}
             <div className="education-meta">
               {educationAssets[education.brand] && <div className="education-logo"><img src={educationAssets[education.brand]} alt={`${education.school} logo`} /></div>}
@@ -49,7 +49,7 @@ export default function EducationSection({ editor }) {
                   <h4>Leadership &amp; Campus Involvement</h4>
                   <div className="education-leadership-grid">
                     {education.leadership.map((item) => (
-                      <article className={`education-leadership-item education-leadership-item-${item.brand || 'default'}`} key={item.id}>
+                      <article id={`leadership-entry-${item.id}`} className={`education-leadership-item education-leadership-item-${item.brand || 'default'}`} key={item.id}>
                         <LeadershipLogo item={item} />
                         <div className="education-leadership-copy">
                           <h5>{item.role}</h5>
