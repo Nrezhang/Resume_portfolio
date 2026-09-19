@@ -16,14 +16,7 @@ export default function ExperienceSection({ limit, editor }) {
   const [view, setView] = useState('journey');
   const pendingScroll = useRef(null);
   const sectionRef = useRef(null);
-  const detailEntries = immersive ? [
-    ...experience,
-    ...content.education.flatMap((school) => (school.leadership || [])),
-    ...content.education.map((school) => ({
-      ...school, type: 'education', role: school.degree, company: school.school,
-      location: school.locations, skills: school.coursework,
-    })),
-  ] : experience;
+  const detailEntries = experience;
 
   const changeView = (nextView, entryId = null) => {
     if (nextView === view) return;
@@ -56,16 +49,27 @@ export default function ExperienceSection({ limit, editor }) {
     </div>
   );
 
+  const revealTimelineEntry = (item) => {
+    if (item.kind === 'work') {
+      changeView('details', `experience-detail-${item.id}`);
+      return;
+    }
+    const entryId = item.kind === 'education' ? item.entryId : `leadership-entry-${item.id}`;
+    const target = document.getElementById(entryId);
+    target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    target?.focus({ preventScroll: true });
+  };
+
   return (
     <section ref={sectionRef} id="experience" className={`content-section experience-section${immersive ? ' experience-section-immersive' : ''}`} aria-labelledby="experience-heading">
       {!immersive && <SectionHeading id="experience-heading" eyebrow="Experience" title="Engineering work shaped by real users and real constraints." action={editor ? <AddControl label="Add experience" onClick={editor.onAdd} /> : limit ? <Link className="text-link" to="/experience">Full experience <FiArrowUpRight /></Link> : null} />}
       {immersive && <div id="experience-panel-journey" role="tabpanel" aria-labelledby="experience-tab-journey" hidden={view !== 'journey'}>
         {view === 'journey' && <ExperienceTimeline experience={content.experience} education={content.education} toolbar={viewTabs}
-          onReadEntry={(item) => changeView('details', `experience-detail-${item.kind === 'education' ? item.entryId.replace('education-entry-', '') : item.id}`)} />}
+          onReadEntry={revealTimelineEntry} />}
       </div>}
       <div id={immersive ? 'experience-panel-details' : undefined} role={immersive ? 'tabpanel' : undefined}
         aria-labelledby={immersive ? 'experience-tab-details' : undefined} hidden={immersive && view !== 'details'} className={immersive ? 'experience-details-panel' : undefined}>
-      {immersive && <div className="experience-details-heading"><div><p className="eyebrow">Experience / The full picture</p><h2 id={view === 'details' ? 'experience-heading' : undefined}>Work, learning & leadership.</h2><p>Roles, results, and the details behind the journey.</p></div>{view === 'details' && viewTabs}</div>}
+      {immersive && <div className="experience-details-heading"><div><p className="eyebrow">Experience / Work history</p><h2 id={view === 'details' ? 'experience-heading' : undefined}>Work experience.</h2><p>Roles, results, and the details behind each chapter.</p></div>{view === 'details' && viewTabs}</div>}
       <div className="experience-list">
         {detailEntries.map((item, index) => {
           const logoAsset = experienceAssets[item.brand];

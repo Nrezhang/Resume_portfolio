@@ -31,7 +31,7 @@ test('renders the portfolio profile', () => {
   expect(screen.getByRole('tab', { name: 'Journey' })).toHaveAttribute('aria-selected', 'true');
   expect(screen.getByRole('tab', { name: 'Journey' })).toHaveFocus();
   fireEvent.click(screen.getByRole('button', { name: 'Read full entry' }));
-  expect(screen.getByRole('tab', { name: 'All experience' })).toHaveAttribute('aria-selected', 'true');
-  expect(document.getElementById('experience-detail-nyu-shanghai')).toHaveFocus();
+  expect(screen.getByRole('tab', { name: 'Journey' })).toHaveAttribute('aria-selected', 'true');
+  expect(document.getElementById('education-entry-nyu-shanghai')).toHaveFocus();
   global.fetch = originalFetch;
 });
