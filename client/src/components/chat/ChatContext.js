@@ -3,6 +3,7 @@ import { demoResponseProvider } from '../../services/chatProvider';
 
 const ChatContext = createContext(null);
 const STORAGE_KEY = 'henry-portfolio-conversations-v1';
+const MESSAGE_COUNT_KEY = 'henry-portfolio-demo-messages-v1';
 function readConversations() {
   try {
     const stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '[]');
@@ -14,7 +15,16 @@ export function ChatProvider({ children, provider = demoResponseProvider }) {
   const [conversations, setConversations] = useState(readConversations);
   const [draft, setDraft] = useState('');
   const [pendingIds, setPendingIds] = useState([]);
+  const [sessionMessages, setSessionMessages] = useState(() => {
+    try {
+      const count = Number(sessionStorage.getItem(MESSAGE_COUNT_KEY));
+      return Number.isSafeInteger(count) && count >= 0 ? count : 0;
+    } catch { return 0; }
+  });
   const pending = useRef(new Set());
+  useEffect(() => {
+    try { sessionStorage.setItem(MESSAGE_COUNT_KEY, String(sessionMessages)); } catch { /* Demo counter only. */ }
+  }, [sessionMessages]);
   useEffect(() => {
     try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(conversations)); } catch { /* Chat still works when browser storage is unavailable. */ }
   }, [conversations]);
@@ -22,6 +32,7 @@ export function ChatProvider({ children, provider = demoResponseProvider }) {
   function send(text, conversationId) {
     const question = text.trim();
     if (!question || pending.current.has(conversationId)) return null;
+    setSessionMessages((count) => count + 1);
     const existing = conversations.find((chat) => chat.id === conversationId);
     const id = existing?.id || `chat-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const messages = [...(existing?.messages || []), { role: 'user', text: question }];
@@ -39,6 +50,6 @@ export function ChatProvider({ children, provider = demoResponseProvider }) {
     });
     return id;
   }
-  return <ChatContext.Provider value={{ conversations, draft, setDraft, send, pendingIds }}>{children}</ChatContext.Provider>;
+  return <ChatContext.Provider value={{ conversations, draft, setDraft, send, pendingIds, sessionMessages }}>{children}</ChatContext.Provider>;
 }
 export const useChat = () => useContext(ChatContext);

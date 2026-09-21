@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { FiPlus, FiTrash2, FiX } from 'react-icons/fi';
+import { heroDefaults } from '../chat/HomeIdentity';
 
 function Field({ label, value, onChange, textarea = false, type = 'text', options }) {
   return (
@@ -70,6 +71,8 @@ function EducationFields({ value, update }) {
 function Fields({ type, value, update }) {
   if (type === 'profile') return <>
     <div className="admin-two-column"><Field label="Name" value={value.name} onChange={(next) => update('name', next)} /><Field label="Location" value={value.location} onChange={(next) => update('location', next)} /></div>
+    <Field label="Homepage role (animated)" value={value.heroRole ?? heroDefaults.heroRole} onChange={(next) => update('heroRole', next)} />
+    <Field label="Homepage description" value={value.heroDescription ?? heroDefaults.heroDescription} onChange={(next) => update('heroDescription', next)} textarea />
     <div className="admin-two-column"><Field label="Phone" value={value.phone} onChange={(next) => update('phone', next)} /><Field label="Focus" value={value.focus} onChange={(next) => update('focus', next)} /></div>
     <Field label="Citizenship / clearance" value={value.citizenship} onChange={(next) => update('citizenship', next)} />
     <Field label="Eyebrow" value={value.eyebrow} onChange={(next) => update('eyebrow', next)} />

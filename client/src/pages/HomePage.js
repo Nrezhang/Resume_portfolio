@@ -1,3 +1,4 @@
+import HomeIdentity from '../components/chat/HomeIdentity';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FiArrowLeft, FiArrowRight, FiArrowUp, FiArrowUpRight, FiBookOpen, FiBriefcase, FiFileText, FiGithub, FiGrid, FiLinkedin, FiMessageCircle, FiUser, FiX, FiZap } from 'react-icons/fi';
@@ -48,7 +49,7 @@ export default function HomePage() {
   }
 
   return <main className={`chat-page ${chat ? 'has-conversation' : 'is-home'}`} onKeyDown={(event) => { if (event.key === 'Escape' && expanded) { event.preventDefault(); closeExpanded(); } }}>
-    {chat ? <><header className="conversation-heading"><FiMessageCircle /><span>{chat.title}</span><small>Demo chat</small></header><div className="conversation-thread" role="log" aria-label="Conversation" aria-live="polite">{chat.messages.map((message, index) => <article className={`chat-message message-${message.role}`} key={index}><span className="message-author">{message.role === 'user' ? 'You' : `Henry AI · ${message.label || 'Demo response'}`}</span><p>{message.text}</p></article>)}{pending && <p role="status" className="chat-pending">Preparing response…</p>}<div ref={end} /></div></> : <h1>What would you like to know?</h1>}
+    {chat ? <><header className="conversation-heading"><FiMessageCircle /><span>{chat.title}</span><small>Demo chat</small></header><div className="conversation-thread" role="log" aria-label="Conversation" aria-live="polite">{chat.messages.map((message, index) => <article className={`chat-message message-${message.role}`} key={index}><span className="message-author">{message.role === 'user' ? 'You' : `Henry AI · ${message.label || 'Demo response'}`}</span><p>{message.text}</p></article>)}{pending && <p role="status" className="chat-pending">Preparing response…</p>}<div ref={end} /></div></> : <HomeIdentity />}
     <div className="composer-area">
       <div className={`chat-composer ${dropdown ? 'with-suggestions' : ''}`}>
         <form className="composer-input-row" onSubmit={(event) => { event.preventDefault(); submit(draft); }}>

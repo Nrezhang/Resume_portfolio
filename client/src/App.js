@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import ResumePage from './pages/ResumePage';
 import './styles/portfolio.css';
 import './styles/chat.css';
+import './styles/settings.css';
 
 const PortfolioContentPage = lazy(() => import('./pages/PortfolioContentPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
@@ -25,8 +26,8 @@ function App() {
       <Route path="education" element={<PortfolioContentPage section="education" />} />
       <Route path="skills" element={<PortfolioContentPage section="skills" />} />
       <Route path="contact" element={<PortfolioContentPage section="contact" />} />
+      <Route path="admin" element={<AdminPage />} />
     </Route>
-    <Route path="admin" element={<AdminPage />} />
     <Route path="*" element={<Navigate to="/" replace />} />
   </Routes></Suspense></ChatProvider></ContentProvider></MotionConfig></BrowserRouter>;
 }

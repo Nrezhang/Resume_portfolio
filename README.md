@@ -16,7 +16,7 @@ The public sections use regular browser routes such as `/profile`, `/projects`, 
 
 Create a Google Cloud OAuth client of type **Web application** and add `http://127.0.0.1:3000`, `http://localhost:3000`, and `https://www.henryszhang.dev` under **Authorized JavaScript origins**. Use its client ID for both Google client ID variables. The AWS deployment reads the same client ID and allowlist from its existing admin secret; see `infra/README.md` for the secret format.
 
-The editor is a live preview of the public portfolio. Projects, experience entries, education entries, skill groups, and individual skills can be added, edited, or removed before publishing the complete draft.
+The editor is a themed Portfolio studio inside the public app shell, with a homepage preview and separate content sections. Projects, experience entries, education entries, skill groups, and individual skills can be added, edited, or removed before publishing the complete draft.
 
 Editable content is persisted to DynamoDB in production and `server/data/content.json` locally. Seed the production document once with `npm run seed:content`; the command is idempotent and will not overwrite existing published content unless you explicitly run `npm run seed:content -- --force`.
 
@@ -24,10 +24,12 @@ The bundled `client/src/content/defaultContent.json` remains an emergency fallba
 
 ## Chat-first portfolio
 
-The public app uses a persistent sidebar and a chat homepage. `/profile`, `/projects`, `/projects/:projectId`, `/experience`, and `/resume` open dedicated views in the same shell. The experience page reuses the globe, branch timeline, work history, and education components. The existing content API, DynamoDB publishing path, and `/admin` editor are unchanged.
+The public app uses a persistent sidebar and a chat homepage. `/profile`, `/projects`, `/projects/:projectId`, `/experience`, `/resume`, and `/admin` open dedicated views in the same shell. The experience page reuses the globe, branch timeline, work history, and education components. The content API, DynamoDB publishing path, and admin authentication remain in use.
 
 - `client/src/services/chatProvider.js` defines the demo response provider. Replace or inject a provider into `ChatProvider` with the contract `respond({ messages }) => Promise<{ text, label }>`. Connect a backend endpoint here for persona/RAG; keep API credentials on the server. Pending and failure states are already handled.
 - Visitor conversations are stored only in this tab's `sessionStorage` under `henry-portfolio-conversations-v1`, capped at 20 conversations. They are not sent to the portfolio content API. New chat starts a fresh thread; the recent list reopens previous threads in the browser session.
 - Homepage previews read from `ContentContext`, including remote published content. `components/chat/PortfolioCards.js` maps the three featured projects. LearnFromAI has a clearly labeled placeholder until a matching project is added through the existing editor. Product thumbnails without dedicated assets use labeled preview placeholders.
-- The sidebar uses a neutral avatar. GitHub and LinkedIn use configured profile destinations, and Resume uses the existing bundled document.
+- The homepage uses the name-first design with a one-time typing animation for the software-engineer role. The animation reserves text width to avoid layout shifts, presents complete text to screen readers, and respects reduced motion. Edit `profile.heroRole` and `profile.heroDescription` in Portfolio studio; existing documents use sensible defaults until published.
+- The sidebar uses Henry's existing profile photo. Click it to open Settings: appearance, session usage, and the admin link. Light, Dark, and System preferences persist under `portfolio-theme`; a new visitor defaults to Dark. GitHub and LinkedIn use configured profile destinations, and Resume uses the existing bundled document.
+- Session usage is a demo display, with messages tracked per tab session and zero paid AI tokens. Future server-enforced message/token budgets and spending controls are specified in [AI usage limits](docs/ai-usage-limits.md). The admin AI usage section is a clearly labeled preview until that backend is implemented.
 - Run `CI=true npm --prefix client test -- --watchAll=false`, `npm run test:api`, and `npm run build` for checks. The chat interaction tests cover all four expanded states, draft preservation, Escape/focus restoration, submission, recent conversations, and internal routing.
