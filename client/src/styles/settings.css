@@ -1,13 +1,24 @@
 .chat-shell { --hover: #242424; --control: #1b1b1b; --strong-border: #414141; --hero-halo: #28303b25; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: #eee; }
+@property --muted { syntax: '<color>'; inherits: true; initial-value: #999b9f; }
+@property --paper { syntax: '<color>'; inherits: true; initial-value: #090909; }
+@property --surface { syntax: '<color>'; inherits: true; initial-value: #171717; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: #2c2c2c; }
+@property --body-copy { syntax: '<color>'; inherits: true; initial-value: #b6b6b9; }
+@property --headline-copy { syntax: '<color>'; inherits: true; initial-value: #eee; }
+@property --field-bg { syntax: '<color>'; inherits: true; initial-value: #191919; }
+@property --soft-surface { syntax: '<color>'; inherits: true; initial-value: #1b1b1b; }
+@property --hover { syntax: '<color>'; inherits: true; initial-value: #242424; }
+@property --control { syntax: '<color>'; inherits: true; initial-value: #1b1b1b; }
+@property --strong-border { syntax: '<color>'; inherits: true; initial-value: #414141; }
 @media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root) { animation: theme-fade-out 160ms ease-out both; }
-  ::view-transition-new(root) { animation: theme-fade-in 280ms cubic-bezier(.22, 1, .36, 1) both; }
-  :root.theme-transition :is(.chat-shell, .chat-sidebar, .chat-main, .chat-mobile-header, .profile-settings-panel, .chat-composer, .chat-project-card, .chat-experience-card, .chat-new, .chat-quick-actions button, .chat-suggestions, .conversation-heading, .message-user) {
-    transition: background-color 300ms ease, border-color 260ms ease, color 180ms ease, box-shadow 300ms ease;
+  :root.theme-transition .chat-shell {
+    transition: --ink 620ms cubic-bezier(.22, 1, .36, 1), --muted 620ms cubic-bezier(.22, 1, .36, 1), --paper 620ms cubic-bezier(.22, 1, .36, 1), --surface 620ms cubic-bezier(.22, 1, .36, 1), --line 620ms cubic-bezier(.22, 1, .36, 1), --body-copy 620ms cubic-bezier(.22, 1, .36, 1), --headline-copy 620ms cubic-bezier(.22, 1, .36, 1), --field-bg 620ms cubic-bezier(.22, 1, .36, 1), --soft-surface 620ms cubic-bezier(.22, 1, .36, 1), --hover 620ms cubic-bezier(.22, 1, .36, 1), --control 620ms cubic-bezier(.22, 1, .36, 1), --strong-border 620ms cubic-bezier(.22, 1, .36, 1);
+  }
+  :root.theme-transition :is(.chat-sidebar, .chat-mobile-header, .profile-settings-panel, .chat-composer, .chat-project-card, .chat-experience-card, .chat-new, .chat-quick-actions button, .chat-suggestions, .conversation-heading, .message-user) {
+    transition: background-color 620ms cubic-bezier(.22, 1, .36, 1), border-color 620ms cubic-bezier(.22, 1, .36, 1), color 420ms ease, box-shadow 620ms cubic-bezier(.22, 1, .36, 1);
   }
 }
-@keyframes theme-fade-out { to { opacity: 0; } }
-@keyframes theme-fade-in { from { opacity: 0; } }
 :root[data-theme="light"] .chat-shell {
   --ink: #202124; --muted: #62646b; --paper: #fafafa; --surface: #fff; --line: #dedee2;
   --green: #454750; --green-soft: #eeeef1; --body-copy: #52545d; --headline-copy: #24252a;

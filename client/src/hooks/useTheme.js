@@ -26,20 +26,13 @@ function applyTheme(preference, animate = false) {
   };
   if (!animate || reduceMotion) return update();
 
-  if (typeof document.startViewTransition === 'function') {
-    document.startViewTransition(update);
-    return;
-  }
-
-  // Older browsers use a small, surface-only fallback rather than animating
-  // every descendant, which can create a distracting flash.
+  // Interpolate the palette in place. A whole-page crossfade can make a
+  // dark-to-light switch look like a white flash, especially in Safari.
   window.clearTimeout(fallbackTransitionTimer);
   root.classList.add('theme-transition');
-  // Flush the transition class first so the following palette update animates
-  // without delaying the selected appearance state.
   void root.offsetWidth;
   update();
-  fallbackTransitionTimer = window.setTimeout(() => root.classList.remove('theme-transition'), 380);
+  fallbackTransitionTimer = window.setTimeout(() => root.classList.remove('theme-transition'), 720);
 }
 
 export default function useTheme() {
