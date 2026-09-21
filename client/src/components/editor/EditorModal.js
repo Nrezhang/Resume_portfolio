@@ -100,7 +100,9 @@ function Fields({ type, value, update }) {
   if (type === 'experience') return <>
     <div className="admin-two-column"><Field label="Role" value={value.role} onChange={(next) => update('role', next)} /><Field label="Company" value={value.company} onChange={(next) => update('company', next)} /></div>
     <div className="admin-two-column"><Field label="Period" value={value.period} onChange={(next) => update('period', next)} /><Field label="Location" value={value.location} onChange={(next) => update('location', next)} /></div>
-    <div className="admin-two-column"><Field label="Type" value={value.type} onChange={(next) => update('type', next)} /><Field label="Brand" value={value.brand} onChange={(next) => update('brand', next)} options={[{ value: '', label: 'None' }, { value: 'treasury', label: 'U.S. Treasury' }, { value: 'trianz', label: 'Trianz' }, { value: 'medidata', label: 'Medidata' }, { value: 'microsoft', label: 'Microsoft' }, { value: 'tech-nyu', label: 'Tech@NYU' }, { value: 'tamid', label: 'TAMID Group' }, { value: 'jika', label: 'Jika.io' }]} /></div>
+    <Field label="Type" value={value.type} onChange={(next) => update('type', next)} />
+    <div className="admin-two-column"><Field label="Logo URL or catalog key" value={value.media?.logo?.src || ''} onChange={(next) => update('media', { ...value.media, logo: { ...(value.media?.logo || {}), src: next } })} /><Field label="Dark logo URL (optional)" value={value.media?.logo?.darkSrc || ''} onChange={(next) => update('media', { ...value.media, logo: { ...(value.media?.logo || {}), darkSrc: next } })} /></div>
+    <Field label="Logo alt text" value={value.media?.logo?.alt || ''} onChange={(next) => update('media', { ...value.media, logo: { ...(value.media?.logo || {}), alt: next } })} />
     <Field label="Organization URL" value={value.url} onChange={(next) => update('url', next)} />
     <Field label="Description" value={value.description} onChange={(next) => update('description', next)} textarea />
     <Field label="Highlights (one per line)" value={(value.highlights || []).join('\n')} onChange={(next) => update('highlights', lineList(next))} textarea />

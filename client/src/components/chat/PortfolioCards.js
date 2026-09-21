@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiBookOpen, FiGrid, FiArrowUpRight } from 'react-icons/fi';
-import { imageAssets } from '../../content/assets';
+import { imageAssets, resolveExperienceLogo } from '../../content/assets';
+import ContentImage from '../common/ContentImage';
 
 const featured = [
   { id: 'learnfromai', title: 'LearnFromAI', summary: 'AI learning companion', match: (p) => /learnfromai/i.test(`${p.id} ${p.title}`) },
@@ -20,4 +21,8 @@ export function ProjectThumbnail({ project }) {
 }
 export function CompactProjectCard({ project }) {
   return <Link className="chat-project-card" to={`/projects/${project.data?.id || project.id}`}><ProjectThumbnail project={project} /><div className="chat-project-copy"><h3>{project.title}<FiArrowUpRight aria-hidden="true" /></h3><p>{project.summary || project.data?.description}</p></div></Link>;
+}
+export function CompactExperienceLogo({ experience }) {
+  const logo = resolveExperienceLogo(experience);
+  return <ContentImage media={logo} className="chat-experience-logo" imgClassName="chat-experience-logo-light" alt={`${experience.company || 'Company'} logo`} />;
 }

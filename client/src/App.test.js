@@ -25,6 +25,7 @@ test('shows a removable revamp notice', () => {
 
 test('all homepage expansions preserve the draft and restore focus on close', async () => {
   render(<App />);
+  expect(screen.getByRole('link', { name: 'Henry Zhang home' })).toHaveTextContent('Henry');
   const input = screen.getByRole('textbox', { name: 'Ask Henry' });
   fireEvent.change(input, { target: { value: 'A question in progress' } });
   fireEvent.click(screen.getByRole('button', { name: 'Ask about me' }));
@@ -36,7 +37,10 @@ test('all homepage expansions preserve the draft and restore focus on close', as
     fireEvent.click(screen.getByRole('button', { name: label }));
     expect(screen.getByRole('link', { name: label === 'Projects' ? /View all projects/ : /View experience/ })).toBeVisible();
     if (label === 'Projects') expect(screen.getByRole('link', { name: /LearnFromAI/ })).toBeVisible();
-    else expect(screen.getByText('U.S. Department of the Treasury')).toBeVisible();
+    else {
+      expect(screen.getByText('U.S. Department of the Treasury')).toBeVisible();
+      expect(screen.getByAltText('U.S. Department of the Treasury logo')).toBeVisible();
+    }
     fireEvent.click(screen.getByRole('button', { name: 'Back' }));
     await waitFor(() => expect(screen.getByRole('button', { name: label })).toHaveFocus());
   }
