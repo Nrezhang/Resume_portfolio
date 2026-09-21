@@ -30,6 +30,11 @@ export default function HomePage() {
   const chat = conversations.find((item) => item.id === chatId);
   const pending = pendingIds.includes(chatId);
   const dropdown = !chat && prompts[expanded];
+  const composerPlaceholder = expanded === 'about'
+    ? 'Ask about Henry…'
+    : expanded === 'beyond'
+      ? 'Ask beyond work…'
+      : 'Ask about my work, projects, or experience…';
 
   useEffect(() => { setExpanded(null); }, [location.key]);
   useEffect(() => { if (expanded) expandedRef.current?.querySelector('button, a')?.focus(); }, [expanded]);
@@ -53,11 +58,11 @@ export default function HomePage() {
     <div className="composer-area">
       <div className={`chat-composer ${dropdown ? 'with-suggestions' : ''}`}>
         <form className="composer-input-row" onSubmit={(event) => { event.preventDefault(); submit(draft); }}>
-          <span className="henry-ai">Henry AI</span>
-          <textarea ref={input} rows={1} maxLength={4000} aria-label="Ask Henry" placeholder="Ask about my work, projects, or experience…" value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); submit(draft); } }} />
+          {dropdown && <button type="button" className="chat-composer-close" onClick={closeExpanded} aria-label="Close suggestions"><FiX /></button>}
+          <textarea ref={input} rows={1} maxLength={4000} aria-label="Ask Henry" placeholder={composerPlaceholder} value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); submit(draft); } }} />
           <button className="chat-send" type="submit" aria-label="Send message" disabled={!draft.trim() || pending}><FiArrowUp /></button>
         </form>
-        {dropdown && <section className="chat-suggestions" ref={expandedRef} aria-label={expanded === 'about' ? 'Ask about me suggestions' : 'Beyond work suggestions'}><div className="suggestions-heading"><span>{expanded === 'about' ? 'A little about Henry' : 'Beyond the keyboard'}</span><button className="chat-icon" onClick={closeExpanded} aria-label="Close suggestions"><FiX /></button></div>{dropdown.map((question, index) => <button className="suggestion-row" key={question} onClick={() => submit(question, true)}>{index === 0 ? <FiUser /> : index === 1 ? <FiZap /> : <FiBookOpen />}<span>{question}</span><FiArrowUp className="suggestion-arrow" /></button>)}</section>}
+        {dropdown && <section className="chat-suggestions" ref={expandedRef} aria-label={expanded === 'about' ? 'Ask about me suggestions' : 'Beyond work suggestions'}>{dropdown.map((question, index) => <button className="suggestion-row" key={question} onClick={() => submit(question, true)}>{index === 0 ? <FiUser /> : index === 1 ? <FiZap /> : <FiBookOpen />}<span>{question}</span><FiArrowUp className="suggestion-arrow" /></button>)}</section>}
       </div>
       {chat && <p className="demo-caption">Demo only. No live AI connected.</p>}
     </div>

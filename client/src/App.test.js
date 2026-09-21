@@ -25,7 +25,7 @@ test('shows a removable revamp notice', () => {
 
 test('all homepage expansions preserve the draft and restore focus on close', async () => {
   render(<App />);
-  expect(screen.getByRole('link', { name: 'Henry Zhang home' })).toHaveTextContent('Henry');
+  expect(screen.getByRole('link', { name: 'Henry Zhang portfolio home' })).toHaveTextContent('Portfolio');
   const input = screen.getByRole('textbox', { name: 'Ask Henry' });
   fireEvent.change(input, { target: { value: 'A question in progress' } });
   fireEvent.click(screen.getByRole('button', { name: 'Ask about me' }));
