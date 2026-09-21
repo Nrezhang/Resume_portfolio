@@ -4,9 +4,19 @@ import App from './App';
 beforeEach(() => {
   global.fetch = undefined;
   sessionStorage.clear();
+  localStorage.clear();
   window.history.replaceState({}, '', '/');
   window.scrollTo = jest.fn();
   Element.prototype.scrollIntoView = jest.fn();
+});
+
+test('shows a removable revamp notice', () => {
+  render(<App />);
+  expect(screen.getByRole('status', { name: 'Site update notice' })).toHaveTextContent('This site is currently being revamped.');
+  fireEvent.click(screen.getByRole('button', { name: 'Dismiss site update notice' }));
+  expect(screen.queryByRole('status', { name: 'Site update notice' })).not.toBeInTheDocument();
+  expect(sessionStorage.getItem('henry-revamp-notice-dismissed')).toBeNull();
+  expect(localStorage.getItem('henry-revamp-notice-dismissed')).toBe('true');
 });
 
 test('all homepage expansions preserve the draft and restore focus on close', async () => {

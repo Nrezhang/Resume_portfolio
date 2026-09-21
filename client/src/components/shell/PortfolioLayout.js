@@ -7,6 +7,10 @@ const navigation = [['About me', '/profile', FiUser], ['Projects', '/projects', 
 export default function PortfolioLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showRevampNotice, setShowRevampNotice] = useState(() => {
+    try { return localStorage.getItem('henry-revamp-notice-dismissed') !== 'true'; }
+    catch { return true; }
+  });
   const sidebar = useRef(null);
   const opener = useRef(null);
   const location = useLocation();
@@ -50,6 +54,11 @@ export default function PortfolioLayout() {
     window.addEventListener('resize', resize);
     return () => { viewport?.removeEventListener('resize', resize); window.removeEventListener('resize', resize); document.documentElement.style.removeProperty('--chat-viewport'); };
   }, []);
+  const dismissRevampNotice = () => {
+    setShowRevampNotice(false);
+    try { localStorage.setItem('henry-revamp-notice-dismissed', 'true'); }
+    catch { /* The notice remains dismissible when browser storage is unavailable. */ }
+  };
 
   return <div className={`chat-shell ${collapsed ? 'sidebar-collapsed' : ''} ${mobileOpen ? 'drawer-open' : ''}`}>
     <a className="chat-skip" href="#main-content">Skip to content</a>
@@ -62,6 +71,9 @@ export default function PortfolioLayout() {
       {conversations.length > 0 && <nav className="chat-recents sidebar-label" aria-label="Recent conversations"><p>Recent chats <span>this browser session</span></p>{conversations.map((chat) => <NavLink key={chat.id} to={`/chat/${chat.id}`} title={chat.title}><FiMessageSquare /><span>{chat.title}</span></NavLink>)}</nav>}
       <div className="chat-profile"><span className="neutral-avatar" aria-hidden="true"><FiUser /></span><div className="sidebar-label"><strong>Henry Zhang</strong><span>Software Engineer</span></div></div>
     </aside>
-    <div className="chat-main" id="main-content" tabIndex={-1} inert={mobileOpen ? '' : undefined}><Suspense fallback={<p className="chat-loading" role="status">Loading portfolio…</p>}><Outlet /></Suspense></div>
+    <div className="chat-main" id="main-content" tabIndex={-1} inert={mobileOpen ? '' : undefined}>
+      {showRevampNotice && <aside className="revamp-notice" role="status" aria-label="Site update notice"><span>This site is currently being revamped.</span><button type="button" onClick={dismissRevampNotice} aria-label="Dismiss site update notice"><FiX /></button></aside>}
+      <Suspense fallback={<p className="chat-loading" role="status">Loading portfolio…</p>}><Outlet /></Suspense>
+    </div>
   </div>;
 }
