@@ -4,8 +4,10 @@ const STORAGE_KEY = 'portfolio-theme';
 const preferences = ['system', 'light', 'dark'];
 
 function getStoredPreference() {
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  return preferences.includes(stored) ? stored : 'system';
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    return preferences.includes(stored) ? stored : 'dark';
+  } catch { return 'dark'; }
 }
 
 function resolveTheme(preference) {
@@ -30,7 +32,7 @@ export default function useTheme() {
     };
 
     applyTheme(preference);
-    window.localStorage.setItem(STORAGE_KEY, preference);
+    try { window.localStorage.setItem(STORAGE_KEY, preference); } catch { /* Theme still works without storage. */ }
     media.addEventListener('change', handleSystemChange);
     return () => media.removeEventListener('change', handleSystemChange);
   }, [preference]);
@@ -40,5 +42,5 @@ export default function useTheme() {
     setPreference(preferences[(index + 1) % preferences.length]);
   };
 
-  return { preference, cycleTheme };
+  return { preference, setPreference, cycleTheme };
 }

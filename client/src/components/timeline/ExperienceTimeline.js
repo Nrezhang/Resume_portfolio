@@ -312,7 +312,7 @@ export default function ExperienceTimeline({ experience, education, toolbar, onR
     const track = trackRef.current;
     const journey = journeyRef.current;
     if (!track || !journey || items.length < 2) return;
-    const headerOffset = window.innerWidth <= 760 ? 64 : 72;
+    const headerOffset = track.closest('.chat-shell') ? 0 : window.innerWidth <= 760 ? 64 : 72;
     const trackTop = window.scrollY + track.getBoundingClientRect().top;
     const scrollRange = Math.max(1, track.offsetHeight - journey.offsetHeight);
     const targetTop = trackTop - headerOffset + (scrollRange * index) / (items.length - 1);
@@ -348,7 +348,7 @@ export default function ExperienceTimeline({ experience, education, toolbar, onR
       const journey = journeyRef.current;
       if (!track || !journey || items.length < 2) return;
       if (!track.offsetHeight || !journey.offsetHeight) return;
-      const headerOffset = window.innerWidth <= 760 ? 64 : 72;
+      const headerOffset = track.closest('.chat-shell') ? 0 : window.innerWidth <= 760 ? 64 : 72;
       const rect = track.getBoundingClientRect();
       const scrollRange = Math.max(1, track.offsetHeight - journey.offsetHeight);
       const progress = Math.max(0, Math.min(1, (headerOffset - rect.top) / scrollRange));

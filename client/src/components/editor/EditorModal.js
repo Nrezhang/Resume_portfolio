@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { FiPlus, FiTrash2, FiX } from 'react-icons/fi';
+import { heroDefaults } from '../chat/HomeIdentity';
 
 function Field({ label, value, onChange, textarea = false, type = 'text', options }) {
   return (
@@ -70,6 +71,8 @@ function EducationFields({ value, update }) {
 function Fields({ type, value, update }) {
   if (type === 'profile') return <>
     <div className="admin-two-column"><Field label="Name" value={value.name} onChange={(next) => update('name', next)} /><Field label="Location" value={value.location} onChange={(next) => update('location', next)} /></div>
+    <Field label="Homepage role (animated)" value={value.heroRole ?? heroDefaults.heroRole} onChange={(next) => update('heroRole', next)} />
+    <Field label="Homepage description" value={value.heroDescription ?? heroDefaults.heroDescription} onChange={(next) => update('heroDescription', next)} textarea />
     <div className="admin-two-column"><Field label="Phone" value={value.phone} onChange={(next) => update('phone', next)} /><Field label="Focus" value={value.focus} onChange={(next) => update('focus', next)} /></div>
     <Field label="Citizenship / clearance" value={value.citizenship} onChange={(next) => update('citizenship', next)} />
     <Field label="Eyebrow" value={value.eyebrow} onChange={(next) => update('eyebrow', next)} />
@@ -97,7 +100,9 @@ function Fields({ type, value, update }) {
   if (type === 'experience') return <>
     <div className="admin-two-column"><Field label="Role" value={value.role} onChange={(next) => update('role', next)} /><Field label="Company" value={value.company} onChange={(next) => update('company', next)} /></div>
     <div className="admin-two-column"><Field label="Period" value={value.period} onChange={(next) => update('period', next)} /><Field label="Location" value={value.location} onChange={(next) => update('location', next)} /></div>
-    <div className="admin-two-column"><Field label="Type" value={value.type} onChange={(next) => update('type', next)} /><Field label="Brand" value={value.brand} onChange={(next) => update('brand', next)} options={[{ value: '', label: 'None' }, { value: 'treasury', label: 'U.S. Treasury' }, { value: 'trianz', label: 'Trianz' }, { value: 'medidata', label: 'Medidata' }, { value: 'microsoft', label: 'Microsoft' }, { value: 'tech-nyu', label: 'Tech@NYU' }, { value: 'tamid', label: 'TAMID Group' }, { value: 'jika', label: 'Jika.io' }]} /></div>
+    <Field label="Type" value={value.type} onChange={(next) => update('type', next)} />
+    <div className="admin-two-column"><Field label="Logo URL or catalog key" value={value.media?.logo?.src || ''} onChange={(next) => update('media', { ...value.media, logo: { ...(value.media?.logo || {}), src: next } })} /><Field label="Dark logo URL (optional)" value={value.media?.logo?.darkSrc || ''} onChange={(next) => update('media', { ...value.media, logo: { ...(value.media?.logo || {}), darkSrc: next } })} /></div>
+    <Field label="Logo alt text" value={value.media?.logo?.alt || ''} onChange={(next) => update('media', { ...value.media, logo: { ...(value.media?.logo || {}), alt: next } })} />
     <Field label="Organization URL" value={value.url} onChange={(next) => update('url', next)} />
     <Field label="Description" value={value.description} onChange={(next) => update('description', next)} textarea />
     <Field label="Highlights (one per line)" value={(value.highlights || []).join('\n')} onChange={(next) => update('highlights', lineList(next))} textarea />

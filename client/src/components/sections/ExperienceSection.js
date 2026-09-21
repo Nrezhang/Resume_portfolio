@@ -6,7 +6,8 @@ import SectionHeading from '../common/SectionHeading';
 import SkillTags from '../common/SkillTags';
 import Card from '../ui/Card';
 import { AddControl, ItemControls } from '../editor/InlineEditorControls';
-import { experienceAssets } from '../../content/assets';
+import { resolveExperienceLogo } from '../../content/assets';
+import ContentImage from '../common/ContentImage';
 import ExperienceTimeline from '../timeline/ExperienceTimeline';
 
 export default function ExperienceSection({ limit, editor }) {
@@ -72,18 +73,12 @@ export default function ExperienceSection({ limit, editor }) {
       {immersive && <div className="experience-details-heading"><div><p className="eyebrow">Experience / Work history</p><h2 id={view === 'details' ? 'experience-heading' : undefined}>Work experience.</h2><p>Roles, results, and the details behind each chapter.</p></div>{view === 'details' && viewTabs}</div>}
       <div className="experience-list">
         {detailEntries.map((item, index) => {
-          const logoAsset = experienceAssets[item.brand];
-          const logo = typeof logoAsset === 'string' ? { light: logoAsset } : logoAsset;
+          const logo = resolveExperienceLogo(item);
           return (
-            <Card id={immersive ? `experience-detail-${item.id}` : `work-entry-${item.id}`} tabIndex={-1} className={`experience-row experience-row-${item.brand || 'unbranded'}`} index={index} key={item.id}>
+            <Card id={immersive ? `experience-detail-${item.id}` : `work-entry-${item.id}`} tabIndex={-1} className={`experience-row experience-row-${item.id || 'unbranded'}`} index={index} key={item.id}>
               {editor && <ItemControls label={`${item.role || 'experience'} at ${item.company || 'company'}`} onEdit={() => editor.onEdit(index)} onDelete={() => editor.onDelete(index)} />}
               <div className="experience-meta">
-                {logo?.light && <a className={`experience-logo${logo.dark ? ' has-dark-variant' : ''}`} href={item.url} target="_blank" rel="noreferrer" aria-label={`Visit ${item.company}`}>
-                  <img className="experience-logo-light" src={logo.light} alt={`${item.company} logo`} />
-                  {logo.dark && (item.brand === 'medidata'
-                    ? <span className="experience-logo-dark experience-logo-mask" style={{ '--experience-logo-mask': `url(${logo.dark})` }} aria-hidden="true" />
-                    : <img className="experience-logo-dark" src={logo.dark} alt="" aria-hidden="true" />)}
-                </a>}
+                {logo?.light && <a className="experience-logo" href={item.url} target="_blank" rel="noreferrer" aria-label={`Visit ${item.company}`}><ContentImage media={logo} alt={`${item.company} logo`} imgClassName="experience-logo-light" darkImgClassName="experience-logo-dark" /></a>}
                 <span>{item.period}</span><small>{item.location}</small><i>{item.type}</i>
               </div>
               <div className="experience-copy">

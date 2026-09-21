@@ -45,6 +45,33 @@ export const experienceAssets = {
   jika: jikaLogo,
 };
 
+/**
+ * Resolves a content-owned media reference without coupling the UI to a
+ * particular storage provider. A value can be a bundled asset key, a URL, or
+ * an object with light/dark variants. The object form is what published
+ * DynamoDB content should use for future S3/CloudFront media.
+ */
+export function resolveMedia(value, assets = {}) {
+  if (!value) return null;
+  if (typeof value === 'string') {
+    const source = assets[value] || value;
+    return typeof source === 'string' ? { light: source } : source;
+  }
+  if (typeof value !== 'object') return null;
+
+  const source = value.light || value.src || value.url;
+  const resolvedSource = typeof source === 'string' ? (assets[source] || source) : source;
+  const light = typeof resolvedSource === 'string' ? resolvedSource : resolvedSource?.light;
+  const darkSource = value.dark || value.darkSrc;
+  const resolvedDark = typeof darkSource === 'string' ? (assets[darkSource] || darkSource) : darkSource;
+  const dark = typeof resolvedDark === 'string' ? resolvedDark : resolvedDark?.light || resolvedSource?.dark || (value.darkMode === 'invert' ? light : null);
+  return light ? { light, ...(dark ? { dark } : {}), alt: value.alt, fit: value.fit, darkMode: value.darkMode } : null;
+}
+
+export function resolveExperienceLogo(experience = {}) {
+  return resolveMedia(experience.media?.logo, experienceAssets);
+}
+
 export function resolveLink(link) {
   return documentAssets[link] || link;
 }

@@ -48,7 +48,7 @@ function Login({ onLogin }) {
         size: 'large',
         shape: 'rectangular',
         text: 'signin_with',
-        width: 370,
+        width: Math.min(370, googleButton.current.clientWidth || 250),
       });
     };
 
@@ -70,12 +70,12 @@ function Login({ onLogin }) {
     return () => { active = false; };
   }, [googleClientId, signIn]);
 
-  return <main className="admin-login"><section><Link className="text-link" to="/profile"><FiArrowLeft /> Back to portfolio</Link><p className="eyebrow">Portfolio CMS</p><h1>Sign in to edit.</h1><p>Edit the real portfolio in a live preview, then publish when it looks right.</p><div className="google-sign-in" ref={googleButton} aria-busy={busy} />{busy && <p className="admin-sign-in-status" role="status">Signing in...</p>}{error && <p className="form-error" role="alert">{error}</p>}</section></main>;
+  return <main className="admin-login"><section><Link className="text-link" to="/"><FiArrowLeft /> Back to portfolio</Link><p className="eyebrow">Owner workspace</p><h1>Portfolio studio</h1><p>Sign in to manage your content and preview changes before publishing.</p><div className="google-sign-in" ref={googleButton} aria-busy={busy} />{busy && <p className="admin-sign-in-status" role="status">Signing in...</p>}{error && <p className="form-error" role="alert">{error}</p>}<small>Admin access is restricted to approved accounts.</small></section></main>;
 }
 
 const templates = {
   project: () => ({ id: createId('project'), year: new Date().getFullYear().toString(), title: 'New project', category: 'Software project', description: 'Describe the problem and why this project matters.', impact: 'Describe what you designed and built.', highlights: [], skills: [], image: 'portfolio', imageAlt: 'Project preview', link: '', linkLabel: 'View project' }),
-  experience: () => ({ id: createId('experience'), type: 'work', role: 'New role', company: 'Organization', location: 'Location', period: 'Dates', brand: '', description: 'Describe your responsibilities and impact.', highlights: [], skills: [], url: '' }),
+  experience: () => ({ id: createId('experience'), type: 'work', role: 'New role', company: 'Organization', location: 'Location', period: 'Dates', media: { logo: { src: '', darkSrc: '', alt: '' } }, description: 'Describe your responsibilities and impact.', highlights: [], skills: [], url: '' }),
   education: () => ({ id: createId('education'), school: 'School', degree: 'Degree or program', period: 'Dates', locations: 'Location', gpa: '', brand: '', url: '', description: 'Describe the program and areas of focus.', coursework: [], leadership: [] }),
   skillGroup: () => ({ id: createId('skill-group'), group: 'New skill group', items: [] }),
   skill: () => ({ name: 'New skill', proficiency: 75, description: 'Describe how you have used this skill.' }),

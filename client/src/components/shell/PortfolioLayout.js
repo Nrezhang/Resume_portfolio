@@ -1,75 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { FiDownload, FiMail, FiMenu, FiMonitor, FiMoon, FiSun, FiX } from 'react-icons/fi';
-import { documentAssets } from '../../content/assets';
-import { useContent } from '../../content/ContentContext';
-import { isPortfolioSection, portfolioSections, sectionChangeEvent } from '../../navigation/portfolioSections';
-import Button from '../ui/Button';
-import { motion } from 'motion/react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { FiBriefcase, FiFileText, FiGrid, FiMenu, FiMessageSquare, FiPlus, FiSidebar, FiUser, FiX } from 'react-icons/fi';
+import { useChat } from '../chat/ChatContext';
 import useTheme from '../../hooks/useTheme';
+import ProfileSettings from './ProfileSettings';
 
-const themeIcons = {
-  system: FiMonitor,
-  light: FiSun,
-  dark: FiMoon,
-};
-
+const navigation = [['About me', '/profile', FiUser], ['Projects', '/projects', FiGrid], ['Experience', '/experience', FiBriefcase], ['Resume', '/resume', FiFileText]];
 export default function PortfolioLayout() {
-  const { content } = useContent();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [showRevampNotice, setShowRevampNotice] = useState(() => {
+    try { return localStorage.getItem('henry-revamp-notice-dismissed') !== 'true'; }
+    catch { return true; }
+  });
+  const sidebar = useRef(null);
+  const opener = useRef(null);
   const location = useLocation();
-  const [activePath, setActivePath] = useState(isPortfolioSection(location.pathname) ? location.pathname : '');
-  const { preference: themePreference, cycleTheme } = useTheme();
-  const ThemeIcon = themeIcons[themePreference];
+  const navigate = useNavigate();
+  const { conversations, setDraft } = useChat();
+  const { preference, setPreference } = useTheme();
 
   useEffect(() => {
-    setMenuOpen(false);
-    setActivePath(isPortfolioSection(location.pathname) ? location.pathname : '');
+    setMobileOpen(false);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [location.pathname]);
-
   useEffect(() => {
-    const handleSectionChange = (event) => setActivePath(event.detail.path);
-    window.addEventListener(sectionChangeEvent, handleSectionChange);
-    return () => window.removeEventListener(sectionChangeEvent, handleSectionChange);
+    if (!mobileOpen) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    const openerElement = opener.current;
+    document.body.style.overflow = 'hidden';
+    sidebar.current.querySelector('.mobile-close')?.focus();
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') { event.preventDefault(); setMobileOpen(false); }
+      if (event.key !== 'Tab') return;
+      const controls = Array.from(sidebar.current.querySelectorAll('a[href], button')).filter((node) => node.getClientRects().length && !node.disabled);
+      const first = controls[0]; const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener('keydown', onKeyDown); openerElement?.focus(); };
+  }, [mobileOpen]);
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    const resize = () => {
+      document.documentElement.style.setProperty('--chat-viewport', `${viewport?.height || window.innerHeight}px`);
+      if (window.innerWidth > 760) setMobileOpen(false);
+    };
+    resize();
+    viewport?.addEventListener('resize', resize);
+    window.addEventListener('resize', resize);
+    return () => { viewport?.removeEventListener('resize', resize); window.removeEventListener('resize', resize); document.documentElement.style.removeProperty('--chat-viewport'); };
   }, []);
-
-  const scrollToRoute = (path) => {
-    const headingId = path === '/profile' ? 'profile-heading' : `${path.slice(1)}-heading`;
-    window.requestAnimationFrame(() => {
-      document.getElementById(headingId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+  const dismissRevampNotice = () => {
+    setShowRevampNotice(false);
+    try { localStorage.setItem('henry-revamp-notice-dismissed', 'true'); }
+    catch { /* The notice remains dismissible when browser storage is unavailable. */ }
   };
 
-  return (
-    <div className="site-frame">
-      <header className="site-header">
-        <div className="site-shell header-inner">
-          <Link className="brand" to="/profile" onClick={() => scrollToRoute('/profile')} aria-label="Henry Zhang home">
-            <img className="brand-mark" src={`${process.env.PUBLIC_URL}/icons/favicon-master.png`} alt="" aria-hidden="true" />
-            <span className="brand-copy"><b>{content.profile.name}</b><small>Software Engineer</small></span>
-          </Link>
-          <motion.button className="icon-button menu-button" whileTap={{ scale: 0.92 }} type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen}>{menuOpen ? <FiX /> : <FiMenu />}</motion.button>
-          <nav className={`primary-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Primary navigation">
-            {portfolioSections.map(({ label, path }) => <Link className={activePath === path ? 'active' : ''} to={path} key={path} onClick={() => scrollToRoute(path)}>{label}{activePath === path && <motion.span className="nav-indicator" layoutId="nav-indicator" />}</Link>)}
-          </nav>
-          <div className="header-actions">
-            <button className="icon-button" type="button" onClick={cycleTheme} aria-label={`Theme: ${themePreference}. Switch theme`} title={`Theme: ${themePreference}`}><ThemeIcon /></button>
-            <a className="icon-button" href={documentAssets.resume} target="_blank" rel="noreferrer" aria-label="Open resume" title="Open resume"><FiDownload /></a>
-            <Button asChild><a href={`mailto:${content.profile.email}`}><FiMail /> Contact</a></Button>
-          </div>
-        </div>
-      </header>
-      <Outlet />
-      <footer className="site-footer">
-        <div className="site-shell footer-inner">
-          <div><b>{content.profile.name}</b><span>Building clear, useful software.</span></div>
-          <div className="footer-links">
-            <a href={content.profile.github} target="_blank" rel="noreferrer">GitHub</a>
-            <a href={content.profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-            <NavLink to="/admin">Admin</NavLink>
-          </div>
-        </div>
-      </footer>
+  return <div className={`chat-shell ${collapsed ? 'sidebar-collapsed' : ''} ${mobileOpen ? 'drawer-open' : ''}`}>
+    <a className="chat-skip" href="#main-content">Skip to content</a>
+    <header className="chat-mobile-header" inert={mobileOpen ? '' : undefined}><button ref={opener} className="chat-icon" aria-label="Open navigation" aria-expanded={mobileOpen} aria-controls="portfolio-sidebar" onClick={() => setMobileOpen(true)}><FiMenu /></button><Link to="/">Portfolio</Link></header>
+    {mobileOpen && <button className="drawer-overlay" aria-label="Close navigation" tabIndex={-1} onClick={() => setMobileOpen(false)} />}
+    <aside id="portfolio-sidebar" ref={sidebar} className="chat-sidebar" role={mobileOpen ? 'dialog' : undefined} aria-modal={mobileOpen ? true : undefined} aria-label="Portfolio navigation">
+      <div className="chat-brand"><Link to="/" className="chat-brand-link" aria-label="Henry Zhang portfolio home"><img src={`${process.env.PUBLIC_URL}/icons/favicon-master.png`} alt="" /><span className="sidebar-label">Portfolio</span></Link><button className="chat-icon desktop-collapse" onClick={() => setCollapsed(!collapsed)} aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}><FiSidebar /></button><button className="chat-icon mobile-close" onClick={() => setMobileOpen(false)} aria-label="Close navigation"><FiX /></button></div>
+      <button className="chat-new" onClick={() => { setDraft(''); setMobileOpen(false); navigate('/', { state: { reset: Date.now() } }); }} title="New chat"><FiPlus /><span className="sidebar-label">New chat</span></button>
+      <nav className="chat-nav" aria-label="Pinned navigation"><p className="sidebar-label">Pinned</p>{navigation.map(([label, path, Icon]) => <NavLink to={path} key={path} title={label}><Icon /><span className="sidebar-label">{label}</span></NavLink>)}</nav>
+      {conversations.length > 0 && <nav className="chat-recents sidebar-label" aria-label="Recent conversations"><p>Recent chats <span>this browser session</span></p>{conversations.map((chat) => <NavLink key={chat.id} to={`/chat/${chat.id}`} title={chat.title}><FiMessageSquare /><span>{chat.title}</span></NavLink>)}</nav>}
+      <ProfileSettings preference={preference} setPreference={setPreference} mobileOpen={mobileOpen} />
+    </aside>
+    <div className="chat-main" id="main-content" tabIndex={-1} inert={mobileOpen ? '' : undefined}>
+      {showRevampNotice && location.pathname !== '/admin' && <aside className="revamp-notice" role="status" aria-label="Site update notice"><span>This site is currently being revamped.</span><button type="button" onClick={dismissRevampNotice} aria-label="Dismiss site update notice"><FiX /></button></aside>}
+      <Suspense fallback={<p className="chat-loading" role="status">Loading portfolio…</p>}><Outlet /></Suspense>
     </div>
-  );
+  </div>;
 }
