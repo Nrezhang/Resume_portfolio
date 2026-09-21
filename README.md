@@ -21,3 +21,13 @@ The editor is a live preview of the public portfolio. Projects, experience entri
 Editable content is persisted to DynamoDB in production and `server/data/content.json` locally. Seed the production document once with `npm run seed:content`; the command is idempotent and will not overwrite existing published content unless you explicitly run `npm run seed:content -- --force`.
 
 The bundled `client/src/content/defaultContent.json` remains an emergency fallback for public reads when the API is unavailable. It keeps the portfolio visible during a transient API failure, but published DynamoDB content is the production source of truth.
+
+## Chat-first portfolio
+
+The public app uses a persistent sidebar and a chat homepage. `/profile`, `/projects`, `/projects/:projectId`, `/experience`, and `/resume` open dedicated views in the same shell. The experience page reuses the globe, branch timeline, work history, and education components. The existing content API, DynamoDB publishing path, and `/admin` editor are unchanged.
+
+- `client/src/services/chatProvider.js` defines the demo response provider. Replace or inject a provider into `ChatProvider` with the contract `respond({ messages }) => Promise<{ text, label }>`. Connect a backend endpoint here for persona/RAG; keep API credentials on the server. Pending and failure states are already handled.
+- Visitor conversations are stored only in this tab's `sessionStorage` under `henry-portfolio-conversations-v1`, capped at 20 conversations. They are not sent to the portfolio content API. New chat starts a fresh thread; the recent list reopens previous threads in the browser session.
+- Homepage previews read from `ContentContext`, including remote published content. `components/chat/PortfolioCards.js` maps the three featured projects. LearnFromAI has a clearly labeled placeholder until a matching project is added through the existing editor. Product thumbnails without dedicated assets use labeled preview placeholders.
+- The sidebar uses a neutral avatar. GitHub and LinkedIn use configured profile destinations, and Resume uses the existing bundled document.
+- Run `CI=true npm --prefix client test -- --watchAll=false`, `npm run test:api`, and `npm run build` for checks. The chat interaction tests cover all four expanded states, draft preservation, Escape/focus restoration, submission, recent conversations, and internal routing.
