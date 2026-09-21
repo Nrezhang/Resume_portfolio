@@ -9,7 +9,7 @@
 }
 
 .education h1{
-    font-family: sans-serif;
+    font-family: var(--sans);
     font-size: 50px;
 }
 .education-container{

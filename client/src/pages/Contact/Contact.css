@@ -68,7 +68,7 @@
     width: 10%;
     font-weight: bolder;
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: var(--sans);
 
 }
 
@@ -104,7 +104,7 @@ button:focus{
     width: 100%;
     font-size: 15px;
     font-weight: bolder;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: var(--sans);
 }
 
 .btn:hover{
@@ -114,4 +114,3 @@ button:focus{
     color: #0d6efd;
     transition: .3s;
 }
-

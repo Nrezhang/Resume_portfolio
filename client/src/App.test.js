@@ -1,10 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 
 test('renders the portfolio profile', () => {
   const originalFetch = global.fetch;
   global.fetch = undefined;
   window.scrollTo = jest.fn();
+  Element.prototype.scrollIntoView = jest.fn();
   render(<App />);
   expect(screen.getByRole('heading', { name: 'Henry Zhang' })).toBeInTheDocument();
   expect(screen.getAllByRole('link', { name: /linkedin/i })[0]).toHaveAttribute('href', 'https://www.linkedin.com/in/henryszhang/');
@@ -13,8 +14,24 @@ test('renders the portfolio profile', () => {
   expect(screen.getByRole('heading', { name: 'Tech Trek Tutor' })).toBeInTheDocument();
   expect(screen.getByRole('region', { name: 'New York University Shanghai leadership and campus involvement' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Thomas Jefferson High School for Science and Technology' })).toBeInTheDocument();
+  expect(screen.getByRole('tab', { name: 'Journey' })).toHaveAttribute('aria-selected', 'true');
+  const progress = screen.getByRole('slider', { name: 'Experience progress' });
+  fireEvent.change(progress, { target: { value: progress.max } });
+  expect(progress).toHaveAttribute('aria-valuetext', expect.stringContaining('Present'));
+  expect(progress.style.getPropertyValue('--journey-progress')).toBe('100%');
+  expect(screen.getByText(/^Present ·/)).toBeInTheDocument();
+  fireEvent.change(progress, { target: { value: '0' } });
+  fireEvent.click(screen.getByRole('tab', { name: 'All experience' }));
+  expect(screen.getByRole('tabpanel', { name: 'All experience' })).toBeVisible();
+  expect(screen.getByRole('tab', { name: 'All experience' })).toHaveFocus();
   expect(screen.getAllByRole('link', { name: /U\.S\. Department of the Treasury/ })[0]).toHaveAttribute('href', 'https://home.treasury.gov');
   expect(screen.getByAltText('Microsoft AI Co-Innovation Labs logo')).toBeInTheDocument();
   expect(screen.getAllByRole('link', { name: /Jika\.io/ })[0]).toHaveAttribute('href', 'https://www.linkedin.com/company/jika-io/');
+  fireEvent.keyDown(screen.getByRole('tab', { name: 'All experience' }), { key: 'ArrowLeft' });
+  expect(screen.getByRole('tab', { name: 'Journey' })).toHaveAttribute('aria-selected', 'true');
+  expect(screen.getByRole('tab', { name: 'Journey' })).toHaveFocus();
+  fireEvent.click(screen.getByRole('button', { name: 'Read full entry' }));
+  expect(screen.getByRole('tab', { name: 'Journey' })).toHaveAttribute('aria-selected', 'true');
+  expect(document.getElementById('education-entry-nyu-shanghai')).toHaveFocus();
   global.fetch = originalFetch;
 });
