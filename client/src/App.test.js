@@ -79,8 +79,10 @@ test('profile settings persist the theme, expose demo usage, and restore focus',
   fireEvent.click(screen.getByRole('button', { name: 'Light', exact: true }));
   expect(document.documentElement).toHaveAttribute('data-theme', 'light');
   expect(localStorage.getItem('portfolio-theme')).toBe('light');
+  expect(screen.getByRole('region', { name: 'Profile settings' })).toBeVisible();
   fireEvent.click(screen.getByRole('button', { name: 'Dark', exact: true }));
   expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+  expect(screen.getByRole('region', { name: 'Profile settings' })).toBeVisible();
   expect(screen.getByText('Not enabled')).toBeInTheDocument();
   fireEvent.keyDown(screen.getByRole('button', { name: 'Close settings' }), { key: 'Escape' });
   expect(trigger).toHaveFocus();

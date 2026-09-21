@@ -1,4 +1,24 @@
 .chat-shell { --hover: #242424; --control: #1b1b1b; --strong-border: #414141; --hero-halo: #28303b25; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: #eee; }
+@property --muted { syntax: '<color>'; inherits: true; initial-value: #999b9f; }
+@property --paper { syntax: '<color>'; inherits: true; initial-value: #090909; }
+@property --surface { syntax: '<color>'; inherits: true; initial-value: #171717; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: #2c2c2c; }
+@property --body-copy { syntax: '<color>'; inherits: true; initial-value: #b6b6b9; }
+@property --headline-copy { syntax: '<color>'; inherits: true; initial-value: #eee; }
+@property --field-bg { syntax: '<color>'; inherits: true; initial-value: #191919; }
+@property --soft-surface { syntax: '<color>'; inherits: true; initial-value: #1b1b1b; }
+@property --hover { syntax: '<color>'; inherits: true; initial-value: #242424; }
+@property --control { syntax: '<color>'; inherits: true; initial-value: #1b1b1b; }
+@property --strong-border { syntax: '<color>'; inherits: true; initial-value: #414141; }
+@media (prefers-reduced-motion: no-preference) {
+  :root.theme-transition .chat-shell {
+    transition: --ink 620ms cubic-bezier(.22, 1, .36, 1), --muted 620ms cubic-bezier(.22, 1, .36, 1), --paper 620ms cubic-bezier(.22, 1, .36, 1), --surface 620ms cubic-bezier(.22, 1, .36, 1), --line 620ms cubic-bezier(.22, 1, .36, 1), --body-copy 620ms cubic-bezier(.22, 1, .36, 1), --headline-copy 620ms cubic-bezier(.22, 1, .36, 1), --field-bg 620ms cubic-bezier(.22, 1, .36, 1), --soft-surface 620ms cubic-bezier(.22, 1, .36, 1), --hover 620ms cubic-bezier(.22, 1, .36, 1), --control 620ms cubic-bezier(.22, 1, .36, 1), --strong-border 620ms cubic-bezier(.22, 1, .36, 1);
+  }
+  :root.theme-transition :is(.chat-sidebar, .chat-mobile-header, .profile-settings-panel, .chat-composer, .chat-project-card, .chat-experience-card, .chat-new, .chat-quick-actions button, .chat-suggestions, .conversation-heading, .message-user) {
+    transition: background-color 620ms cubic-bezier(.22, 1, .36, 1), border-color 620ms cubic-bezier(.22, 1, .36, 1), color 420ms ease, box-shadow 620ms cubic-bezier(.22, 1, .36, 1);
+  }
+}
 :root[data-theme="light"] .chat-shell {
   --ink: #202124; --muted: #62646b; --paper: #fafafa; --surface: #fff; --line: #dedee2;
   --green: #454750; --green-soft: #eeeef1; --body-copy: #52545d; --headline-copy: #24252a;
@@ -33,9 +53,11 @@
 .appearance-settings { border: 0; padding: 0; margin: 0 0 18px; min-width: 0; }
 .appearance-settings legend { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
 .appearance-settings > div { display: flex; gap: 4px; border: 1px solid var(--line); border-radius: 8px; padding: 4px; background: var(--paper); }
-.appearance-settings button { display: flex; justify-content: center; align-items: center; gap: 5px; border: 0; background: transparent; padding: 8px 5px; font-size: 11px; border-radius: 5px; flex: 1; }
+.appearance-settings button { position: relative; isolation: isolate; display: flex; justify-content: center; align-items: center; gap: 5px; border: 0; background: transparent; padding: 8px 5px; font-size: 11px; border-radius: 5px; flex: 1; }
 .appearance-settings button svg { width: 14px; height: 14px; }
-.appearance-settings button[aria-pressed="true"] { background: var(--hover); color: var(--ink); box-shadow: 0 1px 3px #0002; }
+.appearance-choice-content { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 5px; }
+.appearance-selection { position: absolute; z-index: 0; inset: 0; border-radius: 5px; background: var(--hover); box-shadow: 0 1px 3px #0002; }
+.appearance-settings button[aria-pressed="true"] { color: var(--ink); }
 .appearance-settings button:hover { background: var(--hover); }
 .session-usage { padding-top: 14px; border-top: 1px solid var(--line); }
 .settings-section-title { display: flex; justify-content: space-between; align-items: center; }
@@ -123,7 +145,7 @@
 :root[data-theme="light"] .chat-shell :is(.chat-suggestions, .suggestion-row, .conversation-heading, .chat-utilities a + a) { border-color: var(--line); }
 :root[data-theme="light"] .suggestion-row:hover { background: var(--hover); }
 :root[data-theme="light"] .chat-shell :is(.chat-project-copy p, .chat-experience-card p, .chat-experience-card small, .message-author, .demo-caption, .conversation-heading small, .chat-pending, .chat-overline, .chat-detail-list, .chat-content-view > p:not(.chat-overline)) { color: var(--muted); }
-:root[data-theme="light"] .experience-card-icon { background: var(--control); border-color: var(--line); }
+:root[data-theme="light"] .chat-experience-logo { background: var(--control); border-color: var(--line); }
 :root[data-theme="light"] .chat-utilities a:hover { color: #111; }
 :root[data-theme="light"] .chat-shell :is(.chat-skip, .chat-loading) { background: var(--paper); color: var(--ink); }
 :root[data-theme="light"] .chat-shell .resume-heading .button { color: var(--ink); background: var(--surface); border-color: var(--line); }
