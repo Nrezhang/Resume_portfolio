@@ -1,6 +1,6 @@
 .chat-shell {
   --ink: #eee; --muted: #999b9f; --paper: #090909; --surface: #171717; --line: #2c2c2c;
-  --green: #c6c6c6; --green-soft: #242424; --body-copy: #b6b6b9; --headline-copy: #eee;
+  --green: #d7ee9e; --green-soft: #25301b; --body-copy: #b6b6b9; --headline-copy: #eee;
   --field-bg: #191919; --soft-surface: #1b1b1b; --sidebar-width: 240px;
   min-height: 100dvh; background: var(--paper); color: var(--ink); font-size: 13px;
   line-height: 1.5; color-scheme: dark; -webkit-font-smoothing: antialiased;

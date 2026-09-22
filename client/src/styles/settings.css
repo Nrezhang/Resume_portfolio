@@ -21,15 +21,15 @@
 }
 :root[data-theme="light"] .chat-shell {
   --ink: #202124; --muted: #62646b; --paper: #fafafa; --surface: #fff; --line: #dedee2;
-  --green: #454750; --green-soft: #eeeef1; --body-copy: #52545d; --headline-copy: #24252a;
+  --green: #576924; --green-soft: #eff2e4; --body-copy: #52545d; --headline-copy: #24252a;
   --field-bg: #fff; --soft-surface: #f0f0f3; --hover: #eaeaee; --control: #f4f4f6;
   --strong-border: #bdbdc5; --hero-halo: #b7c5db25; color-scheme: light;
 }
 .chat-page.is-home { padding-top: clamp(95px, 16vh, 180px); }
 .home-identity { position: relative; text-align: center; margin: 0 0 38px; }
 .home-identity::before { content: ''; pointer-events: none; position: absolute; inset: -28px 15% 0; background: radial-gradient(ellipse, var(--hero-halo), transparent 70%); }
-.identity-eyebrow { position: relative; margin: 0 0 19px; color: var(--muted); font-size: 10px; letter-spacing: .23em; text-transform: uppercase; }
-.home-identity h1, .chat-page .home-identity h1 { position: relative; margin: 0 0 16px; font-size: clamp(38px, 4.4vw, 56px); font-weight: 550; letter-spacing: -1.8px; line-height: 1.15; }
+.identity-eyebrow { position: relative; margin: 0 0 19px; color: var(--green); font-size: 10px; letter-spacing: .23em; text-transform: uppercase; }
+.home-identity h1, .chat-page .home-identity h1 { position: relative; margin: 0 0 18px; color: var(--green); font-size: clamp(58px, 7vw, 88px); font-weight: 550; letter-spacing: -1.5px; line-height: .98; }
 .identity-description { position: relative; max-width: 520px; margin: 0 auto; color: var(--muted); font-size: 18px; line-height: 1.6; text-wrap: balance; }
 .typed-role { position: relative; display: inline-block; white-space: nowrap; color: var(--ink); }
 .role-reserved { opacity: 0; }
@@ -156,7 +156,7 @@
 @media (max-width: 760px) {
   .chat-page.is-home { padding-top: 88px; }
   .home-identity { margin-bottom: 28px; }
-  .home-identity h1, .chat-page .home-identity h1 { font-size: 40px; }
+  .home-identity h1, .chat-page .home-identity h1 { font-size: clamp(48px, 14vw, 62px); letter-spacing: -1.2px; }
   .identity-description { font-size: 16px; max-width: 340px; }
   .identity-eyebrow { font-size: 9px; margin-bottom: 14px; }
   .identity-tags { gap: 6px; margin-top: 20px; }

@@ -130,7 +130,7 @@ test('pinned navigation opens dedicated views and project details', async () => 
   await screen.findByRole('heading', { name: 'LearnFromAI', level: 1 });
   expect(screen.getByText(/This is a placeholder/)).toBeVisible();
   fireEvent.click(within(screen.getByRole('navigation', { name: 'Pinned navigation' })).getByRole('link', { name: 'About me' }));
-  await screen.findByRole('heading', { name: 'Henry Zhang', level: 1 });
+  await screen.findByRole('heading', { name: "I'm Henry Zhang.", level: 1 });
   fireEvent.click(within(screen.getByRole('navigation', { name: 'Pinned navigation' })).getByRole('link', { name: 'Resume' }));
   expect(screen.getByRole('link', { name: /Open PDF/ })).toHaveAttribute('href', expect.stringContaining('resume.pdf'));
 });
