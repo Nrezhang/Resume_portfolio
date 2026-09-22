@@ -1,0 +1,83 @@
+.projects-index-page { container-type: inline-size; width: min(1040px, calc(100% - 88px)); margin-inline: auto; padding-block: 44px 48px; }
+.editorial-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-bottom: 20px; border-bottom: 1px solid var(--line); color: var(--muted); font: 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.editorial-meta a, .editorial-footer a { display: inline-flex; align-items: center; gap: 6px; }
+.editorial-hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(230px, 1fr); gap: 32px; align-items: end; padding-block: 38px 42px; }
+.editorial-word { display: flex; align-items: center; gap: 12px; font: 500 clamp(80px, 15cqw, 145px)/.9 var(--sans); letter-spacing: -.075em; }
+.chat-shell .editorial-word svg { width: clamp(36px, 6cqw, 58px); height: clamp(36px, 6cqw, 58px); color: var(--green); stroke-width: 1.4; }
+.editorial-hero h1 { margin: 0 0 12px; font: 500 clamp(23px, 3cqw, 30px)/1.15 var(--sans); letter-spacing: -.035em; }
+.editorial-hero p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.project-index-entry { display: grid; grid-template-columns: 24px minmax(0, .9fr) minmax(0, 1fr); gap: 28px; align-items: center; padding-block: 32px; border-top: 1px solid var(--line); }
+.project-index-number { align-self: start; color: var(--green); font: 11px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.project-index-entry .chat-project-image { width: 100%; aspect-ratio: 1.65; border: 1px solid var(--line); border-radius: 3px; }
+.project-index-category { color: var(--muted); font: 10px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .06em; text-transform: uppercase; }
+.project-index-copy h2 { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 12px 0; font: 500 clamp(24px, 3cqw, 34px)/1.15 var(--sans); letter-spacing: -.04em; }
+.project-index-copy h2 svg { flex: none; width: 22px; height: 22px; color: var(--green); transition: transform 180ms ease; }
+.project-index-copy p { margin: 0; color: var(--body-copy); font-size: 13px; line-height: 1.8; }
+.project-index-action { display: inline-flex; align-items: center; gap: 7px; margin-top: 22px; font-size: 12px; color: var(--green); }
+.project-index-entry:hover h2 { color: var(--green); }
+.project-index-entry:hover h2 svg { transform: translate(3px, -3px); }
+.project-index-entry:focus-visible { outline: 2px solid var(--green); outline-offset: 6px; }
+.editorial-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; border-top: 1px solid var(--line); padding-top: 22px; }
+.editorial-footer > span { color: var(--muted); font: 10px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.editorial-footer nav { display: flex; flex-wrap: wrap; gap: 24px; font-size: 12px; }
+.editorial-footer a { min-height: 32px; }
+.editorial-footer a:hover { color: var(--green); }
+/* Keep the immersive journey intact; align its controls and reading view with the index pages. */
+.experience-content .experience-view-tabs { padding: 0; gap: 20px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
+.experience-content .experience-view-tabs button { border-radius: 0; padding: 10px 0; border-bottom: 2px solid transparent; font-weight: 500; }
+.experience-content .experience-view-tabs button[aria-selected="true"] { background: transparent; color: var(--green); border-bottom-color: var(--green); box-shadow: none; }
+.experience-content .experience-details-panel { width: min(1040px, calc(100% - 88px)); padding-block: 64px 40px; }
+.experience-content .experience-details-heading { padding-bottom: 28px; margin-bottom: 0; }
+.experience-content .experience-details-heading h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 500; letter-spacing: -.045em; }
+.experience-content .experience-details-heading .eyebrow { color: var(--green); font: 11px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .08em; }
+.experience-content .experience-list { border-top-color: var(--line); }
+.experience-content .experience-row { grid-template-columns: 160px minmax(0, 1fr); gap: 36px; padding-block: 32px; }
+.experience-content .experience-copy h3 { font-size: 28px; font-weight: 500; letter-spacing: -.035em; }
+.experience-content .experience-copy > p, .experience-content .experience-highlights { font-size: 13px; line-height: 1.8; }
+.experience-content .experience-copy > p.experience-company { font-size: 13px; font-weight: 500; color: var(--green); }
+.experience-content .experience-meta i { padding: 0; border: 0; border-radius: 0; font: 10px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .06em; }
+.experience-content .experience-meta span, .experience-content .experience-meta small { font-size: 11px; }
+.experience-content > .chat-reading-width { width: min(1040px, calc(100% - 88px)); max-width: 1040px; }
+@container (max-width: 650px) {
+  .editorial-hero { grid-template-columns: 1fr; gap: 25px; }
+  .editorial-word { font-size: clamp(76px, 21cqw, 132px); }
+  .project-index-entry { grid-template-columns: 20px minmax(0, 1fr); gap: 16px; }
+  .project-index-copy { grid-column: 2; }
+}
+@media (max-width: 760px) {
+  .projects-index-page { width: calc(100% - 40px); padding-block: 32px 32px; }
+  .experience-content .experience-details-panel, .experience-content > .chat-reading-width { width: calc(100% - 40px); }
+  .experience-content .experience-row { grid-template-columns: 1fr; gap: 20px; }
+  .experience-content .experience-copy h3 { font-size: 24px; }
+}
+/* Compact headers and category shelves, shared with the About and Education indexes. */
+.projects-index-page .editorial-hero, .about-index-page .about-index-hero, .education-index-page .education-index-hero { display: block; padding-block: 26px 30px; }
+.projects-index-page .editorial-hero h1, .about-index-page .about-index-intro h1, .education-index-page .education-index-hero h1 { margin: 0 0 12px; font: 500 clamp(32px, 5cqw, 44px)/1.1 var(--sans); letter-spacing: -.045em; }
+.chat-shell .editorial-hero h1 svg, .chat-shell .about-index-intro h1 svg, .chat-shell .education-index-hero h1 svg { width: .7em; height: .7em; color: var(--green); stroke-width: 1.4; }
+.about-index-page .about-index-title { font-size: clamp(24px, 3.5cqw, 32px); }
+.about-index-page .about-index-entry summary { padding-block: 20px; }
+.project-shelf { margin-bottom: 28px; }
+.project-shelf-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.project-shelf-heading h2 { margin: 0; font: 500 18px/1.4 var(--sans); letter-spacing: -.02em; }
+.project-shelf-heading h2 span { margin-left: 9px; font: 11px/1.5 ui-monospace, monospace; color: var(--muted); }
+.project-shelf-controls { display: flex; gap: 8px; }
+.project-shelf-controls button { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--green); cursor: pointer; }
+.project-shelf-controls button:disabled { opacity: .3; cursor: default; }
+.project-shelf-controls button:focus-visible, .project-shelf-card:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; }
+.project-shelf-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 24px) / 2); gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-bottom: 12px; }
+.project-shelf-card { display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; scroll-snap-align: start; }
+.project-shelf-card .chat-project-image { flex: none; width: 100%; height: 110px; aspect-ratio: auto; border: 1px solid var(--line); border-radius: 3px; }
+.project-shelf-card .chat-project-image img { object-position: top; }
+.project-shelf-copy { flex: 1; display: flex; flex-direction: column; padding-top: 12px; }
+.project-shelf-copy h3 { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 7px 0 9px; font: 500 22px/1.2 var(--sans); letter-spacing: -.03em; }
+.project-shelf-copy h3 svg { flex: none; color: var(--green); width: 18px; height: 18px; }
+.project-shelf-copy h3 > span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.project-shelf-card:hover h3 { color: var(--green); }
+.project-shelf-copy p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin: 0 0 14px; color: var(--body-copy); font-size: 13px; line-height: 1.7; }
+.project-shelf-copy .project-index-action { margin-top: auto; padding-top: 4px; }
+@container (max-width: 520px) {
+  .project-shelf-track { grid-auto-columns: 88%; gap: 16px; }
+  .project-shelf-copy h3 { font-size: 20px; }
+}
+@media (pointer: coarse) { .project-shelf-controls button { width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .project-index-copy h2 svg { transition: none; } }

@@ -1,0 +1,134 @@
+.about-index-page {
+  --about-accent: var(--green);
+  container-type: inline-size;
+  width: min(1040px, calc(100% - 88px));
+  margin-inline: auto;
+  padding-block: 44px 48px;
+}
+.about-index-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+  color: var(--muted);
+  font: 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+}
+.about-index-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(230px, 1fr);
+  align-items: end;
+  gap: 32px;
+  padding-block: 38px 42px;
+}
+.about-index-hello {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(80px, 16cqw, 154px);
+  font-weight: 500;
+  line-height: .88;
+  letter-spacing: -.075em;
+}
+.chat-shell .about-index-hello svg {
+  width: clamp(36px, 6cqw, 58px);
+  height: clamp(36px, 6cqw, 58px);
+  color: var(--about-accent);
+  stroke-width: 1.4;
+  margin-left: 4px;
+}
+.about-index-intro h1 {
+  margin: 0 0 11px;
+  font: 500 clamp(23px, 3cqw, 31px)/1.15 var(--sans);
+  letter-spacing: -.04em;
+}
+.about-index-intro p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.about-index-intro p + p { margin-top: 7px; }
+.about-index-entry { border-top: 1px solid var(--line); }
+.about-index-entry summary {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding-block: 25px;
+  list-style: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.about-index-entry summary::-webkit-details-marker { display: none; }
+.about-index-entry summary:focus-visible { outline: 2px solid var(--about-accent); outline-offset: 5px; border-radius: 2px; }
+.about-index-number { flex: 0 0 20px; color: var(--muted); font: 12px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.about-index-entry h2 { min-width: 0; margin: 0; font-family: var(--sans); font-weight: 500; }
+.about-index-title {
+  display: block;
+  font-size: clamp(27px, 5cqw, 48px);
+  line-height: 1.13;
+  letter-spacing: -.045em;
+  transition: color 180ms ease, transform 220ms ease;
+  text-wrap: balance;
+}
+.about-index-subtitle { display: block; margin-top: 9px; color: var(--muted); font-size: 12px; font-weight: 400; line-height: 1.5; }
+.chat-shell .about-index-toggle { margin-left: auto; width: 29px; height: 29px; color: var(--muted); stroke-width: 1.2; transition: transform 220ms ease, color 180ms ease; }
+.about-index-entry[open] .about-index-title, .about-index-entry[open] .about-index-toggle { color: var(--about-accent); }
+.about-index-entry[open] .about-index-toggle { transform: rotate(45deg); }
+@media (hover: hover) {
+  .about-index-entry summary:hover .about-index-title { color: var(--about-accent); transform: translateX(5px); }
+}
+.about-index-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 36px;
+  align-items: center;
+  padding: 0 0 28px 46px;
+}
+.about-index-entry[open] .about-index-detail { animation: about-index-reveal 240ms ease-out both; }
+.about-index-copy { max-width: 580px; }
+.about-index-copy p { margin: 0; font-size: 14px; line-height: 1.8; color: var(--body-copy); }
+.about-index-copy > a, .about-index-footer a { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; font-size: 12px; }
+.about-index-copy > a { margin-top: 14px; color: var(--ink); }
+.about-index-copy > a:hover, .about-index-footer a:hover { color: var(--about-accent); }
+.about-index-stat { align-self: center; }
+.about-index-stat > span { display: block; font-size: clamp(38px, 6cqw, 58px); font-weight: 500; letter-spacing: -.055em; line-height: 1.1; }
+.about-index-stat small { display: block; margin-top: 7px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.about-index-schools article + article { margin-top: 22px; }
+.about-index-schools h3 { margin: 0 0 6px; font-size: 14px; font-weight: 500; line-height: 1.5; }
+.about-index-schools small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.about-index-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px 24px; border-top: 1px solid var(--line); padding-top: 22px; }
+.about-index-footer > span { color: var(--muted); font: 10px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; text-transform: uppercase; letter-spacing: .1em; }
+.about-index-footer nav { display: flex; flex-wrap: wrap; gap: 26px; }
+.about-index-footer a { color: var(--body-copy); }
+@keyframes about-index-reveal { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+@container (max-width: 650px) {
+  .about-index-hero { grid-template-columns: 1fr; gap: 25px; }
+  .about-index-hello { font-size: clamp(86px, 21cqw, 132px); }
+  .about-index-intro h1 { font-size: 25px; }
+  .about-index-intro p br { display: none; }
+  .about-index-intro p + p { margin-top: 3px; }
+  .about-index-detail { grid-template-columns: minmax(0, 1fr) 105px; gap: 22px; }
+}
+@media (max-width: 760px) {
+  .about-index-page { width: calc(100% - 40px); padding-top: 32px; padding-bottom: 32px; }
+}
+@media (max-width: 480px) {
+  .about-index-meta { font-size: 10px; letter-spacing: .04em; gap: 8px; }
+  .about-index-hero { padding-block: 30px; }
+  .about-index-entry summary { gap: 13px; padding-block: 23px; }
+  .about-index-number { flex-basis: 16px; font-size: 11px; }
+  .about-index-title { font-size: 27px; }
+  .about-index-subtitle { font-size: 11px; margin-top: 8px; }
+  .chat-shell .about-index-toggle { width: 23px; height: 23px; }
+  .about-index-detail { grid-template-columns: 1fr; gap: 21px; padding-left: 29px; }
+  .about-index-stat { display: flex; align-items: center; gap: 13px; }
+  .about-index-stat > span { font-size: 36px; }
+  .about-index-stat small { margin: 0; }
+  .about-index-footer { padding-top: 20px; gap: 10px; }
+  .about-index-footer > span { flex-basis: 100%; }
+  .about-index-footer nav { gap: 23px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-index-entry[open] .about-index-detail { animation: none; }
+  .about-index-title, .chat-shell .about-index-toggle { transition: none; }
+  .about-index-entry summary:hover .about-index-title { transform: none; }
+}
