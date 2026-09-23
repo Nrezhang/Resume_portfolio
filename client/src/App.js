@@ -27,7 +27,7 @@ function App() {
       <Route path="education" element={<PortfolioContentPage section="education" />} />
       <Route path="skills" element={<PortfolioContentPage section="skills" />} />
       <Route path="contact" element={<PortfolioContentPage section="contact" />} />
-      <Route path="admin" element={<AdminPage />} />
+      <Route path="admin" element={process.env.REACT_APP_CONTENT_PREVIEW === 'true' ? <p role="alert">Production-content preview is read-only. Editing and sign-in are disabled.</p> : <AdminPage />} />
     </Route>
     <Route path="*" element={<Navigate to="/" replace />} />
   </Routes></Suspense></ChatProvider></ContentProvider></MotionConfig></BrowserRouter>;

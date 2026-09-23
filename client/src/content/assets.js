@@ -73,7 +73,8 @@ export function resolveMedia(value, assets = {}) {
 }
 
 export function resolveExperienceLogo(experience = {}) {
-  return resolveMedia(experience.media?.logo, experienceAssets);
+  return resolveMedia(experience.media?.logo, experienceAssets)
+    || resolveMedia(experienceAssets[experience.brand]);
 }
 
 export function resolveLink(link) {

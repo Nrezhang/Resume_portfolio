@@ -16,6 +16,7 @@ function loadEnvironmentFile(filePath) {
 loadEnvironmentFile(path.resolve(__dirname, '../.env'));
 
 const PORT = Number(process.env.PORT || 8080);
+const productionPreview = process.env.PRODUCTION_CONTENT_PREVIEW === 'true';
 const ADMIN_EMAILS = new Set((process.env.ADMIN_EMAILS || '').split(',').map((email) => email.trim().toLowerCase()).filter(Boolean));
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 const SESSION_TTL = 12 * 60 * 60 * 1000;
@@ -118,6 +119,13 @@ const server = http.createServer(async (request, response) => {
 
   try {
     if (request.url === '/api/health' && request.method === 'GET') return json(response, 200, { status: 'ok' });
+    if (productionPreview) {
+      response.setHeader('Cache-Control', 'no-store');
+      if (request.url !== '/api/content' || request.method !== 'GET') return json(response, 403, { message: 'Production-content preview is read-only. Editing and authentication are disabled.' });
+      const upstream = await fetch('https://www.henryszhang.dev/api/content', { signal: AbortSignal.timeout(10000) });
+      if (!upstream.ok) return json(response, 502, { message: 'Production content is unavailable. No local fallback is used in preview.' });
+      return json(response, 200, await upstream.json());
+    }
     if (request.url === '/api/content' && request.method === 'GET') return json(response, 200, readContent());
 
     if (request.url === '/api/auth/google' && request.method === 'POST') {
@@ -153,6 +161,6 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(PORT, '127.0.0.1', () => {
-  console.log(`Portfolio API running at http://127.0.0.1:${PORT}`);
+  console.log(`Portfolio API running at http://127.0.0.1:${server.address().port}`);
   if (!GOOGLE_CLIENT_ID || !ADMIN_EMAILS.size) console.log('Google admin authentication is not configured. Set GOOGLE_CLIENT_ID and ADMIN_EMAILS before signing in.');
 });

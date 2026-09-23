@@ -24,5 +24,6 @@ export function CompactProjectCard({ project }) {
 }
 export function CompactExperienceLogo({ experience }) {
   const logo = resolveExperienceLogo(experience);
+  if (!logo) return <span className="chat-experience-logo" aria-hidden="true"><FiGrid /></span>;
   return <ContentImage media={logo} className="chat-experience-logo" imgClassName="chat-experience-logo-light" alt={`${experience.company || 'Company'} logo`} />;
 }

@@ -3,6 +3,10 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/dev.js",
+    "dev:production-content": "node scripts/dev.js --production-content",
+    "content:migrate": "node scripts/content-migration.js",
+    "check:content-release": "node scripts/check-content-release.js",
+    "test:content": "node --test tests/content-migration.test.js tests/production-preview.test.js",
     "client": "npm --prefix client start",
     "server": "node server/server.js",
     "build": "npm --prefix client run build",

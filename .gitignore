@@ -3,3 +3,4 @@ logs
 .env
 .venv
 .tools/
+.content-backups/

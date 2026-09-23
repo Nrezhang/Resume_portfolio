@@ -13,6 +13,7 @@ export function normalizeContent(content) {
 }
 
 export function ContentProvider({ children }) {
+  const preview = process.env.REACT_APP_CONTENT_PREVIEW === 'true';
   const [content, setContent] = useState(() => normalizeContent(defaultContent));
   const [source, setSource] = useState('local');
 
@@ -33,7 +34,8 @@ export function ContentProvider({ children }) {
   }, []);
 
   const value = useMemo(() => ({ content, setContent, source }), [content, source]);
-  return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;
+  if (preview && source !== 'api') return <p role={source === 'fallback' ? 'alert' : 'status'}>{source === 'fallback' ? 'Production content unavailable. Preview stopped; local fallback is disabled.' : 'Loading production content…'}</p>;
+  return <ContentContext.Provider value={value}>{preview && <aside role="status" className="production-preview-banner">Read-only production content · local code · editing disabled</aside>}{children}</ContentContext.Provider>;
 }
 
 export function DraftContentProvider({ content, setContent, children }) {
