@@ -9,6 +9,7 @@ import ResumePage from './pages/ResumePage';
 import './styles/portfolio.css';
 import './styles/chat.css';
 import './styles/settings.css';
+import './styles/home-portfolio.css';
 
 const PortfolioContentPage = lazy(() => import('./pages/PortfolioContentPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));

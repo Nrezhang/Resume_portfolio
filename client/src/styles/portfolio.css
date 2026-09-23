@@ -38,7 +38,11 @@
   --soft-surface: #202824;
 }
 
-html { scroll-behavior: smooth; }
+/* Keep centered content stationary when expanding panels adds a scrollbar. */
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+@supports not (scrollbar-gutter: stable) {
+  html { overflow-y: scroll; }
+}
 body { font-family: var(--sans); line-height: 1.5; }
 a { color: inherit; text-decoration: none; }
 button, a { -webkit-tap-highlight-color: transparent; }

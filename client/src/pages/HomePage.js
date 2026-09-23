@@ -53,8 +53,14 @@ export default function HomePage() {
     requestAnimationFrame(() => input.current?.focus());
   }
 
-  return <main className={`chat-page ${chat ? 'has-conversation' : 'is-home'}`} onKeyDown={(event) => { if (event.key === 'Escape' && expanded) { event.preventDefault(); closeExpanded(); } }}>
-    {chat ? <><header className="conversation-heading"><FiMessageCircle /><span>{chat.title}</span><small>Demo chat</small></header><div className="conversation-thread" role="log" aria-label="Conversation" aria-live="polite">{chat.messages.map((message, index) => <article className={`chat-message message-${message.role}`} key={index}><span className="message-author">{message.role === 'user' ? 'You' : `Henry AI · ${message.label || 'Demo response'}`}</span><p>{message.text}</p></article>)}{pending && <p role="status" className="chat-pending">Preparing response…</p>}<div ref={end} /></div></> : <HomeIdentity />}
+  return <main className={`chat-page ${chat ? 'has-conversation' : 'is-home home-portfolio'}`} onKeyDown={(event) => { if (event.key === 'Escape' && expanded) { event.preventDefault(); closeExpanded(); } }}>
+    {chat ? <><header className="conversation-heading"><FiMessageCircle /><span>{chat.title}</span><small>Demo chat</small></header><div className="conversation-thread" role="log" aria-label="Conversation" aria-live="polite">{chat.messages.map((message, index) => <article className={`chat-message message-${message.role}`} key={index}><span className="message-author">{message.role === 'user' ? 'You' : `Henry AI · ${message.label || 'Demo response'}`}</span><p>{message.text}</p></article>)}{pending && <p role="status" className="chat-pending">Preparing response…</p>}<div ref={end} /></div></> : <div className="home-overview">
+      <HomeIdentity />
+      <section className="home-selected-work" aria-labelledby="home-selected-work-heading">
+        <div className="home-selected-work-heading"><h2 id="home-selected-work-heading">Selected work</h2><Link to="/projects">All projects <FiArrowUpRight aria-hidden="true" /></Link></div>
+        <div className="home-project-list">{highlightedProjects(content.projects).map((project) => <CompactProjectCard key={project.id} project={project} />)}</div>
+      </section>
+    </div>}
     <div className="composer-area">
       <div className={`chat-composer ${dropdown ? 'with-suggestions' : ''}`}>
         <form className="composer-input-row" onSubmit={(event) => { event.preventDefault(); submit(draft); }}>
