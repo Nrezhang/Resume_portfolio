@@ -1,0 +1,248 @@
+{
+  "id": "2026-09-23-project-branding",
+  "reason": "Publish approved project links, logos and LLaMA copy; add missing experience logo references without replacing admin content.",
+  "patches": [
+    {
+      "collection": "projects",
+      "id": "inyo",
+      "path": [
+        "image"
+      ],
+      "before": "portfolio",
+      "after": "inyo"
+    },
+    {
+      "collection": "projects",
+      "id": "inyo",
+      "path": [
+        "imageAlt"
+      ],
+      "before": "Web product and engineering interface",
+      "after": "Inyo logo"
+    },
+    {
+      "collection": "projects",
+      "id": "inyo",
+      "path": [
+        "link"
+      ],
+      "before": "",
+      "after": "https://joininyo.com"
+    },
+    {
+      "collection": "projects",
+      "id": "inyo",
+      "path": [
+        "linkLabel"
+      ],
+      "before": "",
+      "after": "Visit website"
+    },
+    {
+      "collection": "projects",
+      "id": "mydian-dashboard",
+      "path": [
+        "image"
+      ],
+      "before": "portfolio",
+      "after": "mydian"
+    },
+    {
+      "collection": "projects",
+      "id": "mydian-dashboard",
+      "path": [
+        "imageAlt"
+      ],
+      "before": "Dashboard product interface",
+      "after": "MyDian logo"
+    },
+    {
+      "collection": "projects",
+      "id": "mydian-dashboard",
+      "path": [
+        "link"
+      ],
+      "before": "",
+      "after": "https://mydian.co"
+    },
+    {
+      "collection": "projects",
+      "id": "mydian-dashboard",
+      "path": [
+        "linkLabel"
+      ],
+      "before": "",
+      "after": "Visit website"
+    },
+    {
+      "collection": "projects",
+      "id": "financial-sentiment",
+      "path": [
+        "title"
+      ],
+      "before": "Fine-Tuning and Supervised Learning for Stock Prediction",
+      "after": "LLaMA 3.1 Fine-Tuning"
+    },
+    {
+      "collection": "projects",
+      "id": "financial-sentiment",
+      "path": [
+        "category"
+      ],
+      "before": "Applied AI · Capstone",
+      "after": "Applied AI · LLM fine-tuning"
+    },
+    {
+      "collection": "projects",
+      "id": "financial-sentiment",
+      "path": [
+        "description"
+      ],
+      "before": "Fine-tuned LLaMA 3.1 on financial news with qLoRA and incorporated the enhanced sentiment signal into a time-series stock-prediction model.",
+      "after": "Adapted LLaMA 3.1 to financial news using QLoRA, with a focus on parameter-efficient fine-tuning and sentiment evaluation."
+    },
+    {
+      "collection": "projects",
+      "id": "financial-sentiment",
+      "path": [
+        "impact"
+      ],
+      "before": "Improved financial-news sentiment labeling accuracy by 9%, from 0.75 to 0.84, then used those scores as an additional model feature for market-trend prediction.",
+      "after": "Improved financial-news sentiment labeling accuracy from 75% to 84% through fine-tuning—a gain of 9 percentage points."
+    },
+    {
+      "collection": "projects",
+      "id": "financial-sentiment",
+      "path": [
+        "highlights"
+      ],
+      "before": [
+        "Built the end-to-end research pipeline covering data preparation, parameter-efficient model adaptation, feature generation, and downstream evaluation."
+      ],
+      "after": [
+        "Built the research pipeline from financial-news data preparation through parameter-efficient LLaMA adaptation and evaluation.",
+        "Applied the fine-tuned model’s sentiment scores as an additional feature in an LSTM stock-prediction pipeline to evaluate downstream use."
+      ]
+    },
+    {
+      "collection": "projects",
+      "id": "financial-sentiment",
+      "path": [
+        "skills"
+      ],
+      "before": [
+        "LLaMA 3.1",
+        "qLoRA",
+        "Fine-Tuning",
+        "LSTM",
+        "Python",
+        "NLP",
+        "Data Analysis"
+      ],
+      "after": [
+        "LLaMA 3.1",
+        "QLoRA",
+        "Fine-Tuning",
+        "NLP",
+        "Python",
+        "LSTM",
+        "Data Analysis"
+      ]
+    },
+    {
+      "collection": "projects",
+      "id": "full-stack-tinder",
+      "path": [
+        "link"
+      ],
+      "before": "",
+      "after": "https://github.com/Nrezhang/4-final-project-pet-tinder"
+    },
+    {
+      "collection": "projects",
+      "id": "full-stack-tinder",
+      "path": [
+        "linkLabel"
+      ],
+      "before": "",
+      "after": "View repository"
+    },
+    {
+      "collection": "projects",
+      "id": "airline-simulator",
+      "path": [
+        "linkLabel"
+      ],
+      "before": "View source code",
+      "after": "View repository"
+    },
+    {
+      "collection": "experience",
+      "id": "treasury",
+      "path": [
+        "media",
+        "logo"
+      ],
+      "after": {
+        "src": "treasury",
+        "alt": "U.S. Department of the Treasury logo"
+      }
+    },
+    {
+      "collection": "experience",
+      "id": "trianz",
+      "path": [
+        "media",
+        "logo"
+      ],
+      "after": {
+        "src": "trianz",
+        "alt": "Trianz logo"
+      }
+    },
+    {
+      "collection": "experience",
+      "id": "medidata",
+      "path": [
+        "media",
+        "logo"
+      ],
+      "after": {
+        "src": "medidata",
+        "darkMode": "invert",
+        "alt": "Medidata logo"
+      }
+    },
+    {
+      "collection": "experience",
+      "id": "microsoft",
+      "path": [
+        "media",
+        "logo"
+      ],
+      "after": {
+        "src": "microsoft",
+        "alt": "Microsoft logo"
+      }
+    },
+    {
+      "collection": "experience",
+      "id": "jika",
+      "path": [
+        "media",
+        "logo"
+      ],
+      "after": {
+        "src": "jika",
+        "alt": "Jika.io logo"
+      }
+    }
+  ],
+  "assets": [
+    "static/media/treasury-seal.png",
+    "static/media/mydian-logo.png"
+  ],
+  "inlineAssets": [
+    "inyo-logo.png"
+  ]
+}

@@ -45,7 +45,8 @@
 /* Small fallback icons, not illegible "preview coming soon" thumbnails. The
    original full-size previews remain in the Projects quick-action panel. */
 .home-project-list .thumbnail-placeholder > span, .home-project-list .thumbnail-lines { display: none; }
-.home-project-list .chat-project-copy { min-width: 0; padding: 0; }
+.production-preview-banner { position: sticky; top: 0; z-index: 100; padding: 8px 16px; background: #daeaa0; color: #17200a; text-align: center; font: 12px/1.5 sans-serif; }
+.home-project-list .chat-project-copy { grid-column: 2; min-width: 0; padding: 0; }
 .home-project-list .chat-project-copy h3 { margin: 0 0 3px; color: var(--ink); font-size: 14px; line-height: 1.4; overflow-wrap: anywhere; }
 .home-project-list .chat-project-copy h3 svg { color: var(--muted); }
 .chat-shell .home-project-list .chat-project-copy p { color: var(--muted); font-size: 12px; line-height: 1.5; }

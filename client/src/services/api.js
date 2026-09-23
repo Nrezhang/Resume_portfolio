@@ -1,6 +1,7 @@
 const API_BASE = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://127.0.0.1:8080/api');
 
 async function request(path, options = {}) {
+  if (process.env.REACT_APP_CONTENT_PREVIEW === 'true' && (path !== '/content' || (options.method && options.method !== 'GET'))) throw new Error('Production-content preview is read-only.');
   const response = await fetch(`${API_BASE}${path}`, {
     ...options,
     headers: {
