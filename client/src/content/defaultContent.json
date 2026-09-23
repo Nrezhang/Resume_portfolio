@@ -28,10 +28,10 @@
         "Balanced scalability, reliability, and execution speed while rapidly delivering the product as a part-time founding engineer and technical lead."
       ],
       "skills": ["Technical Leadership", "Event-Driven Systems", "LLMs", "SMS", "Product Strategy", "Production Infrastructure"],
-      "image": "portfolio",
-      "imageAlt": "Web product and engineering interface",
-      "link": "",
-      "linkLabel": ""
+      "image": "inyo",
+      "imageAlt": "Inyo logo",
+      "link": "https://joininyo.com",
+      "linkLabel": "Visit website"
     },
     {
       "id": "mydian-dashboard",
@@ -45,20 +45,23 @@
         "Established a foundation for future product development and client onboarding."
       ],
       "skills": ["React", "Supabase", "Generative AI", "Requirements Gathering", "UX Flows", "Product Development"],
-      "image": "portfolio",
-      "imageAlt": "Dashboard product interface",
-      "link": "",
-      "linkLabel": ""
+      "image": "mydian",
+      "imageAlt": "MyDian logo",
+      "link": "https://mydian.co",
+      "linkLabel": "Visit website"
     },
     {
       "id": "financial-sentiment",
       "year": "2024",
-      "title": "Fine-Tuning and Supervised Learning for Stock Prediction",
-      "category": "Applied AI · Capstone",
-      "description": "Fine-tuned LLaMA 3.1 on financial news with qLoRA and incorporated the enhanced sentiment signal into a time-series stock-prediction model.",
-      "impact": "Improved financial-news sentiment labeling accuracy by 9%, from 0.75 to 0.84, then used those scores as an additional model feature for market-trend prediction.",
-      "highlights": ["Built the end-to-end research pipeline covering data preparation, parameter-efficient model adaptation, feature generation, and downstream evaluation."],
-      "skills": ["LLaMA 3.1", "qLoRA", "Fine-Tuning", "LSTM", "Python", "NLP", "Data Analysis"],
+      "title": "LLaMA 3.1 Fine-Tuning",
+      "category": "Applied AI · LLM fine-tuning",
+      "description": "Adapted LLaMA 3.1 to financial news using QLoRA, with a focus on parameter-efficient fine-tuning and sentiment evaluation.",
+      "impact": "Improved financial-news sentiment labeling accuracy from 75% to 84% through fine-tuning—a gain of 9 percentage points.",
+      "highlights": [
+        "Built the research pipeline from financial-news data preparation through parameter-efficient LLaMA adaptation and evaluation.",
+        "Applied the fine-tuned model’s sentiment scores as an additional feature in an LSTM stock-prediction pipeline to evaluate downstream use."
+      ],
+      "skills": ["LLaMA 3.1", "QLoRA", "Fine-Tuning", "NLP", "Python", "LSTM", "Data Analysis"],
       "image": "sentiment",
       "imageAlt": "Financial sentiment model output chart",
       "link": "capstone",
@@ -75,8 +78,8 @@
       "skills": ["Agile", "Full-Stack Development", "User Stories", "Backlog Prioritization", "Teamwork"],
       "image": "portfolio",
       "imageAlt": "Full-stack web application interface",
-      "link": "",
-      "linkLabel": ""
+      "link": "https://github.com/Nrezhang/4-final-project-pet-tinder",
+      "linkLabel": "View repository"
     },
     {
       "id": "portfolio-platform",
@@ -118,7 +121,7 @@
       "image": "airline",
       "imageAlt": "Airline booking simulator interface",
       "link": "https://github.com/Nrezhang/AirlineSim",
-      "linkLabel": "View source code"
+      "linkLabel": "View repository"
     }
   ],
   "experience": [

@@ -30,6 +30,8 @@ export default function HomePage() {
   const chat = conversations.find((item) => item.id === chatId);
   const pending = pendingIds.includes(chatId);
   const dropdown = !chat && prompts[expanded];
+  const selectedProjects = highlightedProjects(content.projects).filter((project) => ['inyo', 'mydian-dashboard'].includes(project.id));
+  const treasuryRole = content.experience.find((item) => item.id === 'treasury');
   const composerPlaceholder = expanded === 'about'
     ? 'Ask about Henry…'
     : expanded === 'beyond'
@@ -56,10 +58,21 @@ export default function HomePage() {
   return <main className={`chat-page ${chat ? 'has-conversation' : 'is-home home-portfolio'}`} onKeyDown={(event) => { if (event.key === 'Escape' && expanded) { event.preventDefault(); closeExpanded(); } }}>
     {chat ? <><header className="conversation-heading"><FiMessageCircle /><span>{chat.title}</span><small>Demo chat</small></header><div className="conversation-thread" role="log" aria-label="Conversation" aria-live="polite">{chat.messages.map((message, index) => <article className={`chat-message message-${message.role}`} key={index}><span className="message-author">{message.role === 'user' ? 'You' : `Henry AI · ${message.label || 'Demo response'}`}</span><p>{message.text}</p></article>)}{pending && <p role="status" className="chat-pending">Preparing response…</p>}<div ref={end} /></div></> : <div className="home-overview">
       <HomeIdentity />
-      <section className="home-selected-work" aria-labelledby="home-selected-work-heading">
-        <div className="home-selected-work-heading"><h2 id="home-selected-work-heading">Selected work</h2><Link to="/projects">All projects <FiArrowUpRight aria-hidden="true" /></Link></div>
-        <div className="home-project-list">{highlightedProjects(content.projects).map((project) => <CompactProjectCard key={project.id} project={project} />)}</div>
-      </section>
+      <div className="home-work-overview">
+        {treasuryRole && <section className="home-current-role" aria-labelledby="home-current-role-heading">
+          <div className="home-selected-work-heading"><h2 id="home-current-role-heading">Currently</h2><Link to="/experience">Experience <FiArrowUpRight aria-hidden="true" /></Link></div>
+          <div className="home-project-list">
+            <Link className="chat-project-card home-role-card" to={`/experience#experience-detail-${treasuryRole.id}`} aria-label={`Current role: ${treasuryRole.role} at ${treasuryRole.company}`}>
+              <CompactExperienceLogo experience={treasuryRole} />
+              <div className="chat-project-copy"><h3>{treasuryRole.company}<FiArrowUpRight aria-hidden="true" /></h3><p>{treasuryRole.role}</p></div>
+            </Link>
+          </div>
+        </section>}
+        <section className="home-selected-work" aria-labelledby="home-selected-work-heading">
+          <div className="home-selected-work-heading"><h2 id="home-selected-work-heading">Selected work</h2><Link to="/projects">All projects <FiArrowUpRight aria-hidden="true" /></Link></div>
+          <div className="home-project-list">{selectedProjects.map((project) => <CompactProjectCard key={project.id} project={project} />)}</div>
+        </section>
+      </div>
     </div>}
     <div className="composer-area">
       <div className={`chat-composer ${dropdown ? 'with-suggestions' : ''}`}>

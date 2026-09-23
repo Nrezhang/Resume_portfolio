@@ -3,6 +3,8 @@ import sentimentImage from '../static/images/prediction_jpm_2.png';
 import agentImage from '../static/images/widget.png';
 import airlineImage from '../static/images/airline.png';
 import portfolioImage from '../static/images/homepage.png';
+import mydianLogo from '../static/images/mydian-logo.png';
+import inyoLogo from '../static/images/inyo-logo.png';
 import nyuLogo from '../static/images/education/nyu-logo.png';
 import tjhsstLogo from '../static/images/education/tjhsst-logo.jpg';
 import treasuryLogo from '../static/images/experience/treasury-seal.png';
@@ -23,6 +25,8 @@ export const imageAssets = {
   agent: agentImage,
   airline: airlineImage,
   portfolio: portfolioImage,
+  mydian: mydianLogo,
+  inyo: inyoLogo,
 };
 
 export const documentAssets = {
