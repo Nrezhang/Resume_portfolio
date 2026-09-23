@@ -5,7 +5,6 @@ import { useContent } from '../content/ContentContext';
 import { resolveLink } from '../content/assets';
 import { highlightedProjects, ProjectThumbnail } from '../components/chat/PortfolioCards';
 import SkillTags from '../components/common/SkillTags';
-import EducationSection from '../components/sections/EducationSection';
 import ExperienceSection from '../components/sections/ExperienceSection';
 import SkillsSection from '../components/sections/SkillsSection';
 import ContactSection from '../components/sections/ContactSection';
@@ -19,7 +18,7 @@ export default function PortfolioContentPage({ section }) {
   const { projectId } = useParams();
   const highlighted = highlightedProjects(content.projects);
   if (section === 'education') return <EducationIndexPage />;
-  if (section === 'experience') return <main className="chat-content-view experience-content"><ExperienceSection /><div className="chat-reading-width"><EducationSection /><UtilityLinks /></div></main>;
+  if (section === 'experience') return <main className="chat-content-view experience-content"><ExperienceSection /><div className="chat-reading-width"><UtilityLinks /></div></main>;
   if (section === 'skills' || section === 'contact') return <main className="chat-content-view chat-reading-width">{section === 'skills' ? <SkillsSection detailed /> : <ContactSection />}<UtilityLinks /></main>;
   if (section === 'projects') {
     const selected = content.projects.find((project) => project.id === projectId);

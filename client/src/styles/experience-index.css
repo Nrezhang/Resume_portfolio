@@ -1,0 +1,149 @@
+/* Open atlas: a continuous globe canvas, floating copy, and a vertical branch index. */
+:root[data-theme] .experience-section-immersive .journey.journey-open-index {
+  container-type: inline-size;
+  grid-template-columns: minmax(0, 1fr) 228px;
+  grid-template-rows: auto minmax(0, 1fr);
+  column-gap: 24px;
+  padding: 44px max(44px, calc((100% - 1040px) / 2)) 22px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.journey-open-index .journey-topline { grid-column: 1 / -1; grid-row: 1; padding: 0 0 30px; gap: 26px 16px; align-items: end; }
+.experience-index-meta { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; grid-column: 1 / -1; padding-bottom: 20px; border-bottom: 1px solid var(--line); color: var(--muted); font: 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.journey-open-index .journey-index-intro h1, .experience-content .experience-details-heading h1 { margin: 0 0 12px; font: 500 clamp(32px, 5cqw, 44px)/1.1 var(--sans); letter-spacing: -.045em; }
+.journey-open-index .journey-index-intro h1 svg, .experience-details-heading h1 svg { width: .7em; height: .7em; color: var(--green); stroke-width: 1.4; }
+.journey-index-intro p, .experience-content .experience-details-heading p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.journey-open-index .journey-view-choice { align-self: end; }
+.journey-open-index .journey-stage { grid-column: 1; grid-row: 2; display: flex; align-items: center; overflow: visible; padding-bottom: 60px; }
+.journey-open-index .journey-card { width: min(420px, 70%); margin: 0; padding: 0; background: none; border: 0; box-shadow: none; color: var(--ink); }
+.journey-open-index .journey-card h4 { font-size: clamp(24px, 2.8vw, 32px); font-weight: 500; line-height: 1.12; }
+.journey-open-index .journey-card-meta, .journey-open-index .journey-card-location, .journey-open-index .journey-context { color: var(--muted); font-size: 11px; font-weight: 400; }
+.journey-open-index .journey-card-meta { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+:root[data-theme] .journey-open-index .journey-organization, :root[data-theme] .journey-open-index .journey-details-link { color: var(--green); font-size: 13px; font-weight: 500; }
+.journey-open-index .journey-details-link { border-color: var(--line); margin-top: 18px; font-size: 12px; }
+.journey-open-index .journey-summary { margin-top: 14px; color: var(--body-copy); font-size: 13px; line-height: 1.75; -webkit-line-clamp: 4; }
+.journey-open-index .journey-card .badge { color: var(--muted); background: transparent; border: 0; border-radius: 0; padding: 0; font-size: 11px; font-weight: 400; }
+.journey-open-index .journey-card .skill-tags { gap: 8px 14px; margin-top: 14px; }
+.journey-open-index .journey-type { padding: 0; background: none; color: var(--green); font-size: 11px; font-weight: 400; }
+.journey-open-index .journey-type-education { color: #a67fc4; }
+.journey-open-index .journey-type-leadership { color: #c98567; }
+.journey-open-index .journey-globe { width: 100%; }
+:root[data-theme] .experience-section-immersive .journey.journey-open-index::before { background: none; }
+:root[data-theme] .experience-section-immersive .journey.journey-open-index::after { background: linear-gradient(270deg, var(--paper), color-mix(in srgb, var(--paper) 88%, transparent) 17%, transparent 37%), linear-gradient(90deg, var(--paper) 0%, color-mix(in srgb, var(--paper) 84%, transparent) 24%, color-mix(in srgb, var(--paper) 18%, transparent) 55%, transparent 75%); }
+.journey-open-index .journey-controls { left: 0; right: auto; bottom: 5px; font: 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; color: var(--muted); }
+.journey-open-index .journey-controls button { border-color: var(--line); background: transparent; backdrop-filter: none; color: var(--green); }
+.journey-open-index .journey-controls b { color: var(--ink); }
+.journey-open-index .journey-controls button:disabled { opacity: .35; color: var(--muted); }
+.journey-branch-index { grid-column: 2; grid-row: 2; position: relative; z-index: 4; min-height: 0; }
+.branch-index { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.branch-index-main { display: flex; align-items: center; gap: 8px; color: var(--green); font: 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; padding-bottom: 10px; }
+.branch-index-main i { width: 6px; height: 6px; background: currentColor; border-radius: 50%; }
+.branch-index-main span { margin-left: auto; color: var(--muted); font-size: 10px; }
+.branch-index-chart { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; overscroll-behavior-y: contain; scroll-behavior: auto; }
+.branch-index-chart::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.branch-index-chart-inner { position: relative; }
+.branch-index .branch-time-graph { position: absolute; z-index: 2; top: 0; left: 0; width: 72px; height: 100%; overflow: visible; pointer-events: none; }
+.branch-time-graph path { fill: none; stroke: currentColor; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.branch-time-trunk { color: var(--muted); opacity: .5; }
+.branch-time-lane { color: #75c5a6; }
+.branch-index-education { color: #b88ad8; --branch-color: #b88ad8; }
+.branch-index-leadership { color: #ef9275; --branch-color: #ef9275; }
+.branch-index-work { --branch-color: #75c5a6; }
+.branch-time-lane.is-active { color: var(--green); }
+.branch-time-lane circle { fill: var(--paper); stroke: currentColor; stroke-width: 1.3; }
+.branch-time-lane.is-active path { stroke-width: 2; }
+.branch-time-lane.is-active circle { fill: currentColor; }
+.branch-time-lane .branch-time-merge { fill: currentColor; stroke: var(--paper); stroke-width: 1; }
+.branch-index .branch-event-row { position: absolute; left: 0; right: 0; display: flex; align-items: center; padding: 6px 4px 6px 80px; border: 0; background: transparent; text-align: left; color: var(--ink); font: 12px/1.4 var(--sans); cursor: pointer; }
+.branch-index .branch-event-row.is-active { background: linear-gradient(90deg, color-mix(in srgb, var(--green) 16%, transparent), color-mix(in srgb, var(--green) 4%, transparent)); box-shadow: inset 2px 0 var(--green); }
+.branch-index .branch-event-row:hover { background-color: color-mix(in srgb, var(--branch-color) 8%, transparent); }
+.branch-event-row:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; }
+.branch-event-copy { display: grid; gap: 4px; min-width: 0; width: 100%; }
+.branch-event-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.branch-event-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2px 8px; color: var(--muted); font: 10px/1.35 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.branch-event-meta time { white-space: nowrap; }
+:root[data-theme="light"] .branch-time-lane { color: #477761; }
+:root[data-theme="light"] .branch-index-education, :root[data-theme="light"] .journey-open-index .journey-type-education { color: #815b9b; }
+:root[data-theme="light"] .branch-index-leadership, :root[data-theme="light"] .journey-open-index .journey-type-leadership { color: #9c6044; }
+:root[data-theme="light"] .branch-time-lane.is-active { color: var(--green); }
+/* Light mode needs opaque copy and a quiet reading area, not translucent
+   dark-mode text painted over the daytime globe. Keep the canvas unboxed. */
+:root[data-theme="light"] .experience-section-immersive {
+  --body-copy: #343c38;
+  --muted: #535e57;
+  --line: #d5dbd5;
+}
+:root[data-theme="light"] .experience-section-immersive .journey.journey-open-index::after {
+  background: linear-gradient(270deg, var(--paper) 0%, color-mix(in srgb, var(--paper) 96%, transparent) 18%, transparent 42%),
+    linear-gradient(90deg, var(--paper) 0%, var(--paper) 28%, color-mix(in srgb, var(--paper) 96%, transparent) 44%, color-mix(in srgb, var(--paper) 45%, transparent) 62%, transparent 78%);
+}
+:root[data-theme="light"] .journey-open-index .journey-globe { filter: saturate(.7); }
+:root[data-theme="light"] .journey-open-index .journey-card { color: var(--ink); }
+:root[data-theme="light"] .journey-open-index .journey-card-meta,
+:root[data-theme="light"] .journey-open-index .journey-card-location,
+:root[data-theme="light"] .journey-open-index .journey-context { color: var(--muted); }
+:root[data-theme="light"] .journey-open-index .journey-summary { color: var(--body-copy); }
+:root[data-theme="light"] .journey-open-index .journey-context { border-left-color: var(--green); }
+:root[data-theme="light"] .journey-open-index .journey-card .badge { color: var(--body-copy); background: transparent; border: 0; }
+:root[data-theme="light"] .journey-open-index .journey-controls { color: var(--muted); }
+:root[data-theme="light"] .journey-open-index .journey-controls button { color: var(--green); background: transparent; border-color: #a8b4a2; }
+:root[data-theme="light"] .journey-open-index .journey-controls button:disabled { color: var(--muted); border-color: var(--line); }
+:root[data-theme="light"] .experience-section-immersive .branch-event-row.is-active { background: linear-gradient(90deg, #e5edda, #f0f4e9); }
+:root[data-theme="light"] .experience-section-immersive .experience-more .badge { background: #edf1e8; border-color: #d5decf; color: var(--body-copy); font-weight: 500; }
+.experience-content .experience-section-immersive .experience-details-panel { container-type: inline-size; padding-top: 44px; }
+.experience-content .experience-section-immersive .experience-details-heading { padding-block: 26px 30px; }
+.experience-content .experience-copy h3 { font-size: 25px; }
+.experience-description.is-collapsed { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.experience-expand { display: inline-flex; align-items: center; gap: 10px; border: 0; border-bottom: 1px solid var(--line); padding: 8px 0; background: transparent; color: var(--green); font: 12px/1.5 var(--sans); cursor: pointer; }
+.experience-expand svg { transition: transform 180ms ease; }
+.experience-expand[aria-expanded="true"] svg { transform: rotate(180deg); }
+.experience-expand:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+.experience-more .experience-highlights { font-size: 13px; line-height: 1.8; }
+.experience-logo > span { display: flex; align-items: center; width: 100%; height: 100%; }
+.experience-logo img { width: 100%; height: 100%; }
+.experience-details-layout { display: grid; grid-template-columns: minmax(0, 1fr) 228px; align-items: start; gap: 40px; }
+.experience-details-layout > .experience-list { min-width: 0; }
+/* Fill the reading viewport instead of cutting history off at a fixed height. */
+.experience-details-index { position: sticky; top: 32px; height: calc(100svh - 64px); min-height: 0; }
+.experience-content .experience-details-layout .experience-row { grid-template-columns: 116px minmax(0, 1fr); gap: 24px; }
+.experience-details-layout .experience-logo { max-width: 100%; }
+.experience-details-layout .experience-meta { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.experience-details-layout .experience-meta > span { overflow-wrap: anywhere; }
+.experience-details-layout .experience-logo { min-width: 0; box-sizing: border-box; }
+.experience-details-layout .experience-logo > span { min-width: 0; flex: 1 1 0; overflow: hidden; }
+@media (max-width: 1100px) {
+  .experience-details-layout { gap: 24px; grid-template-columns: minmax(0, 1fr) 200px; }
+  .experience-content .experience-details-layout .experience-row { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 700px) {
+  .experience-details-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .experience-details-index { grid-row: 1; position: relative; top: auto; height: 260px; max-height: none; }
+}
+@media (max-width: 1000px) {
+  :root[data-theme] .experience-section-immersive .journey.journey-open-index { grid-template-columns: minmax(0, 1fr) 228px; column-gap: 16px; }
+  .journey-open-index .journey-card { width: min(390px, 85%); }
+}
+@media (max-width: 760px) {
+  :root[data-theme] .experience-section-immersive .journey.journey-open-index { padding: 32px 20px 22px; }
+  .experience-content .experience-section-immersive .experience-details-panel { padding-top: 32px; }
+}
+@media (max-width: 600px) {
+  :root[data-theme] .experience-section-immersive .journey.journey-open-index { grid-template-columns: minmax(0, 1fr) 146px; column-gap: 12px; }
+  .chat-shell .journey.journey-open-index { height: calc(100svh - 58px); }
+  .journey-open-index .journey-topline { grid-template-columns: 1fr; }
+  .experience-index-meta > span:last-child { display: none; }
+  .journey-open-index .journey-view-choice { justify-items: start; }
+  .journey-open-index .journey-card { width: 100%; }
+  .journey-open-index .journey-card h4 { font-size: 23px; }
+  .journey-open-index .journey-context { font-size: 10px; }
+  .journey-open-index .journey-summary { -webkit-line-clamp: 3; font-size: 12px; }
+  .journey-open-index .journey-globe { width: 150%; left: -30%; }
+  .journey-open-index .branch-time-graph { width: 58px; }
+  .journey-open-index .branch-event-row { padding: 4px 4px 4px 62px; font-size: 11px; }
+  .branch-event-meta { flex-direction: column; font-size: 9px; }
+  .branch-index-main span { display: none; }
+}
+@media (max-height: 650px) {
+  .journey-open-index .journey-card { max-height: calc(100% - 15px); overflow-y: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .experience-expand svg { transition: none; } }

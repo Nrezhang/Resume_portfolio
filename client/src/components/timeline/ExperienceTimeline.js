@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { FiArrowDown, FiChevronLeft, FiChevronRight, FiMapPin } from 'react-icons/fi';
+import { animate, AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { FiArrowDown, FiArrowDownRight, FiChevronLeft, FiChevronRight, FiMapPin } from 'react-icons/fi';
 import SkillTags from '../common/SkillTags';
 import TimelineGlobe from './TimelineGlobe';
 
@@ -45,7 +45,7 @@ function parsePeriod(period) {
   return { start, end, milestone: false };
 }
 
-function buildTimeline(experience, education) {
+export function buildTimeline(experience, education) {
   const work = experience.map((item) => ({
     ...item,
     ...parsePeriod(item.period),
@@ -112,201 +112,159 @@ function buildTimeline(experience, education) {
     .sort((a, b) => a.start - b.start || a.end - b.end);
   const kindOrder = { education: 0, leadership: 1, work: 2 };
   const items = [...work, ...leadership, ...educationEvents]
-    .sort((a, b) => a.start - b.start || a.end - b.end || kindOrder[a.kind] - kindOrder[b.kind]);
+    .sort((a, b) => b.start - a.start || b.end - a.end || kindOrder[a.kind] - kindOrder[b.kind]);
   return { items, graphItems };
 }
 
-function branchName(item) {
-  const prefixes = { work: 'exp', education: 'edu', leadership: 'lead' };
-  const aliases = { microsoft: 'msft', 'nyu-shanghai': 'nyu', treasury: 'treasury', medidata: 'medidata', trianz: 'trianz', jika: 'jika', tamid: 'tamid', 'tech-trek': 'tech-nyu', tjhsst: 'tjhsst' };
-  return `${prefixes[item.kind]}/${aliases[item.id] || item.id}`;
+export function GitBranchIndex({ items, graphItems, keyboardItems = items, activeItem, contextIds = [], onSelect, reduceMotion }) {
+  const containerRef = useRef(null);
+  const scrollAnimationRef = useRef(null);
+  const lastSelectionRef = useRef(null);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const selectionInset = 32;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const measure = () => setViewportHeight(container.clientHeight);
+    measure();
+    if (typeof ResizeObserver !== 'undefined') {
+      const observer = new ResizeObserver(measure);
+      observer.observe(container);
+      return () => observer.disconnect();
+    }
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+  const geometry = useMemo(() => {
+    // A constant month scale preserves durations and overlaps; the viewport scrolls.
+    const rowHeight = 56;
+    const monthIndex = (date) => date.getFullYear() * 12 + date.getMonth();
+    const latestMonth = Math.max(...graphItems.map((branch) => monthIndex(branch.end)));
+    const dateY = (date) => 32 + (latestMonth - monthIndex(date)) * 36;
+    // Keep touching intervals in separate lanes too, so a merge cannot be
+    // mistaken for the next role continuing down the same branch.
+    const lanes = [];
+    const branches = [...graphItems].sort((a, b) => a.start - b.start || b.end - a.end).map((branch) => {
+      let lane = branch.kind === 'education' ? 0 : branch.kind === 'leadership' ? 1 : 2;
+      while (lanes[lane] >= monthIndex(branch.start)) lane += 1;
+      lanes[lane] = monthIndex(branch.end);
+      const startY = dateY(branch.start), endY = dateY(branch.end);
+      const handoff = graphItems.some((other) => other.id !== branch.id && !other.current && monthIndex(other.end) === monthIndex(branch.start));
+      // Separate the merge and fork ports within a shared month, not the dates.
+      const forkY = startY - (handoff ? 16 : 0);
+      return { ...branch, lane, startY, endY, forkY, nodeY: forkY - 18 };
+    });
+    // Labels are collision-free even when two roles start in the same month.
+    // Their dates and branch endpoints remain on the shared month scale.
+    const rows = items.map((item) => ({
+      key: item.id, item, date: item.start, phase: item.eventType || 'role',
+      branch: branches.find((branch) => branch.id === item.id || branch.navigationEvents?.some((event) => event.id === item.id)),
+    }));
+    rows.forEach((row, index) => {
+      const anchorY = row.phase === 'graduation' ? row.branch.endY : row.branch.nodeY;
+      row.y = Math.max(anchorY, index ? rows[index - 1].y + rowHeight : rowHeight / 2);
+    });
+    const height = Math.max(...branches.map((branch) => branch.startY), ...rows.map((row) => row.y + rowHeight / 2)) + 36;
+    const laneCount = Math.max(3, ...branches.map((branch) => branch.lane + 1));
+    const laneX = (lane) => 24 + lane * (40 / Math.max(2, laneCount - 1));
+    return { rows, branches, rowHeight, height, laneX };
+  }, [graphItems, items]);
+  const selectedRow = geometry.rows.find((row) => row.item.id === activeItem.id);
+  // Leave enough trailing room to align even the final chapter near the top.
+  const lastRow = geometry.rows[geometry.rows.length - 1];
+  const scrollHeight = Math.max(geometry.height, (lastRow?.y || 0) - geometry.rowHeight / 2 + viewportHeight - selectionInset);
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !selectedRow) return;
+    const changed = lastSelectionRef.current !== null && lastSelectionRef.current !== selectedRow.key;
+    lastSelectionRef.current = selectedRow.key;
+    const top = Math.max(0, selectedRow.y - geometry.rowHeight / 2 - selectionInset);
+    // Animate the scroll position itself: native smooth scrolling has a
+    // browser-defined duration and can race through long gaps in the history.
+    if (changed && !reduceMotion) {
+      const animation = animate(container.scrollTop, top, {
+        duration: 1.1,
+        ease: [0.4, 0, 0.2, 1],
+        onUpdate: (value) => { container.scrollTop = value; },
+      });
+      scrollAnimationRef.current = animation;
+      return () => {
+        animation.stop();
+        scrollAnimationRef.current = null;
+      };
+    }
+    container.scrollTop = top;
+  }, [selectedRow, geometry.rowHeight, reduceMotion, viewportHeight]);
+  const interruptScroll = () => scrollAnimationRef.current?.stop();
+  const handleKeyDown = (event) => {
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+    const focusedRow = event.target.closest('[data-timeline-id]');
+    if (!focusedRow || !keyboardItems.length) return;
+    const buttons = [...event.currentTarget.querySelectorAll('[data-timeline-id]')]
+      .filter((button) => keyboardItems.some((item) => item.id === button.dataset.timelineId));
+    const focusedIndex = buttons.indexOf(focusedRow);
+    // In the reading view, tabbing onto a school row must not change the
+    // work-only arrow sequence. Continue from the role currently being read.
+    const currentIndex = focusedIndex >= 0 ? focusedIndex : Math.max(0, keyboardItems.findIndex((item) => item.id === activeItem.id));
+    event.preventDefault();
+    event.stopPropagation();
+    const nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1
+      : Math.max(0, Math.min(buttons.length - 1, currentIndex + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1)));
+    buttons[nextIndex].click();
+    buttons[nextIndex].focus({ preventScroll: true });
+  };
+  const names = { 'nyu-shanghai': 'NYU Shanghai', microsoft: 'Microsoft', treasury: 'Treasury', medidata: 'Medidata', trianz: 'Trianz', jika: 'Jika', tamid: 'TAMID', 'tech-trek': 'Tech@NYU' };
+  return <nav className="branch-index" aria-label="Career branch index" onKeyDown={handleKeyDown}>
+    <div className="branch-index-main"><i aria-hidden="true" /> main <span>Scroll history ↓</span></div>
+    <div className="branch-index-chart" ref={containerRef} onWheel={interruptScroll} onTouchStart={interruptScroll} onPointerDown={interruptScroll}>
+      <div className="branch-index-chart-inner" style={{ height: scrollHeight }}>
+        {geometry.rows.map((row) => {
+          const isActive = row.key === selectedRow?.key;
+          const eventLabel = row.phase === 'start' ? 'Started' : row.phase === 'graduation' ? 'Graduated' : null;
+          const startDate = row.branch.start.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+          const endDate = row.branch.current ? 'Present' : row.branch.end.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+          return <button key={row.key} type="button" data-timeline-id={row.item.id} data-event-key={row.key} data-event-date={+row.date}
+            className={`branch-event-row branch-index-${row.branch.kind}${isActive ? ' is-active' : ''}`}
+            style={{ top: row.y - geometry.rowHeight / 2, height: geometry.rowHeight }} aria-pressed={isActive}
+            aria-label={`${row.item.organization}: ${row.item.title}, ${row.item.period}`}
+            onClick={() => onSelect(row.item.id)}>
+            <span className="branch-event-copy"><span className="branch-event-name">{names[row.branch.id] || row.item.organization}</span><span className="branch-event-meta">{eventLabel}{eventLabel ? <time dateTime={row.date.toISOString()}>{row.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</time> : <span className="branch-role-period">{startDate} – {endDate}</span>}</span></span>
+          </button>;
+        })}
+        <svg className="branch-time-graph" style={{ height: geometry.height }} viewBox={`0 0 72 ${geometry.height}`} preserveAspectRatio="none" aria-hidden="true">
+          <path className="branch-time-trunk" d={`M 8 0 V ${geometry.height}`} />
+          {geometry.branches.map((branch) => {
+            const x = geometry.laneX(branch.lane);
+            const isActive = branch.id === selectedRow?.branch.id;
+            const start = branch.forkY, end = branch.endY;
+            return <g key={branch.id} data-branch-id={branch.id} data-start={+branch.start} data-end={+branch.end} data-lane={branch.lane} data-start-y={branch.startY} data-end-y={end} className={`branch-time-lane branch-index-${branch.kind}${isActive ? ' is-active' : ''}${contextIds.includes(branch.id) ? ' is-context' : ''}`}>
+              <path className="branch-time-path" d={`M 8 ${start} C 8 ${start - 9},${x} ${start - 9},${x} ${branch.nodeY} V ${branch.current ? 12 : end + 18}${branch.current ? '' : ` C ${x} ${end + 9},8 ${end + 9},8 ${end}`}`} />
+              <circle cx={x} cy={branch.nodeY} r="3.8" />
+              {branch.current
+                ? <path className="branch-time-ongoing" d={`M ${x - 4} 18 L ${x} 12 L ${x + 4} 18`} />
+                : <path className="branch-time-merge" d={`M 8 ${end - 4} l 4 4 -4 4 -4 -4 Z`} />}
+            </g>;
+          })}
+        </svg>
+      </div>
+    </div>
+  </nav>;
 }
 
-function GitTimelineGraph({ items, rangeStart, rangeEnd, activeItem, contextIds, onSelect, reduceMotion }) {
-  const width = 3000;
-  const left = 100;
-  const right = 2900;
-  const rowGap = 22;
-  const mainY = 74;
-  const height = 122;
-  const span = rangeEnd - rangeStart;
-  const years = Array.from(
-    { length: rangeEnd.getFullYear() - rangeStart.getFullYear() + 1 },
-    (_, index) => rangeStart.getFullYear() + index,
-  );
-  const toX = (date) => left + Math.max(0, Math.min(1, (date - rangeStart) / span)) * (right - left);
-  const arranged = items.map((item) => {
-    const branchY = item.kind === 'education'
-      ? mainY - rowGap * 2
-      : item.kind === 'leadership' ? mainY - rowGap : mainY + rowGap;
-    return { ...item, branchY };
-  });
-  const activeX = toX(activeItem.start);
-
-  return (
-    <svg className="git-graph" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" role="group" aria-label="Henry Zhang career branch history">
-      {years.map((year) => {
-        const x = toX(new Date(year, 0, 1));
-        return (
-          <g className="git-year" key={year}>
-            <line x1={x} x2={x} y1="22" y2={height - 8} />
-            <text x={x} y="16">{year}</text>
-            <circle className="git-year-tick" cx={x} cy={mainY} r="2.5" />
-          </g>
-        );
-      })}
-
-      <motion.line
-        className="git-selected-line"
-        initial={false}
-        animate={{ x1: activeX, x2: activeX }}
-        y1="25"
-        y2={height - 18}
-        transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 105, damping: 22 }}
-      />
-      <line className="git-main-line" x1="0" x2={right} y1={mainY} y2={mainY} />
-      <circle className="git-main-origin" cx={left - 18} cy={mainY} r="5" />
-      <g className="git-year git-present">
-        <title>{`Present: ${rangeEnd.toLocaleDateString('en-US', { dateStyle: 'long' })}`}</title>
-        <line x1={right} x2={right} y1="22" y2={height - 8} />
-        <text x={right} y="16">Present · {rangeEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</text>
-        <circle className="git-main-origin" cx={right} cy={mainY} r="4" />
-      </g>
-
-      {arranged.map((item, index) => {
-        const startX = toX(item.start);
-        const rawEndX = toX(item.end);
-        const endX = Math.min(right, Math.max(startX + 96, rawEndX));
-        const direction = item.branchY < mainY ? -1 : 1;
-        const curve = Math.min(12, (endX - startX) / 4);
-        const path = item.current
-          ? `M ${startX} ${mainY} C ${startX + curve} ${mainY} ${startX + curve} ${item.branchY} ${startX + curve * 2} ${item.branchY} L ${endX} ${item.branchY}`
-          : `M ${startX} ${mainY} C ${startX + curve} ${mainY} ${startX + curve} ${item.branchY} ${startX + curve * 2} ${item.branchY} L ${endX - curve * 2} ${item.branchY} C ${endX - curve} ${item.branchY} ${endX - curve} ${mainY} ${endX} ${mainY}`;
-        const isActive = item.id === activeItem.id || item.navigationEvents?.some((event) => event.id === activeItem.id);
-        const isContext = contextIds.includes(item.id);
-        const stateClass = isActive ? ' is-active' : isContext ? ' is-context' : '';
-        const labelX = Math.min(startX + curve * 2 + 5, right - 88);
-        const labelY = item.branchY + (direction < 0 ? -7 : 16);
-        const labels = { microsoft: 'Microsoft', treasury: 'Treasury', medidata: 'Medidata', trianz: 'Trianz', jika: 'Jika', tamid: 'TAMID', 'tech-trek': 'Tech@NYU' };
-
-        if (item.kind === 'education' && item.navigationEvents?.length === 2) {
-          return (
-            <g className={`git-branch git-branch-education${stateClass}`} key={item.id}>
-              <title>{item.organization} · {item.period}</title>
-              <motion.path
-                className="git-branch-path"
-                d={path}
-                initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: isActive || isContext ? 1 : 0.72 }}
-                transition={{ duration: reduceMotion ? 0 : 0.65, delay: reduceMotion ? 0 : Math.min(index * 0.045, 0.22), ease: [0.22, 1, 0.36, 1] }}
-              />
-              {item.navigationEvents.map((event, eventIndex) => {
-                const eventX = eventIndex === 0 ? startX : endX;
-                const eventActive = event.id === activeItem.id;
-                return (
-                  <g
-                    className={`git-education-event${eventActive ? ' is-active' : ''}`}
-                    role="button"
-                    tabIndex="0"
-                    data-timeline-id={event.id}
-                    data-timeline-anchor={event.id}
-                    aria-label={`${event.title}, ${event.period}`}
-                    aria-pressed={eventActive}
-                    onClick={() => onSelect(event.id)}
-                    onKeyDown={(eventKey) => {
-                      if (eventKey.key === 'Enter' || eventKey.key === ' ') {
-                        eventKey.preventDefault();
-                        onSelect(event.id);
-                      }
-                    }}
-                    key={event.id}
-                  >
-                    <circle className="git-event-hit" cx={eventX} cy={mainY} r="13" />
-                    <circle className={`git-commit ${eventIndex === 0 ? 'git-commit-start' : 'git-commit-merge'}`} cx={eventX} cy={mainY} r={eventActive ? 5 : 3.5} />
-                    <text className="git-event-label" x={eventX + (eventIndex === 0 ? 28 : -28)} y={item.branchY - 7} textAnchor={eventIndex === 0 ? 'start' : 'end'}>{eventIndex === 0 ? 'NYU begins' : 'NYU graduation'}</text>
-                  </g>
-                );
-              })}
-            </g>
-          );
-        }
-
-        return (
-          <g
-            className={`git-branch git-branch-${item.kind}${stateClass}`}
-            role="button"
-            tabIndex="0"
-            data-timeline-id={item.id}
-            aria-label={`${branchName(item)}: ${item.organization}, ${item.period}`}
-            aria-pressed={isActive}
-            onClick={() => onSelect(item.id)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                onSelect(item.id);
-              }
-            }}
-            key={item.id}
-          >
-            <title>{item.organization} · {item.period}</title>
-            <motion.path
-              className="git-branch-path"
-              d={path}
-              initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: isActive || isContext ? 1 : 0.58 }}
-              transition={{ duration: reduceMotion ? 0 : 0.65, delay: reduceMotion ? 0 : Math.min(index * 0.045, 0.22), ease: [0.22, 1, 0.36, 1] }}
-            />
-            <circle
-              className="git-commit git-commit-start"
-              data-timeline-anchor={item.id}
-              cx={startX}
-              cy={mainY}
-              r={isActive ? 5 : 3.5}
-            />
-            {item.current && <circle className="git-commit git-commit-tip" cx={endX} cy={item.branchY} r="3.5" />}
-            {!item.current && <circle className="git-commit git-commit-merge" cx={endX} cy={mainY} r="3" />}
-            <text className="git-branch-name" x={labelX} y={labelY}>{labels[item.id] || item.organization}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
-export default function ExperienceTimeline({ experience, education, toolbar, onReadEntry }) {
+export default function ExperienceTimeline({ name, experience, education, toolbar, onReadEntry }) {
   const timeline = useMemo(() => buildTimeline(experience, education), [experience, education]);
   const { items, graphItems } = timeline;
   const reduceMotion = useReducedMotion();
   const [activeId, setActiveId] = useState(items[0]?.id || experience[experience.length - 1]?.id);
-  const buttonsRef = useRef(null);
   const trackRef = useRef(null);
   const journeyRef = useRef(null);
   const scrollTargetRef = useRef(null);
   const scrollTargetTimerRef = useRef(null);
   const activeIndex = Math.max(0, items.findIndex((item) => item.id === activeId));
   const active = items[activeIndex] || items[0];
-  const startYear = Math.min(...items.map((item) => item.start.getFullYear()));
-  const rangeStart = new Date(startYear, 0, 1);
-  const rangeEnd = useMemo(() => new Date(), []);
   const educationItems = graphItems.filter((item) => item.kind === 'education');
   const concurrentEducation = educationItems.filter((item) => active.kind !== 'education' && item.start <= active.end && item.end >= active.start);
-
-  useEffect(() => {
-    const container = buttonsRef.current;
-    const target = container?.querySelector(`[data-timeline-anchor="${active.id}"]`);
-    if (!container || !target) return;
-    const centerActive = () => {
-      const containerRect = container.getBoundingClientRect();
-      const targetRect = target.getBoundingClientRect();
-      const targetCenter = targetRect.left - containerRect.left + container.scrollLeft + targetRect.width / 2;
-      const nextScrollLeft = Math.max(0, targetCenter - container.clientWidth / 2);
-      if (typeof container.scrollTo === 'function') container.scrollTo({ left: nextScrollLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
-      else container.scrollLeft = nextScrollLeft;
-    };
-    centerActive();
-    window.addEventListener('resize', centerActive);
-    return () => window.removeEventListener('resize', centerActive);
-  }, [active.id, reduceMotion]);
 
   const scrollToIndex = useCallback((index) => {
     const track = trackRef.current;
@@ -380,8 +338,15 @@ export default function ExperienceTimeline({ experience, education, toolbar, onR
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return;
-      if (event.metaKey || event.ctrlKey || event.altKey || /input|textarea|select/i.test(event.target.tagName)) return;
-      const rect = journeyRef.current?.getBoundingClientRect();
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+      const journey = journeyRef.current;
+      const target = event.target;
+      if (target instanceof Element) {
+        if (target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return;
+        // Do not steal arrows from navigation or controls elsewhere on the page.
+        if (target !== document.body && target !== document.documentElement && !journey?.contains(target)) return;
+      }
+      const rect = journey?.getBoundingClientRect();
       if (!rect || rect.bottom < window.innerHeight * 0.35 || rect.top > window.innerHeight * 0.65) return;
       event.preventDefault();
       const direction = event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : -1;
@@ -390,20 +355,6 @@ export default function ExperienceTimeline({ experience, education, toolbar, onR
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeIndex, selectIndex]);
-
-  const handleTimelineKeyDown = (event) => {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-    const currentId = event.target.closest('[data-timeline-id]')?.dataset.timelineId;
-    if (!currentId) return;
-    event.preventDefault();
-    event.stopPropagation();
-    const currentIndex = items.findIndex((item) => item.id === currentId);
-    const nextIndex = Math.max(0, Math.min(items.length - 1, currentIndex + (event.key === 'ArrowRight' ? 1 : -1)));
-    selectIndex(nextIndex);
-    window.requestAnimationFrame(() => {
-      buttonsRef.current?.querySelector(`[data-timeline-id="${items[nextIndex].id}"]`)?.focus({ preventScroll: true });
-    });
-  };
 
   const revealFullEntry = () => {
     if (onReadEntry) { onReadEntry(active); return; }
@@ -418,7 +369,7 @@ export default function ExperienceTimeline({ experience, education, toolbar, onR
       ref={trackRef}
       style={{ '--journey-scroll-distance': `${Math.max(0, items.length - 1) * 42}svh` }}
     >
-    <section className="journey" ref={journeyRef} aria-labelledby="experience-heading">
+    <section className="journey journey-open-index" ref={journeyRef} aria-labelledby="experience-heading">
       <div className="journey-progress-track" aria-hidden="true">
         <motion.div className="journey-progress-fill" initial={false}
           animate={{ scaleX: items.length > 1 ? activeIndex / (items.length - 1) : 1 }}
@@ -432,25 +383,13 @@ export default function ExperienceTimeline({ experience, education, toolbar, onR
         <TimelineGlobe location={active.locationData} reduceMotion={reduceMotion} />
       </div>
       <div className="journey-topline">
-        <h2 id="experience-heading">Experience</h2>
+        <div className="experience-index-meta"><span>Experience / {name}</span><span>Portfolio</span></div>
+        <div className="journey-index-intro"><h1 id="experience-heading">Experience <FiArrowDownRight aria-hidden="true" /></h1><p>Engineering, product, and the places in between.</p></div>
         <div className="journey-view-choice">{toolbar}</div>
       </div>
 
-      <div className="journey-graph-header">
-      <div className="git-main-badge"><i aria-hidden="true" /><b>main</b></div>
-      <div className="journey-timeline-scroll" ref={buttonsRef} onKeyDown={handleTimelineKeyDown}>
-        <div className="journey-timeline">
-          <GitTimelineGraph
-            items={graphItems}
-            rangeStart={rangeStart}
-            rangeEnd={rangeEnd}
-            activeItem={active}
-            contextIds={concurrentEducation.map((item) => item.id)}
-            onSelect={selectItem}
-            reduceMotion={reduceMotion}
-          />
-        </div>
-      </div>
+      <div className="journey-branch-index">
+        <GitBranchIndex items={items} graphItems={graphItems} activeItem={active} contextIds={concurrentEducation.map((item) => item.id)} onSelect={selectItem} reduceMotion={reduceMotion} />
       </div>
 
       <div className="journey-stage">
