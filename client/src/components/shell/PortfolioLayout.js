@@ -1,11 +1,11 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { FiBriefcase, FiFileText, FiGrid, FiMenu, FiMessageSquare, FiPlus, FiSidebar, FiUser, FiX } from 'react-icons/fi';
+import { FiBookOpen, FiBriefcase, FiFileText, FiGrid, FiMenu, FiMessageSquare, FiPlus, FiSidebar, FiUser, FiX } from 'react-icons/fi';
 import { useChat } from '../chat/ChatContext';
 import useTheme from '../../hooks/useTheme';
 import ProfileSettings from './ProfileSettings';
 
-const navigation = [['About me', '/profile', FiUser], ['Projects', '/projects', FiGrid], ['Experience', '/experience', FiBriefcase], ['Resume', '/resume', FiFileText]];
+const navigation = [['About me', '/profile', FiUser], ['Projects', '/projects', FiGrid], ['Experience', '/experience', FiBriefcase], ['Education', '/education', FiBookOpen], ['Resume', '/resume', FiFileText]];
 export default function PortfolioLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
