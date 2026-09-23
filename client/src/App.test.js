@@ -36,10 +36,10 @@ test('all homepage expansions preserve the draft and restore focus on close', as
   for (const label of ['Projects', 'Experience']) {
     fireEvent.click(screen.getByRole('button', { name: label }));
     expect(screen.getByRole('link', { name: label === 'Projects' ? /View all projects/ : /View experience/ })).toBeVisible();
-    if (label === 'Projects') expect(within(screen.getByRole('region', { name: 'Highlighted projects' })).getByRole('link', { name: /LearnFromAI/ })).toBeVisible();
+    if (label === 'Projects') expect(within(screen.getByRole('region', { name: 'Highlighted projects' })).getByRole('link', { name: /LLaMA 3.1 Fine-Tuning/ })).toBeVisible();
     else {
-      expect(screen.getByText('U.S. Department of the Treasury')).toBeVisible();
-      expect(screen.getByAltText('U.S. Department of the Treasury logo')).toBeVisible();
+      expect(within(screen.getByRole('region', { name: 'Recent experience' })).getByText('U.S. Department of the Treasury')).toBeVisible();
+      expect(within(screen.getByRole('region', { name: 'Recent experience' })).getByAltText('U.S. Department of the Treasury logo')).toBeVisible();
     }
     fireEvent.click(screen.getByRole('button', { name: 'Back' }));
     await waitFor(() => expect(screen.getByRole('button', { name: label })).toHaveFocus());
@@ -72,20 +72,43 @@ test('questions start demo conversations, retain suggestion drafts, and can be r
   expect(within(screen.getByRole('log')).getByText('Saved draft')).toBeVisible();
 });
 
-test('the homepage shows three linked projects immediately while preserving identity and quick actions', async () => {
+test('Currently and Selected work are separate ordered sections without changing project highlights', async () => {
   render(<App />);
   const work = screen.getByRole('region', { name: 'Selected work' });
   expect(work).toBeVisible();
-  for (const [title, id] of [['LearnFromAI', 'learnfromai'], ['Financial Sentiment', 'financial-sentiment'], ['MyDian', 'mydian-dashboard']]) {
+  for (const [title, id] of [['Inyo', 'inyo'], ['MyDian', 'mydian-dashboard']]) {
     expect(within(work).getByRole('link', { name: new RegExp(title) })).toHaveAttribute('href', `/projects/${id}`);
   }
+  expect(within(work).getAllByRole('link').slice(1).map((link) => link.getAttribute('href'))).toEqual(['/projects/inyo', '/projects/mydian-dashboard']);
+  expect(within(work).queryByText('LLaMA 3.1 Fine-Tuning')).not.toBeInTheDocument();
+  expect(within(work).queryByAltText('U.S. Department of the Treasury logo')).not.toBeInTheDocument();
+  const current = screen.getByRole('region', { name: 'Currently' });
+  expect(within(current).getByAltText('U.S. Department of the Treasury logo')).toBeVisible();
+  expect(within(current).getByRole('heading', { name: 'U.S. Department of the Treasury' })).toBeVisible();
+  expect(within(current).getByText('Software Engineer')).toBeVisible();
+  expect(current.compareDocumentPosition(work) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(current.parentElement).toBe(work.parentElement);
+  expect(within(work).queryByText('LearnFromAI')).not.toBeInTheDocument();
   expect(within(work).getByRole('link', { name: /All projects/ })).toHaveAttribute('href', '/projects');
   expect(screen.getByRole('list', { name: 'Areas of focus' })).toBeVisible();
   expect(screen.getByRole('heading', { name: 'Henry Zhang', level: 1 })).toBeVisible();
   expect(screen.getByRole('textbox', { name: 'Ask Henry' })).toBeVisible();
   ['Ask about me', 'Projects', 'Experience', 'Beyond work'].forEach((name) => expect(screen.getByRole('button', { name, exact: true })).toBeVisible());
-  fireEvent.click(within(work).getByRole('link', { name: /LearnFromAI/ }));
-  await screen.findByRole('heading', { name: 'LearnFromAI', level: 1 });
+  fireEvent.click(screen.getByRole('button', { name: 'Projects', exact: true }));
+  const highlights = screen.getByRole('region', { name: 'Highlighted projects' });
+  expect(within(highlights).getAllByRole('link').slice(1).map((link) => link.getAttribute('href'))).toEqual(['/projects/inyo', '/projects/financial-sentiment', '/projects/mydian-dashboard']);
+  fireEvent.click(within(highlights).getByRole('link', { name: /LLaMA 3.1 Fine-Tuning/ }));
+  await screen.findByRole('heading', { name: 'LLaMA 3.1 Fine-Tuning', level: 1 });
+  expect(screen.getByText(/Adapted LLaMA 3.1 to financial news using QLoRA/)).toBeVisible();
+});
+
+test('selected Treasury work opens its expanded experience entry', async () => {
+  render(<App />);
+  const current = screen.getByRole('region', { name: 'Currently' });
+  fireEvent.click(within(current).getByRole('link', { name: /Current role: Software Engineer at U.S. Department of the Treasury/ }));
+  await waitFor(() => expect(document.getElementById('experience-detail-treasury')).toHaveFocus());
+  expect(window.location.hash).toBe('#experience-detail-treasury');
+  expect(screen.getByRole('button', { name: 'Hide details for Software Engineer at U.S. Department of the Treasury' })).toHaveAttribute('aria-expanded', 'true');
 });
 
 test('profile settings persist the theme, expose demo usage, and restore focus', async () => {
@@ -144,9 +167,9 @@ test('pinned navigation opens dedicated views and project details', async () => 
   render(<App />);
   fireEvent.click(within(screen.getByRole('navigation', { name: 'Pinned navigation' })).getByRole('link', { name: 'Projects' }));
   await screen.findByRole('heading', { name: 'Projects', level: 1 });
-  fireEvent.click(screen.getByRole('link', { name: /LearnFromAI/ }));
-  await screen.findByRole('heading', { name: 'LearnFromAI', level: 1 });
-  expect(screen.getByText(/This is a placeholder/)).toBeVisible();
+  fireEvent.click(screen.getByRole('link', { name: 'Explore project: LLaMA 3.1 Fine-Tuning' }));
+  await screen.findByRole('heading', { name: 'LLaMA 3.1 Fine-Tuning', level: 1 });
+  expect(screen.getByRole('link', { name: /Read capstone paper/ })).toHaveAttribute('target', '_blank');
   fireEvent.click(within(screen.getByRole('navigation', { name: 'Pinned navigation' })).getByRole('link', { name: 'About me' }));
   await screen.findByRole('heading', { name: "I'm Henry Zhang.", level: 1 });
   fireEvent.click(within(screen.getByRole('navigation', { name: 'Pinned navigation' })).getByRole('link', { name: 'Resume' }));

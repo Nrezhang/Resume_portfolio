@@ -16,19 +16,19 @@
 .chat-page .home-overview .home-identity h1 { max-width: 7ch; text-align: left; overflow-wrap: anywhere; }
 .home-overview .identity-description { max-width: 390px; margin: 0; font-size: 16px; text-wrap: pretty; }
 .home-overview .identity-tags { justify-content: flex-start; gap: 7px; margin-top: 22px; }
-.home-selected-work { min-width: 0; }
-.home-selected-work-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 12px; }
+.home-work-overview { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.home-selected-work, .home-current-role { min-width: 0; }
+.home-selected-work-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; padding-bottom: 5px; border-bottom: 1px solid var(--line); }
 .home-selected-work-heading h2 { margin: 0; color: var(--muted); font: 400 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .09em; text-transform: uppercase; }
 .home-selected-work-heading a { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 11px; }
 .home-selected-work-heading a:hover { color: var(--green); }
 .home-selected-work-heading svg { width: 13px; height: 13px; }
-.home-project-list { border-top: 1px solid var(--line); }
 :root[data-theme] .chat-shell .home-project-list .chat-project-card {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 14px;
   align-items: center;
-  padding: 22px 0;
+  padding: 10px 0;
   border: 0;
   border-bottom: 1px solid var(--line);
   border-radius: 0;
@@ -36,14 +36,17 @@
   overflow: visible;
 }
 :root[data-theme] .chat-shell .home-project-list .chat-project-card:hover { background: transparent; }
+:root[data-theme] .chat-shell .home-current-role .home-role-card { border-bottom: 0; }
 .home-project-list .chat-project-card:hover h3 { color: var(--green); }
-.home-project-list .chat-project-image { width: 48px; height: 48px; aspect-ratio: 1; border: 0; border-radius: 3px; background: var(--green-soft); color: var(--green); }
+.home-project-list .chat-project-image { width: 38px; height: 38px; aspect-ratio: 1; border: 0; border-radius: 3px; background: var(--green-soft); color: var(--green); }
+.chat-shell .home-project-list .chat-project-image.project-brand-inyo img { padding: 6px; }
+.chat-shell .home-project-list .chat-experience-logo { width: 38px; height: 38px; padding: 0; border: 0; border-radius: 3px; background: transparent; }
 .home-project-list .thumbnail-placeholder > svg { width: 22px; height: 22px; color: var(--green); }
 /* Small fallback icons, not illegible "preview coming soon" thumbnails. The
    original full-size previews remain in the Projects quick-action panel. */
 .home-project-list .thumbnail-placeholder > span, .home-project-list .thumbnail-lines { display: none; }
 .home-project-list .chat-project-copy { min-width: 0; padding: 0; }
-.home-project-list .chat-project-copy h3 { margin: 0 0 5px; color: var(--ink); font-size: 15px; line-height: 1.4; overflow-wrap: anywhere; }
+.home-project-list .chat-project-copy h3 { margin: 0 0 3px; color: var(--ink); font-size: 14px; line-height: 1.4; overflow-wrap: anywhere; }
 .home-project-list .chat-project-copy h3 svg { color: var(--muted); }
 .chat-shell .home-project-list .chat-project-copy p { color: var(--muted); font-size: 12px; line-height: 1.5; }
 .home-portfolio > .composer-area, .home-portfolio > .chat-expanded-cards { width: min(760px, 100%); margin-inline: auto; }
@@ -53,13 +56,11 @@
   .chat-page .home-overview .home-identity h1 { font-size: clamp(52px, 6vw, 68px); }
   .home-overview .identity-description { font-size: 14px; }
   .home-project-list .chat-project-copy h3 { font-size: 13px; }
-  :root[data-theme] .chat-shell .home-project-list .chat-project-card { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; }
-  .home-project-list .chat-project-image { width: 40px; height: 40px; }
+  :root[data-theme] .chat-shell .home-project-list .chat-project-card { gap: 12px; }
 }
 @media (max-width: 760px) {
   .chat-page.is-home.home-portfolio { width: calc(100% - 40px); padding-top: 64px; }
   .home-overview { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-bottom: 30px; }
   .chat-page .home-overview .home-identity h1 { max-width: none; }
   .home-overview .identity-description { max-width: 420px; }
-  :root[data-theme] .chat-shell .home-project-list .chat-project-card { padding: 17px 0; }
 }
