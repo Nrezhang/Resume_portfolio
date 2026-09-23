@@ -30,7 +30,7 @@ Content and assets have separate release paths: deploying React uploads its impo
 
 1. Run `npm run content:migrate -- content-migrations/NAME.json` for a read-only AWS dry run. Unexpected values stop the migration for manual review.
 2. Run the same command with `--apply` after review. It saves the complete DynamoDB item under gitignored `.content-backups/` (private permissions), conditionally writes only if the fetched content is unchanged, and reads back to verify. Other content and item attributes are retained. Reapplying is a no-op.
-3. CI requires a new release plan when tracked content, editor schemas, or assets change. Deploy is blocked until that release’s targeted content values are published. After CloudFront invalidation completes, checks verify public content, the exact deployed asset manifest against the build, and media URL availability. No new AWS write permissions are granted to CI.
+3. CI requires a new release plan when tracked content, editor schemas, or assets change. Deploy is blocked until that release’s targeted content values are published. After requesting CloudFront invalidation, bounded retries check public content, the exact deployed asset manifest against the build, and media/JS/CSS URL availability. The job fails if propagation or verification does not succeed. It does not need CloudFront polling permissions or any new AWS permissions.
 
 For incompatible schema changes, deploy backward-compatible readers first, then migrate, then remove compatibility in a later release. Do not mutate old migration files. Backups contain an `Item` wrapper; restore only after comparing with current content so newer admin changes are not erased. Keep the backup outside git and retain it until the release is verified.
 

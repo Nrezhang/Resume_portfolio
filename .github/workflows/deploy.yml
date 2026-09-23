@@ -92,10 +92,18 @@ jobs:
       - name: Upload site shell and public files
         run: aws s3 sync client/build "s3://${{ vars.AWS_SITE_BUCKET }}" --delete --exclude "static/*" --cache-control "public,max-age=0,must-revalidate"
       - name: Invalidate CloudFront
-        run: |
-          invalidation_id=$(aws cloudfront create-invalidation --distribution-id "${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }}" --paths "/*" --query 'Invalidation.Id' --output text)
-          aws cloudfront wait invalidation-completed --distribution-id "${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }}" --id "$invalidation_id"
+        run: aws cloudfront create-invalidation --distribution-id "${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }}" --paths "/*"
       - name: Verify deployed content and assets
-        run: npm run check:content-release -- --deployed
+        timeout-minutes: 8
+        run: |
+          for attempt in {1..12}; do
+            if npm run check:content-release -- --deployed; then
+              exit 0
+            fi
+            echo "Public deployment verification attempt ${attempt}/12 failed; allowing time for CloudFront propagation."
+            sleep 15
+          done
+          echo "Deployed content/build/assets did not pass verification."
+          exit 1
         env:
           CONTENT_DIFF_BASE: ${{ github.event.before || 'HEAD^' }}
