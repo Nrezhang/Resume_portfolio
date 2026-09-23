@@ -36,7 +36,7 @@ test('all homepage expansions preserve the draft and restore focus on close', as
   for (const label of ['Projects', 'Experience']) {
     fireEvent.click(screen.getByRole('button', { name: label }));
     expect(screen.getByRole('link', { name: label === 'Projects' ? /View all projects/ : /View experience/ })).toBeVisible();
-    if (label === 'Projects') expect(screen.getByRole('link', { name: /LearnFromAI/ })).toBeVisible();
+    if (label === 'Projects') expect(within(screen.getByRole('region', { name: 'Highlighted projects' })).getByRole('link', { name: /LearnFromAI/ })).toBeVisible();
     else {
       expect(screen.getByText('U.S. Department of the Treasury')).toBeVisible();
       expect(screen.getByAltText('U.S. Department of the Treasury logo')).toBeVisible();
@@ -57,6 +57,7 @@ test('questions start demo conversations, retain suggestion drafts, and can be r
   fireEvent.click(screen.getByRole('button', { name: 'Ask about me' }));
   fireEvent.click(screen.getByRole('button', { name: 'Give me a quick introduction.' }));
   const log = screen.getByRole('log', { name: 'Conversation' });
+  expect(screen.queryByRole('region', { name: 'Selected work' })).not.toBeInTheDocument();
   expect(within(log).getByText('Give me a quick introduction.')).toBeVisible();
   await waitFor(() => expect(within(log).getByText('Henry AI · Demo response')).toBeVisible());
   expect(within(log).getByText(/no live AI or personal knowledge retrieval is connected/)).toBeVisible();
@@ -66,8 +67,25 @@ test('questions start demo conversations, retain suggestion drafts, and can be r
   expect(screen.getByRole('textbox')).toHaveValue('');
   fireEvent.click(screen.getByRole('button', { name: 'New chat' }));
   expect(screen.getByRole('heading', { name: 'Henry Zhang', level: 1 })).toBeVisible();
+  expect(screen.getByRole('region', { name: 'Selected work' })).toBeVisible();
   fireEvent.click(within(screen.getByRole('navigation', { name: 'Recent conversations' })).getByRole('link'));
   expect(within(screen.getByRole('log')).getByText('Saved draft')).toBeVisible();
+});
+
+test('the homepage shows three linked projects immediately while preserving identity and quick actions', async () => {
+  render(<App />);
+  const work = screen.getByRole('region', { name: 'Selected work' });
+  expect(work).toBeVisible();
+  for (const [title, id] of [['LearnFromAI', 'learnfromai'], ['Financial Sentiment', 'financial-sentiment'], ['MyDian', 'mydian-dashboard']]) {
+    expect(within(work).getByRole('link', { name: new RegExp(title) })).toHaveAttribute('href', `/projects/${id}`);
+  }
+  expect(within(work).getByRole('link', { name: /All projects/ })).toHaveAttribute('href', '/projects');
+  expect(screen.getByRole('list', { name: 'Areas of focus' })).toBeVisible();
+  expect(screen.getByRole('heading', { name: 'Henry Zhang', level: 1 })).toBeVisible();
+  expect(screen.getByRole('textbox', { name: 'Ask Henry' })).toBeVisible();
+  ['Ask about me', 'Projects', 'Experience', 'Beyond work'].forEach((name) => expect(screen.getByRole('button', { name, exact: true })).toBeVisible());
+  fireEvent.click(within(work).getByRole('link', { name: /LearnFromAI/ }));
+  await screen.findByRole('heading', { name: 'LearnFromAI', level: 1 });
 });
 
 test('profile settings persist the theme, expose demo usage, and restore focus', async () => {
