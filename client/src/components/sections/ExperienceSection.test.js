@@ -4,6 +4,7 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import { DraftContentProvider } from '../../content/ContentContext';
 import content from '../../content/defaultContent.json';
 import ExperienceSection from './ExperienceSection';
+import { buildTimeline } from '../timeline/ExperienceTimeline';
 import { animate, useReducedMotion } from 'motion/react';
 
 jest.mock('../timeline/TimelineGlobe', () => ({ location }) => <div data-testid="globe-location">{location.label}</div>);
@@ -22,6 +23,12 @@ beforeEach(() => {
 afterEach(() => jest.restoreAllMocks());
 
 const view = (data = content, props = {}) => <MemoryRouter><DraftContentProvider content={data}><ExperienceSection {...props} /></DraftContentProvider></MemoryRouter>;
+
+test('Jika.io keeps Remote displayed while its globe pin is in Tel Aviv', () => {
+  const jika = buildTimeline(content.experience, content.education).items.find(item => item.id === 'jika');
+  expect(jika.locationLabel).toBe('Remote');
+  expect(jika.locationData).toEqual({ lat: 32.0853, lon: 34.7818, label: 'Tel Aviv, Israel', countryCodes: ['IL'], pins: [{ lat: 32.0853, lon: 34.7818 }] });
+});
 
 test('All experience is the default with a working vertical index and preserved expandable entries', () => {
   const { container } = render(view());
