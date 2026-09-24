@@ -14,7 +14,7 @@ const LOCATION_DATA = {
   trianz: { lat: 38.9696, lon: -77.3861, label: 'Herndon, Virginia', countryCodes: ['US'], pins: [{ lat: 38.9696, lon: -77.3861 }] },
   medidata: { lat: 40.7128, lon: -74.006, label: 'New York City', countryCodes: ['US'], pins: [{ lat: 40.7128, lon: -74.006 }] },
   microsoft: { lat: 31.2304, lon: 121.4737, label: 'Shanghai, China', countryCodes: ['CN'], pins: [{ lat: 31.2304, lon: 121.4737 }] },
-  jika: { lat: 18, lon: -25, label: 'Remote', pins: [], remote: true },
+  jika: { lat: 32.0853, lon: 34.7818, label: 'Tel Aviv, Israel', countryCodes: ['IL'], pins: [{ lat: 32.0853, lon: 34.7818 }] },
   'nyu-shanghai': {
     lat: 31.2304,
     lon: 121.4737,
