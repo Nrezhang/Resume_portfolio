@@ -16,9 +16,6 @@ import techNyuLogo from '../static/images/experience/tech-nyu.svg';
 import tamidLogo from '../static/images/experience/tamid.png';
 import tamidDarkLogo from '../static/images/experience/tamid-dark.png';
 import jikaLogo from '../static/images/experience/jika.png';
-import resumeDocument from '../static/docs/resume.pdf';
-import capstoneDocument from '../static/docs/35_Parameter_Efficient_Fine_Tu.pdf';
-
 export const imageAssets = {
   profile: profileImage,
   sentiment: sentimentImage,
@@ -30,8 +27,8 @@ export const imageAssets = {
 };
 
 export const documentAssets = {
-  resume: resumeDocument,
-  capstone: capstoneDocument,
+  resume: 'https://www.henryszhang.dev/media/resume-2026-09-26.pdf',
+  capstone: 'https://www.henryszhang.dev/media/llama-3-1-fine-tuning-2026-09-26.pdf',
 };
 
 export const educationAssets = {

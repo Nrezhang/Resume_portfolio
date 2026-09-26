@@ -15,8 +15,8 @@ export function highlightedProjects(projects = []) {
 export function ProjectThumbnail({ project }) {
   const image = project.data && imageAssets[project.data.image];
   const brandClass = ['mydian', 'inyo'].includes(project.data?.image) ? ` project-brand-${project.data.image}` : '';
-  // The old generic portfolio screenshot is not a screenshot of these products.
-  if (image && project.data.image !== 'portfolio') return <div className={`chat-project-image${brandClass}`}><img src={image} alt={project.data.imageAlt || project.title} /></div>;
+  const isPortfolioPreview = project.data?.id === 'portfolio-platform';
+  if (image && (project.data.image !== 'portfolio' || isPortfolioPreview)) return <div className={`chat-project-image${brandClass}`}><img src={image} alt={project.data.imageAlt || project.title} /></div>;
   return <div className="chat-project-image thumbnail-placeholder"><FiGrid aria-hidden="true" /><span>Preview coming soon</span><div className="thumbnail-lines" aria-hidden="true"><i /><i /><i /></div></div>;
 }
 export function CompactProjectCard({ project }) {

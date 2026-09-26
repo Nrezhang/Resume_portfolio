@@ -20,6 +20,8 @@ Portfolio content may use a portable `media` field. The app accepts either a bun
 
 ## Deployment approach
 
-Today, images imported by React are copied into the production build and uploaded to the private site S3 bucket. CloudFront serves them through the site domain; there is no public S3 bucket and no direct browser upload.
+Images imported by React are copied into the production build and uploaded to the private site S3 bucket. CloudFront serves them through the site domain; there is no public S3 bucket and no direct browser upload.
 
-For a small, stable set of images, upload versioned files under `media/` with the normal site deployment and store CloudFront URLs in DynamoDB content. For owner-managed uploads later, add an authenticated API route that validates type and size, returns a short-lived presigned S3 upload URL, and writes only the resulting CloudFront URL into the portfolio record. Keep original uploads in a private `uploads/` prefix or a dedicated private bucket; expose resized, optimized derivatives through CloudFront. Do not store public S3 URLs, credentials, or arbitrary upload data in DynamoDB.
+All public documents use versioned objects under `media/`, for example `media/resume-2026-09-26.pdf`. Store the corresponding CloudFront URL in content or `documentAssets`; do not import documents into the React build. This keeps document URLs stable and lets a document change ship without rebuilding the site.
+
+For owner-managed uploads later, add an authenticated API route that validates type and size, returns a short-lived presigned S3 upload URL, and writes only the resulting CloudFront URL into the portfolio record. Keep original uploads in a private `uploads/` prefix or a dedicated private bucket; expose resized, optimized derivatives through CloudFront. Do not store public S3 URLs, credentials, or arbitrary upload data in DynamoDB.

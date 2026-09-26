@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import App from './App';
 import { portfolioApi } from './services/api';
 import defaultContent from './content/defaultContent.json';
+import { documentAssets } from './content/assets';
 
 afterEach(() => { jest.restoreAllMocks(); });
 
@@ -173,7 +174,7 @@ test('pinned navigation opens dedicated views and project details', async () => 
   fireEvent.click(within(screen.getByRole('navigation', { name: 'Pinned navigation' })).getByRole('link', { name: 'About me' }));
   await screen.findByRole('heading', { name: "I'm Henry Zhang.", level: 1 });
   fireEvent.click(within(screen.getByRole('navigation', { name: 'Pinned navigation' })).getByRole('link', { name: 'Resume' }));
-  expect(screen.getByRole('link', { name: /Open PDF/ })).toHaveAttribute('href', expect.stringContaining('resume.pdf'));
+  expect(screen.getByRole('link', { name: /Open PDF/ })).toHaveAttribute('href', documentAssets.resume);
 });
 
 test('the dedicated experience view retains the journey and work-history controls', async () => {

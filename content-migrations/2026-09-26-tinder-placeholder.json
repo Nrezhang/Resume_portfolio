@@ -1,0 +1,14 @@
+{
+  "id": "2026-09-26-tinder-placeholder",
+  "reason": "Remove the unrelated portfolio-homepage thumbnail from the Full-Stack Tinder project so it retains the preview placeholder until a dedicated asset is available.",
+  "patches": [
+    {
+      "collection": "projects",
+      "id": "full-stack-tinder",
+      "path": ["image"],
+      "before": "portfolio",
+      "after": ""
+    }
+  ],
+  "assets": []
+}

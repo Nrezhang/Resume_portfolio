@@ -1,0 +1,14 @@
+{
+  "id": "2026-09-26-document-storage",
+  "reason": "Standardize the LLaMA paper on a versioned private-S3 object served through CloudFront rather than a build-generated asset URL.",
+  "patches": [
+    {
+      "collection": "projects",
+      "id": "financial-sentiment",
+      "path": ["link"],
+      "before": "capstone",
+      "after": "https://www.henryszhang.dev/media/llama-3-1-fine-tuning-2026-09-26.pdf"
+    }
+  ],
+  "assets": []
+}
