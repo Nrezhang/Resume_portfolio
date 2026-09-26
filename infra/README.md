@@ -49,7 +49,7 @@ Set these repository variables from Terraform outputs:
 - `AWS_LAMBDA_FUNCTION_NAME` from `lambda_function_name`
 - `GOOGLE_CLIENT_ID` from the Google OAuth web client (required for `/admin` sign-in)
 
-Pull requests run tests and a production build. Pushes to `main` additionally upload the site and invalidate CloudFront.
+Pull requests run two independent CI jobs: **Frontend CI** runs the React tests and production build, while **Backend & infrastructure CI** runs API/content tests and Terraform validation. A push to `main` starts the same CI workflow; only after it succeeds does the separate **Deploy production** workflow upload the site and invalidate CloudFront.
 
 ## Content Operations
 

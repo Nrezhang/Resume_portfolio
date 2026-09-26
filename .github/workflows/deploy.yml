@@ -1,66 +1,27 @@
-name: CI and deploy
+name: Deploy production
 
 on:
-  pull_request:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: read
+  id-token: write
 
 concurrency:
   group: production
   cancel-in-progress: true
 
 jobs:
-  infrastructure:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.16.2
-      - run: terraform -chdir=infra fmt -check -recursive
-      - run: terraform -chdir=infra init -backend=false
-      - run: terraform -chdir=infra validate
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: client/package-lock.json
-      - run: npm ci --prefix client
-      - run: npm ci --prefix infra/lambda --omit=dev --ignore-scripts
-      - run: npm ci --ignore-scripts
-      - run: npm run test:api
-      - run: npm run test:content
-      - name: Require a content release plan
-        run: npm run check:content-release
-        env:
-          CONTENT_DIFF_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD^' }}
-      - run: npm test --prefix client -- --watchAll=false
-      - run: npm run build
-        env:
-          REACT_APP_API_URL: /api
-          REACT_APP_GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
-
   deploy:
-    if: github.event_name != 'pull_request'
-    needs: [infrastructure, test]
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
@@ -75,7 +36,7 @@ jobs:
       - name: Verify required content migrations are published
         run: npm run check:content-release -- --published
         env:
-          CONTENT_DIFF_BASE: ${{ github.event.before || 'HEAD^' }}
+          CONTENT_DIFF_BASE: ${{ github.event.workflow_run.head_sha }}^
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
@@ -106,4 +67,4 @@ jobs:
           echo "Deployed content/build/assets did not pass verification."
           exit 1
         env:
-          CONTENT_DIFF_BASE: ${{ github.event.before || 'HEAD^' }}
+          CONTENT_DIFF_BASE: ${{ github.event.workflow_run.head_sha }}^
