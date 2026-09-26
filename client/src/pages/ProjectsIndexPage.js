@@ -16,7 +16,7 @@ function ProjectShelf({ group, index }) {
     <div className="project-shelf-heading"><div className="project-shelf-label"><span className="project-shelf-number" aria-hidden="true">{String(index + 1).padStart(2, '0')} /</span><h2 id={`shelf-${group.id}`}>{group.title}</h2><span className="project-shelf-count">{group.projects.length} projects</span></div></div>
     <div className="project-shelf-track" id={`track-${group.id}`} role="region" aria-label={`Scroll ${group.title} projects`} tabIndex={0}>
       {group.projects.map((project) => <article className="project-shelf-card" key={project.id}>
-        <ProjectThumbnail project={project} />
+        <Link className="project-shelf-preview" to={`/projects/${project.data?.id || project.id}`} aria-label={`Open project: ${project.title}`}><ProjectThumbnail project={project} /></Link>
         <div className="project-shelf-copy">
           <span className="project-index-category">{project.data?.category || 'Selected project'}</span>
           <h3>{project.data?.link
