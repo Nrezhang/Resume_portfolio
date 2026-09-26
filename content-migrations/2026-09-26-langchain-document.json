@@ -1,0 +1,21 @@
+{
+  "id": "2026-09-26-langchain-document",
+  "reason": "Replace the unavailable Canva presentation for the Natural Language to Database Communication project with a versioned LangChain PDF served through CloudFront.",
+  "patches": [
+    {
+      "collection": "projects",
+      "id": "database-agent",
+      "path": ["link"],
+      "before": "https://www.canva.com/design/DAFqrVJmc2o/abxTLWYPVzbUUnqm7SZNvQ/view?utm_content=DAFqrVJmc2o&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink",
+      "after": "https://www.henryszhang.dev/media/langchain-public-2026-09-26.pdf"
+    },
+    {
+      "collection": "projects",
+      "id": "database-agent",
+      "path": ["linkLabel"],
+      "before": "View presentation",
+      "after": "View document"
+    }
+  ],
+  "assets": []
+}

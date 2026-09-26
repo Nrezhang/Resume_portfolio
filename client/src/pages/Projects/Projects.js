@@ -4,7 +4,7 @@ import widget from '../../static/images/widget.png';
 import airline from '../../static/images/airline.png';
 import homepage from '../../static/images/homepage.png';
 import graph from '../../static/images/prediction_jpm_2.png';
-import paper from '../../static/docs/35_Parameter_Efficient_Fine_Tu.pdf'
+import { documentAssets } from '../../content/assets';
 
 
 const Projects = () => {
@@ -36,7 +36,7 @@ const Projects = () => {
                   <p>Fine Tuned LLaMA for Financial sentiment analysis, and incorporated into a LSTM to improve stock price movement predictions</p>
                 </div>
               </div>
-              <a className='ad-btn' href={paper} target="_blank" > Capstone Paper</a>
+              <a className='ad-btn' href={documentAssets.capstone} target="_blank" rel="noreferrer"> Capstone Paper</a>
             </div>
 
 

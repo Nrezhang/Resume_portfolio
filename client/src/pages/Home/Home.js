@@ -1,7 +1,7 @@
 import React from 'react'
 import'./Home.css'
 import Typewriter from 'typewriter-effect'
-import resume from '../../static/docs/resume.pdf'
+import { documentAssets } from '../../content/assets';
 import { Link } from 'react-scroll';
 const Home = () => {
   return (
@@ -21,7 +21,7 @@ const Home = () => {
                 <Link to="contact" spy = {true} smooth={true} duration={100} offset={0}>
                 <button className='btn btn-hire'> Get in Touch</button>
                 </Link>
-                    <a className='btn btn-cv' href={resume} target="_blank" > My Resume</a>
+                    <a className='btn btn-cv' href={documentAssets.resume} target="_blank" rel="noreferrer"> My Resume</a>
                 </div>
             </div>
         </div>
