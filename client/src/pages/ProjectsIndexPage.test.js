@@ -16,6 +16,9 @@ test('groups every project once using its category and keeps links to the real d
   expect(groups.flatMap((group) => group.projects)).toHaveLength(projects.length);
   render(<MemoryRouter><DraftContentProvider content={content}><ProjectsIndexPage projects={projects} /></DraftContentProvider></MemoryRouter>);
   projects.forEach((project) => {
+    const preview = screen.getByRole('link', { name: `Open project: ${project.title}` });
+    expect(preview).toHaveAttribute('href', `/projects/${project.id}`);
+    expect(preview).not.toHaveAttribute('target');
     const details = screen.getByRole('link', { name: `Explore project: ${project.title}` });
     expect(details).toHaveAttribute('href', `/projects/${project.id}`);
     expect(details).not.toHaveAttribute('target');
